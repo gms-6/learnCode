@@ -17,14 +17,14 @@ namespace learncode
         {
             Revire230505 test = new Revire230505();
             Review test1 = new Review();
-            int[] nums = { 4,2,1,3 };
+            int[] nums = { 1,5,2,4,1 };
             int[] nums1 = { 5,9,10,3,1,4,6};
             char[][] mat = new char[4][] { new char[5] {'1','0','1','0','0' }, new char[5] { '1', '0', '1', '1', '1' }, new char[5] { '1', '1', '1', '1', '1' }, new char[5] { '1', '0', '0', '1', '0' } };
             var head = test1.GenerateListNode(nums);
             string s = "   123   ";
-            s=test.StringTrim(s);
+            var a=test.MinOperations(nums);
             //Show(nums1);
-            Console.WriteLine(s);
+            Console.WriteLine(a);
             Console.ReadKey();
         }
         public void shiftDown(int[] nums,int n,int cur)

@@ -13,6 +13,16 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public int MinOperations(int[] nums)
+        {
+            int pre = nums[0] - 1, res = 0;
+            foreach(int num in nums)
+            {
+                pre = Math.Max(pre+1,num);
+                res += pre - num;
+            }
+            return res;
+        }
         public bool IsIsomorphic(string s, string t)
         {
             if (s.Length != t.Length)
