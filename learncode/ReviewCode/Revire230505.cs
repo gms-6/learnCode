@@ -13,6 +13,54 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        Random random = new Random();
+        public int FindKthLargest(int[] nums, int k)
+        {
+            int len = nums.Length;
+            int target = len - k;
+            int left = 0;
+            int right = len - 1;
+            while(true)
+            {
+                int pivotIndex = partition(nums,left,right);
+                if (pivotIndex == target)
+                    return nums[pivotIndex];
+                else if (pivotIndex < target)
+                    left = pivotIndex + 1;
+                else
+                    right = pivotIndex - 1;
+            }
+        }
+        private int partition(int[] nums,int left,int right)
+        {
+            int randomIndex = left + random.Next(right-left+1);
+            partitionSwap(nums,left,randomIndex);
+
+            int pivot = nums[left];
+            int le = left + 1;
+            int ge = right;
+
+            while(true)
+            {
+                while (le <= ge && nums[le] < pivot)
+                    le++;
+                while (le <= ge && nums[ge] > pivot)
+                    ge--;
+                if (le >= ge)
+                    break;
+                partitionSwap(nums,le,ge);
+                le++;
+                ge--;
+            }
+            partitionSwap(nums,left,ge);
+            return ge;
+        }
+        private void partitionSwap(int[] nums,int index1,int index2)
+        {
+            int temp = nums[index1];
+            nums[index1] = nums[index2];
+            nums[index2] = temp;
+        }
         public int MinOperations(int[] nums)
         {
             int pre = nums[0] - 1, res = 0;
