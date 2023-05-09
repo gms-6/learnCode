@@ -80,7 +80,7 @@ namespace learncode
         /// <param name="n"></param>
         public void createHeapDown(int[] nums,int n)
         {
-            for(int i=(n-2)/2;i>=0;++i)
+            for(int i=(n-2)/2;i>=0;--i)
             {
                 shiftDown(nums,n,i);
             }
