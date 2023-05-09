@@ -27,6 +27,12 @@ namespace learncode
             Console.WriteLine(a);
             Console.ReadKey();
         }
+        /// <summary>
+        /// O(N)
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="n"></param>
+        /// <param name="cur"></param>
         public void shiftDown(int[] nums,int n,int cur)
         {
             int child = 2 * cur + 1;
@@ -44,6 +50,12 @@ namespace learncode
                 }
             }
         }
+        /// <summary>
+        /// O(Nlog(N))
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="n"></param>
+        /// <param name="cur"></param>
         public void shiftUP(int[] nums,int n,int cur)
         {
             int parent = (cur - 1) / 2;
@@ -61,6 +73,11 @@ namespace learncode
                     break;
             }
         }
+        /// <summary>
+        /// 下滤建立小根堆
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="n"></param>
         public void createHeapDown(int[] nums,int n)
         {
             for(int i=(n-2)/2;i>=0;++i)
@@ -68,6 +85,11 @@ namespace learncode
                 shiftDown(nums,n,i);
             }
         }
+        /// <summary>
+        /// 上滤建立小根堆
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="n"></param>
         public void createHeapUp(int[] nums,int n)
         {
             for(int i=1;i<n;++i)
