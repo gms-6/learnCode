@@ -13,38 +13,42 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
-        Random random = new Random();
-        public IList<IList<int>> KSmallestPairs(int[] nums1, int[] nums2, int k)
+        Random random = new Random();public IList<IList<int>> KSmallestPairs(int[] nums1, int[] nums2, int k)
         {
-            IList<IList<int>> list = new List<IList<int>>();
-            int m = nums1.Length;
-            int n = nums2.Length;
-            int[][] num = new int[m * n][];
-            int index = 0;
-            bool flag = false;
-            if (k >= m * n)
-            {
-                flag = true;
-                k = m * n;
-            }
-            for (int i = 0; i < m; ++i)
-            {
-                for (int j = 0; j < n; ++j)
-                {
-                    num[index++] = new int[] { nums1[i],nums2[j]};
-                }
-            }
-            Array.Sort(num, (a, b) => {
-                return a[0] + a[1] - b[0] - b[1];
-            });
-            int sum = -1;
 
-            for(int i=0;i< k; ++i)
-            {
-                list.Add(new List<int>() {num[i][0],num[i][1] });
+
+
+
+
+            //IList<IList<int>> list = new List<IList<int>>();
+            //int m = nums1.Length;
+            //int n = nums2.Length;
+            //int[][] num = new int[m * n][];
+            //int index = 0;
+            //bool flag = false;
+            //if (k >= m * n)
+            //{
+            //    flag = true;
+            //    k = m * n;
+            //}
+            //for (int i = 0; i < m; ++i)
+            //{
+            //    for (int j = 0; j < n; ++j)
+            //    {
+            //        num[index++] = new int[] { nums1[i],nums2[j]};
+            //    }
+            //}
+            //Array.Sort(num, (a, b) => {
+            //    return a[0] + a[1] - b[0] - b[1];
+            //});
+            //int sum = -1;
+
+            //for(int i=0;i< k; ++i)
+            //{
+            //    list.Add(new List<int>() {num[i][0],num[i][1] });
                 
-            }
-            return list;
+            //}
+            //return list;
 
         }
         public int[][] ReconstructQueue(int[][] people)
