@@ -14,28 +14,88 @@ namespace learncode.ReviewCode
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
         Random random = new Random();
+        public IList<IList<int>> KSmallestPairs(int[] nums1, int[] nums2, int k)
+        {
+            IList<IList<int>> list = new List<IList<int>>();
+            int m = nums1.Length;
+            int n = nums2.Length;
+            int[][] num = new int[m * n][];
+            int index = 0;
+            bool flag = false;
+            if (k >= m * n)
+            {
+                flag = true;
+                k = m * n;
+            }
+            for (int i = 0; i < m; ++i)
+            {
+                for (int j = 0; j < n; ++j)
+                {
+                    num[index++] = new int[] { nums1[i],nums2[j]};
+                }
+            }
+            Array.Sort(num, (a, b) => {
+                return a[0] + a[1] - b[0] - b[1];
+            });
+            int sum = -1;
+
+            for(int i=0;i< k; ++i)
+            {
+                list.Add(new List<int>() {num[i][0],num[i][1] });
+                
+            }
+            return list;
+
+        }
         public int[][] ReconstructQueue(int[][] people)
         {
-            int n=people.Length;
-            List<int[]> list=new List<int[]>();
-            int i = ReconstructQueueSort(people);
-            for(;i<n-1;++i)
+            Array.Sort(people, (a, b) =>
             {
-                int j = i;
-                for(;j<n;j++)
+                if (a[0] != b[0])
                 {
-                    int count = 0;
-                    for(int k=0;k<i;++k)
-                    {
-                        if (people[j][0] >= people[k][0])
-                            count++;
-                    }
-                    if (count == people[j][1])
-                        break;
+                    return a[0] - b[0];
                 }
-                ReconstructQueueSortswap(people,i,j);
+                else
+                    return b[1] - a[1];
+            });
+            int n = people.Length;
+            int[][] ans = new int[n][];
+            foreach (var item in people)
+            {
+                int spaces = item[1] + 1;
+                for(int i=0;i<n;++i)
+                {
+                    if (ans[i] == null)
+                        --spaces;
+                    if(spaces==0)
+                    {
+                        ans[i] = item;
+                        break;
+                    }
+                }
             }
-            return people;
+            return ans;
+
+            //int n=people.Length;
+            //List<int[]> list=new List<int[]>();
+            //int i = ReconstructQueueSort(people);
+            //for(;i<n-1;++i)
+            //{
+            //    int j = i;
+            //    for(;j<n;j++)
+            //    {
+            //        int count = 0;
+            //        for(int k=0;k<i;++k)
+            //        {
+            //            if (people[j][0] >= people[k][0])
+            //                count++;
+            //        }
+            //        if (count == people[j][1])
+            //            break;
+            //    }
+            //    ReconstructQueueSortswap(people,i,j);
+            //}
+            //return people;
 
         }
         private int ReconstructQueueSort(int[][] people)

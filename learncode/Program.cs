@@ -17,10 +17,10 @@ namespace learncode
         {
             Revire230505 test = new Revire230505();
             Review test1 = new Review();
-            int[] nums = { 5, 3, 1, 1, 1, 3, 5, 73, 1 };
-            int[] nums1 = { 5,9,10,3,1,4,6};
+            int[] nums = { 1, 2 };
+            int[] nums1 = { 3};
             int[][] mat = new int[][] { new int[] {7,0 }, new int[] { 4,4 }, new int[] {7,1}, new int[] {5,0 }, new int[] { 6, 1 }, new int[] { 5, 2 } };
-            var head = test.ReconstructQueue(mat);
+            var head = test.KSmallestPairs(nums,nums1,3);
             //Show(nums1);
             Console.ReadKey();
         }
