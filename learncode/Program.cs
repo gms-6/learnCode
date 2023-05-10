@@ -17,14 +17,11 @@ namespace learncode
         {
             Revire230505 test = new Revire230505();
             Review test1 = new Review();
-            int[] nums = { 1,5,2,4,1 };
+            int[] nums = { 5, 3, 1, 1, 1, 3, 5, 73, 1 };
             int[] nums1 = { 5,9,10,3,1,4,6};
             char[][] mat = new char[4][] { new char[5] {'1','0','1','0','0' }, new char[5] { '1', '0', '1', '1', '1' }, new char[5] { '1', '1', '1', '1', '1' }, new char[5] { '1', '0', '0', '1', '0' } };
-            var head = test1.GenerateListNode(nums);
-            string s = "   123   ";
-            var a=test.MinOperations(nums);
+            var head = test.TopKFrequent(nums,2);
             //Show(nums1);
-            Console.WriteLine(a);
             Console.ReadKey();
         }
         /// <summary>

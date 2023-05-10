@@ -14,15 +14,135 @@ namespace learncode.ReviewCode
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
         Random random = new Random();
+        public int[] TopKFrequent(int[] nums, int k)
+        {
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            int n = nums.Length;
+            for (int i = 0; i < n; ++i)
+            {
+                if (dic.ContainsKey(nums[i]))
+                    dic[nums[i]] += 1;
+                else
+                    dic.Add(nums[i], 1);
+            }
+            int m = dic.Count;
+            int[,] tmp = new int[2, m];
+            int index = 0;
+            foreach (var num in dic)
+            {
+                tmp[0, index] = num.Key;
+                tmp[1, index] = num.Value;
+                index++;
+            }
+            TopKFrequentQuickSort(tmp, 0, m - 1);
+            int[] target = new int[k];
+            for(int i=0;i<k;++i)
+            {
+                target[i] = tmp[0, i];
+            }
+            return target;
+
+        }
+        private void TopKFrequentQuickSort(int[,] nums,int left,int right)
+        {
+            if (left >= right)
+                return;
+            int i = left, j = right ;
+            int index = nums[1,left];
+            int index1 = nums[0, left];
+            while(i<j)
+            {
+                while (i < j && nums[1, j] <= index)
+                    j--;
+                nums[1, i] = nums[1, j];
+                nums[0, i] = nums[0, j];
+                while (i < j && nums[1, i] >= index)
+                    i++;
+                nums[1, j] = nums[1, i];
+                nums[0, j] = nums[0, i];
+            }
+            nums[0, i] = index1;
+            nums[1, i] = index;
+            TopKFrequentQuickSort(nums,left,i-1);
+            TopKFrequentQuickSort(nums,i+1,right);
+        }
+        public bool IsAdditiveNumber(string num)
+        {
+            int n = num.Length;
+            for (int secondStart = 1; secondStart < n - 1; ++secondStart)
+            {
+                if (num[0] == '0' && secondStart != 1)
+                    break;
+                for (int secondEnd = secondStart; secondEnd < n - 1; ++secondEnd)
+                {
+                    if (num[secondStart] == '0' && secondStart != secondEnd)
+                        break;
+                    if (Valid(secondStart, secondEnd, num))
+                        return true;
+                }
+            }
+            return false;
+        }
+        private bool Valid(int secondStart,int secondEnd,string num)
+        {
+            int n = num.Length;
+            int firstStart = 0, firstEnd = secondStart - 1;
+            while(secondEnd<=n-1)
+            {
+                string third = StringAdd(num, firstStart, firstEnd, secondStart, secondEnd);
+                int thirdStart = secondEnd + 1;
+                int thirdEnd = secondEnd + third.Length;
+                if(thirdEnd>=n||!num.Substring(thirdStart,thirdEnd-thirdStart+1).Equals(third))
+                {
+                    break;
+                }
+                if (thirdEnd == n - 1)
+                    return true;
+                firstStart = secondStart;
+                firstEnd = secondEnd;
+                secondStart = thirdStart;
+                secondEnd = thirdEnd;
+                    
+            }
+            return false;
+        }
+        private string StringAdd(string s,int firstStart,int firstEnd,int secondStart,int secondEnd)
+        {
+            StringBuilder third = new StringBuilder();
+            int carry = 0, cur = 0;
+            while (firstEnd >= firstStart || secondEnd >= secondStart || carry != 0)
+            {
+                cur = carry;
+                if(firstEnd>=firstStart)
+                {
+                    cur += s[firstEnd] - '0';
+                    --secondEnd;
+                }
+                if(secondEnd>=secondStart)
+                {
+                    cur += s[secondEnd] - '0';
+                    --secondEnd;
+                }
+                carry = cur / 10;
+                cur %= 10;
+                third.Append((char)(cur+'0'));
+            }
+            char[] arr = third.ToString().ToCharArray();
+            Array.Reverse(arr);
+            third.Length = 0;
+            foreach (char c in arr)
+                third.Append(c);
+            return third.ToString();
+        }
         public int FindKthLargest(int[] nums, int k)
         {
             int len = nums.Length;
             int target = len - k;
             int left = 0;
             int right = len - 1;
-            while(true)
+            while (true)
             {
-                int pivotIndex = partition(nums,left,right);
+                int pivotIndex = partition(nums, left, right);
                 if (pivotIndex == target)
                     return nums[pivotIndex];
                 else if (pivotIndex < target)
@@ -31,16 +151,16 @@ namespace learncode.ReviewCode
                     right = pivotIndex - 1;
             }
         }
-        private int partition(int[] nums,int left,int right)
+        private int partition(int[] nums, int left, int right)
         {
-            int randomIndex = left + random.Next(right-left+1);
-            partitionSwap(nums,left,randomIndex);
+            int randomIndex = left + random.Next(right - left + 1);
+            partitionSwap(nums, left, randomIndex);
 
             int pivot = nums[left];
             int le = left + 1;
             int ge = right;
 
-            while(true)
+            while (true)
             {
                 while (le <= ge && nums[le] < pivot)
                     le++;
@@ -48,14 +168,14 @@ namespace learncode.ReviewCode
                     ge--;
                 if (le >= ge)
                     break;
-                partitionSwap(nums,le,ge);
+                partitionSwap(nums, le, ge);
                 le++;
                 ge--;
             }
-            partitionSwap(nums,left,ge);
+            partitionSwap(nums, left, ge);
             return ge;
         }
-        private void partitionSwap(int[] nums,int index1,int index2)
+        private void partitionSwap(int[] nums, int index1, int index2)
         {
             int temp = nums[index1];
             nums[index1] = nums[index2];
@@ -64,9 +184,9 @@ namespace learncode.ReviewCode
         public int MinOperations(int[] nums)
         {
             int pre = nums[0] - 1, res = 0;
-            foreach(int num in nums)
+            foreach (int num in nums)
             {
-                pre = Math.Max(pre+1,num);
+                pre = Math.Max(pre + 1, num);
                 res += pre - num;
             }
             return res;
