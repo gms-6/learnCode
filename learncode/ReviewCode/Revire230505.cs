@@ -14,6 +14,78 @@ namespace learncode.ReviewCode
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
         Random random = new Random();
+        public int[][] ReconstructQueue(int[][] people)
+        {
+            int n=people.Length;
+            List<int[]> list=new List<int[]>();
+            int i = ReconstructQueueSort(people);
+            for(;i<n-1;++i)
+            {
+                int j = i;
+                for(;j<n;j++)
+                {
+                    int count = 0;
+                    for(int k=0;k<i;++k)
+                    {
+                        if (people[j][0] >= people[k][0])
+                            count++;
+                    }
+                    if (count == people[j][1])
+                        break;
+                }
+                ReconstructQueueSortswap(people,i,j);
+            }
+            return people;
+
+        }
+        private int ReconstructQueueSort(int[][] people)
+        {
+            int n=people.Length;
+            int i = 0, j = n - 1;
+            int index = 0;
+            while(i<j)
+            {
+                while (i < j && people[i][1] == 0)
+                    i++;
+                while (i < j && people[j][1] != 0)
+                    j--;
+                if (i == j)
+                    break;
+                ReconstructQueueSortswap(people,i,j);
+            }
+            index = i;
+            ReconstructQueueSortQuick(people,0,i-1);
+            return index;
+        }
+        private void ReconstructQueueSortQuick(int[][] nums,int left,int right)
+        {
+            if (left >= right)
+                return;
+            int n = nums.Length;
+            int i=left,j= right;
+            int index = nums[i][0];
+            while(i<j)
+            {
+                while (i < j && nums[j][0] >= index)
+                    j--;
+                nums[i][0] = nums[j][0];
+                while (i < j&& nums[i][0]<=index)
+                    i++;
+                nums[j][0]= nums[i][0];
+            }
+            nums[i][0] = index;
+            ReconstructQueueSortQuick(nums, left, i - 1);
+            ReconstructQueueSortQuick(nums, i+1,right);
+        }
+        private void ReconstructQueueSortswap(int[][] people,int i,int j)
+        {
+            int temp = people[i][0];
+            people[i][0] = people[j][0];
+            people[j][0] = temp;
+            temp = people[i][1];
+            people[i][1] = people[j][1];
+            people[j][1] = temp;
+        }
         public int[] TopKFrequent(int[] nums, int k)
         {
             Dictionary<int, int> dic = new Dictionary<int, int>();

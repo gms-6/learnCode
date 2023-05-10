@@ -19,8 +19,8 @@ namespace learncode
             Review test1 = new Review();
             int[] nums = { 5, 3, 1, 1, 1, 3, 5, 73, 1 };
             int[] nums1 = { 5,9,10,3,1,4,6};
-            char[][] mat = new char[4][] { new char[5] {'1','0','1','0','0' }, new char[5] { '1', '0', '1', '1', '1' }, new char[5] { '1', '1', '1', '1', '1' }, new char[5] { '1', '0', '0', '1', '0' } };
-            var head = test.TopKFrequent(nums,2);
+            int[][] mat = new int[][] { new int[] {7,0 }, new int[] { 4,4 }, new int[] {7,1}, new int[] {5,0 }, new int[] { 6, 1 }, new int[] { 5, 2 } };
+            var head = test.ReconstructQueue(mat);
             //Show(nums1);
             Console.ReadKey();
         }
