@@ -13,6 +13,98 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public bool CanPartition(int[] nums)
+        {
+            int n = nums.Length;
+            if (n == 1)
+                return false;
+            int sum = 0, maxNum = 0;
+            foreach (int num in nums)
+            {
+                sum += num;
+                maxNum = Math.Max(num,maxNum);
+            }
+            if (sum % 2 != 0)
+                return false;
+            int target = sum / 2;
+            if (maxNum > target)
+                return false;
+            bool[][] dp = new bool[n][];
+            for(int i=0;i<n;++i)
+            {
+                dp[i] = new bool[target+1];
+                dp[i][0] = true;
+            }
+            dp[0][nums[0]] = true;
+            for(int i=1;i<n;++i)
+            {
+                int num = nums[i];
+                for(int j=1;j<=target;++j)
+                {
+                    if (j >= num)
+                        dp[i][j] = dp[i - 1][j] | dp[i - 1][j - num];
+                    else
+                        dp[i][j] = dp[i - 1][j];
+                }
+            }
+            return dp[n - 1][target];
+        }
+        public int ThirdMax(int[] nums)
+        {
+            int n = nums.Length;
+            long max1 = long.MinValue, max2 = long.MinValue, max3 = long.MinValue;
+            for (int i = 0; i < n; ++i)
+            {
+                if (nums[i] > max1)
+                {
+                    max3 = max2;
+                    max2 = max1;
+                    max1 = nums[i];
+                }
+                else if (nums[i] > max2&&nums[i]<max1)
+                {
+                    max3 = max2;
+                    max2 = nums[i];
+                }
+                else if (nums[i] > max3&&nums[i]<max2)
+                    max3 = nums[i];
+            }
+            if (max3 == long.MinValue)
+                return (int)max1;
+            return (int)max3;
+        }
+        public int NumberOfArithmeticSlices(int[] nums)
+        {
+            int n = nums.Length;
+            if (n < 3)
+                return 0;
+            int sum = 0;
+            int count = 0, dif = 0;
+            for (int i = 1; i < n; ++i)
+            {
+                if (count == 0)
+                {
+                    dif = nums[i] - nums[i - 1];
+                    count = 2;
+                }
+                else
+                {
+                    if (dif == nums[i] - nums[i - 1])
+                        count++;
+                    else
+                    {
+                        if (count >= 3)
+                            sum += (count * count - 3 * count + 2) / 2;
+                        count = 2;
+                        dif = nums[i] - nums[i - 1];
+
+                    }
+                }
+            }
+            if(count>=3)
+                sum += (count * count - 3 * count + 2) / 2;
+            return sum;
+        }
         public int LongestSubstring(string s, int k)
         {
             int ans = 0;
