@@ -13,12 +13,35 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public int LongestSubstring(string s, int k)
+        {
+            int ans = 0;
+            int n = s.Length;
+            char[] cs = s.ToCharArray();
+            int[] cnt = new int[26];
+            for(int p=1;p<=26;p++)
+            {
+                for(int i=0,j=0,tot=0,sum=0;i<n;++i)
+                {
+                    int u = cs[i] - 'a';
+                    cnt[i]++;
+                    if (cnt[u] == 1) tot++;
+                    if (cnt[u] == k) sum++;
+                    while(tot>p)
+                    {
+                        int t = cs[j++] - 'a';
+                        cnt[t]--;
+                        if (cnt[t] == 0) tot--;
+                        if (cnt[t] == k - 1) sum--;
+                    }
+                    if (tot == sum) ans = Math.Max(ans,i-j+1);
+                }
+            }
+            return ans;
+        }
         Random random = new Random();public IList<IList<int>> KSmallestPairs(int[] nums1, int[] nums2, int k)
         {
-
-
-
-
+            return null;
 
             //IList<IList<int>> list = new List<IList<int>>();
             //int m = nums1.Length;
