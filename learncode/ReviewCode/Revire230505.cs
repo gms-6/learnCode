@@ -20,35 +20,45 @@ namespace learncode.ReviewCode
             bool[][] bod = new bool[m][];
             for (int i = 0; i < m; ++i)
                 bod[i] = new bool[n];
-            int[][] dir= new int[4][] { new int[] {1,0 }, new int[] { 0, 1 }, new int[] { -1, 0 }, new int[] { 0, -1 } };
-            for(int i=0;i<m;++i)
+            int[][] dir = new int[4][] { new int[] { 1, 0 }, new int[] { 0, 1 }, new int[] { -1, 0 }, new int[] { 0, -1 } };
+            int ans = 0;
+            for (int i = 0; i < m; ++i)
             {
-                for(int j=0;j<n;++j)
+                for (int j = 0; j < n; ++j)
                 {
-                    if (!bod[i][j] && board[i][j]=='X')
+                    if (!bod[i][j] && board[i][j] == 'X')
                     {
+                        ans++;
                         int index = -1;
                         bod[i][j] = true;
-                        for(int k=0;k<4;++k)
+                        for (int k = 0; k < 4; ++k)
                         {
-                            if (i + dir[k][0] >= m || j + dir[k][1] >= n)
+                            if (i + dir[k][0] >= m || j + dir[k][1] >= n || i + dir[k][0] < 0 || j + dir[k][1] < 0)
                                 continue;
-                            if (board[i + dir[k][0]][j + dir[k][1]]=='X')
+                            if (board[i + dir[k][0]][j + dir[k][1]] == 'X')
                             {
                                 index = k;
                                 break;
                             }
                         }
-                        int left= dir[index][0], right=j;
-                        while (tmpi + dir[index][0] < m && tmpj + dir[index][1]<n)
+                        if (index != -1)
                         {
-                            bod[tmpi + dir[index][0]][tmpj + dir[index][1]] = true;
-                            
+                            int left = dir[index][0], right = dir[index][1];
+                            while (i + left < m && j + right < n && i + left >= 0 && j + right >= 0)
+                            {
+                                if (board[i + left][j + right] == 'X')
+                                {
+                                    bod[i + left][j + right] = true;
+                                    left += dir[index][0];
+                                    right += dir[index][1];
+                                }
+                                else break;
+                            }
                         }
-                        
                     }
                 }
             }
+            return ans;
         }
         /// <summary>
         /// 未提交
@@ -59,21 +69,25 @@ namespace learncode.ReviewCode
         {
             int m = heights.Length;
             int n = heights[0].Length;
-            IList<IList<int>> list=new List<IList<int>>();
-            for(int i=0;i<m;++i)
+            IList<IList<int>> list = new List<IList<int>>();
+            for (int i = 0; i < m; ++i)
             {
                 int j = 0;
                 bool res = true;
-                for(j=0;j<n;++j)
+                for (j = 0; j < n; ++j)
                 {
                     res = true;
-                    res &= PacificAtlanticLeftDFS(heights,i,j);
-                    res &= PacificAtlanticRightDFS(heights,i,j);
+                    res &= PacificAtlanticLeftDFS(heights, i, j);
+                    res &= PacificAtlanticRightDFS(heights, i, j);
                     if (res)
                         list.Add(new List<int>() { i, j });
                 }
             }
             return list;
+        }
+        public void PacificAtlanticDFS(int row, int col, bool[][] ocean)
+        {
+
         }
         private bool PacificAtlanticRightDFS(int[][] heights, int fir, int sec)
         {
@@ -83,6 +97,12 @@ namespace learncode.ReviewCode
             int curDown = heights[fir + 1][sec];
             int curRight = heights[fir][sec + 1];
             bool res = false;
+            if (sec - 1 >= 0)
+            {
+                int curLeft = heights[fir][sec - 1];
+                if (cur >= curLeft)
+                    res |= PacificAtlanticRightDFS(heights, fir, sec - 1);
+            }
             if (cur >= curDown)
                 res |= PacificAtlanticRightDFS(heights, fir + 1, sec);
             if (cur >= curRight)
@@ -97,6 +117,12 @@ namespace learncode.ReviewCode
             int curUp = heights[fir - 1][sec];
             int curLeft = heights[fir][sec - 1];
             bool res = false;
+            if (sec + 1 < heights[0].Length)
+            {
+                int curRight = heights[fir][sec + 1];
+                if (cur >= curRight)
+                    res |= PacificAtlanticLeftDFS(heights, fir, sec + 1);
+            }
             if (cur >= curUp)
                 res |= PacificAtlanticLeftDFS(heights, fir - 1, sec);
             if (cur >= curLeft)
