@@ -13,6 +13,32 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public int CountBattleships(char[][] board)
+        {
+            int m = board.Length;
+            int n = board[0].Length;
+            bool[][] bod = new bool[m][];
+            for (int i = 0; i < m; ++i)
+                bod[i] = new bool[n];
+            int[][] dir= new int[4][] { new int[] {1,0 }, new int[] { 0, 1 }, new int[] { -1, 0 }, new int[] { 0, -1 } };
+            for(int i=0;i<m;++i)
+            {
+                for(int j=0;j<n;++j)
+                {
+                    if (!bod[i][j] && board[i][j]=='X')
+                    {
+                        int index = -1;
+                        bod[i][j] = true;
+                        for(int k=0;k<4;++k)
+                        {
+                            if (i + dir[k][0] >= m || j + dir[k][1] >= n)
+                                continue;
+                            if(board)
+                        }
+                    }
+                }
+            }
+        }
         /// <summary>
         /// 未提交
         /// </summary>
