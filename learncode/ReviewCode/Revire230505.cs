@@ -39,11 +39,13 @@ namespace learncode.ReviewCode
                                 break;
                             }
                         }
-                        int tmpi=i,tmpj=j;
+                        int left= dir[index][0], right=j;
                         while (tmpi + dir[index][0] < m && tmpj + dir[index][1]<n)
                         {
                             bod[tmpi + dir[index][0]][tmpj + dir[index][1]] = true;
+                            
                         }
+                        
                     }
                 }
             }
