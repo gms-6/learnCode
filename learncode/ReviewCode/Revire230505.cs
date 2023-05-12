@@ -33,7 +33,16 @@ namespace learncode.ReviewCode
                         {
                             if (i + dir[k][0] >= m || j + dir[k][1] >= n)
                                 continue;
-                            if(board)
+                            if (board[i + dir[k][0]][j + dir[k][1]]=='X')
+                            {
+                                index = k;
+                                break;
+                            }
+                        }
+                        int tmpi=i,tmpj=j;
+                        while (tmpi + dir[index][0] < m && tmpj + dir[index][1]<n)
+                        {
+                            bod[tmpi + dir[index][0]][tmpj + dir[index][1]] = true;
                         }
                     }
                 }
