@@ -13,6 +13,59 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        /// <summary>
+        /// 未提交
+        /// </summary>
+        /// <param name="heights"></param>
+        /// <returns></returns>
+        public IList<IList<int>> PacificAtlantic(int[][] heights)
+        {
+            int m = heights.Length;
+            int n = heights[0].Length;
+            IList<IList<int>> list=new List<IList<int>>();
+            for(int i=0;i<m;++i)
+            {
+                int j = 0;
+                bool res = true;
+                for(j=0;j<n;++j)
+                {
+                    res = true;
+                    res &= PacificAtlanticLeftDFS(heights,i,j);
+                    res &= PacificAtlanticRightDFS(heights,i,j);
+                    if (res)
+                        list.Add(new List<int>() { i, j });
+                }
+            }
+            return list;
+        }
+        private bool PacificAtlanticRightDFS(int[][] heights, int fir, int sec)
+        {
+            if (fir == heights.Length - 1 || sec == heights[0].Length - 1)
+                return true;
+            int cur = heights[fir][sec];
+            int curDown = heights[fir + 1][sec];
+            int curRight = heights[fir][sec + 1];
+            bool res = false;
+            if (cur >= curDown)
+                res |= PacificAtlanticRightDFS(heights, fir + 1, sec);
+            if (cur >= curRight)
+                res |= PacificAtlanticRightDFS(heights, fir, sec + 1);
+            return res;
+        }
+        private bool PacificAtlanticLeftDFS(int[][] heights, int fir, int sec)
+        {
+            if (fir == 0 || sec == 0)
+                return true;
+            int cur = heights[fir][sec];
+            int curUp = heights[fir - 1][sec];
+            int curLeft = heights[fir][sec - 1];
+            bool res = false;
+            if (cur >= curUp)
+                res |= PacificAtlanticLeftDFS(heights, fir - 1, sec);
+            if (cur >= curLeft)
+                res |= PacificAtlanticLeftDFS(heights, fir, sec - 1);
+            return res;
+        }
         public bool CanPartition(int[] nums)
         {
             int n = nums.Length;
@@ -22,7 +75,7 @@ namespace learncode.ReviewCode
             foreach (int num in nums)
             {
                 sum += num;
-                maxNum = Math.Max(num,maxNum);
+                maxNum = Math.Max(num, maxNum);
             }
             if (sum % 2 != 0)
                 return false;
@@ -30,16 +83,16 @@ namespace learncode.ReviewCode
             if (maxNum > target)
                 return false;
             bool[][] dp = new bool[n][];
-            for(int i=0;i<n;++i)
+            for (int i = 0; i < n; ++i)
             {
-                dp[i] = new bool[target+1];
+                dp[i] = new bool[target + 1];
                 dp[i][0] = true;
             }
             dp[0][nums[0]] = true;
-            for(int i=1;i<n;++i)
+            for (int i = 1; i < n; ++i)
             {
                 int num = nums[i];
-                for(int j=1;j<=target;++j)
+                for (int j = 1; j <= target; ++j)
                 {
                     if (j >= num)
                         dp[i][j] = dp[i - 1][j] | dp[i - 1][j - num];
@@ -61,12 +114,12 @@ namespace learncode.ReviewCode
                     max2 = max1;
                     max1 = nums[i];
                 }
-                else if (nums[i] > max2&&nums[i]<max1)
+                else if (nums[i] > max2 && nums[i] < max1)
                 {
                     max3 = max2;
                     max2 = nums[i];
                 }
-                else if (nums[i] > max3&&nums[i]<max2)
+                else if (nums[i] > max3 && nums[i] < max2)
                     max3 = nums[i];
             }
             if (max3 == long.MinValue)
@@ -101,7 +154,7 @@ namespace learncode.ReviewCode
                     }
                 }
             }
-            if(count>=3)
+            if (count >= 3)
                 sum += (count * count - 3 * count + 2) / 2;
             return sum;
         }
@@ -111,27 +164,27 @@ namespace learncode.ReviewCode
             int n = s.Length;
             char[] cs = s.ToCharArray();
             int[] cnt = new int[26];
-            for(int p=1;p<=26;p++)
+            for (int p = 1; p <= 26; p++)
             {
-                for(int i=0,j=0,tot=0,sum=0;i<n;++i)
+                for (int i = 0, j = 0, tot = 0, sum = 0; i < n; ++i)
                 {
                     int u = cs[i] - 'a';
                     cnt[i]++;
                     if (cnt[u] == 1) tot++;
                     if (cnt[u] == k) sum++;
-                    while(tot>p)
+                    while (tot > p)
                     {
                         int t = cs[j++] - 'a';
                         cnt[t]--;
                         if (cnt[t] == 0) tot--;
                         if (cnt[t] == k - 1) sum--;
                     }
-                    if (tot == sum) ans = Math.Max(ans,i-j+1);
+                    if (tot == sum) ans = Math.Max(ans, i - j + 1);
                 }
             }
             return ans;
         }
-        Random random = new Random();public IList<IList<int>> KSmallestPairs(int[] nums1, int[] nums2, int k)
+        Random random = new Random(); public IList<IList<int>> KSmallestPairs(int[] nums1, int[] nums2, int k)
         {
             return null;
 
@@ -161,7 +214,7 @@ namespace learncode.ReviewCode
             //for(int i=0;i< k; ++i)
             //{
             //    list.Add(new List<int>() {num[i][0],num[i][1] });
-                
+
             //}
             //return list;
 
@@ -182,11 +235,11 @@ namespace learncode.ReviewCode
             foreach (var item in people)
             {
                 int spaces = item[1] + 1;
-                for(int i=0;i<n;++i)
+                for (int i = 0; i < n; ++i)
                 {
                     if (ans[i] == null)
                         --spaces;
-                    if(spaces==0)
+                    if (spaces == 0)
                     {
                         ans[i] = item;
                         break;
@@ -219,10 +272,10 @@ namespace learncode.ReviewCode
         }
         private int ReconstructQueueSort(int[][] people)
         {
-            int n=people.Length;
+            int n = people.Length;
             int i = 0, j = n - 1;
             int index = 0;
-            while(i<j)
+            while (i < j)
             {
                 while (i < j && people[i][1] == 0)
                     i++;
@@ -230,33 +283,33 @@ namespace learncode.ReviewCode
                     j--;
                 if (i == j)
                     break;
-                ReconstructQueueSortswap(people,i,j);
+                ReconstructQueueSortswap(people, i, j);
             }
             index = i;
-            ReconstructQueueSortQuick(people,0,i-1);
+            ReconstructQueueSortQuick(people, 0, i - 1);
             return index;
         }
-        private void ReconstructQueueSortQuick(int[][] nums,int left,int right)
+        private void ReconstructQueueSortQuick(int[][] nums, int left, int right)
         {
             if (left >= right)
                 return;
             int n = nums.Length;
-            int i=left,j= right;
+            int i = left, j = right;
             int index = nums[i][0];
-            while(i<j)
+            while (i < j)
             {
                 while (i < j && nums[j][0] >= index)
                     j--;
                 nums[i][0] = nums[j][0];
-                while (i < j&& nums[i][0]<=index)
+                while (i < j && nums[i][0] <= index)
                     i++;
-                nums[j][0]= nums[i][0];
+                nums[j][0] = nums[i][0];
             }
             nums[i][0] = index;
             ReconstructQueueSortQuick(nums, left, i - 1);
-            ReconstructQueueSortQuick(nums, i+1,right);
+            ReconstructQueueSortQuick(nums, i + 1, right);
         }
-        private void ReconstructQueueSortswap(int[][] people,int i,int j)
+        private void ReconstructQueueSortswap(int[][] people, int i, int j)
         {
             int temp = people[i][0];
             people[i][0] = people[j][0];
@@ -287,21 +340,21 @@ namespace learncode.ReviewCode
             }
             TopKFrequentQuickSort(tmp, 0, m - 1);
             int[] target = new int[k];
-            for(int i=0;i<k;++i)
+            for (int i = 0; i < k; ++i)
             {
                 target[i] = tmp[0, i];
             }
             return target;
 
         }
-        private void TopKFrequentQuickSort(int[,] nums,int left,int right)
+        private void TopKFrequentQuickSort(int[,] nums, int left, int right)
         {
             if (left >= right)
                 return;
-            int i = left, j = right ;
-            int index = nums[1,left];
+            int i = left, j = right;
+            int index = nums[1, left];
             int index1 = nums[0, left];
-            while(i<j)
+            while (i < j)
             {
                 while (i < j && nums[1, j] <= index)
                     j--;
@@ -314,8 +367,8 @@ namespace learncode.ReviewCode
             }
             nums[0, i] = index1;
             nums[1, i] = index;
-            TopKFrequentQuickSort(nums,left,i-1);
-            TopKFrequentQuickSort(nums,i+1,right);
+            TopKFrequentQuickSort(nums, left, i - 1);
+            TopKFrequentQuickSort(nums, i + 1, right);
         }
         public bool IsAdditiveNumber(string num)
         {
@@ -334,16 +387,16 @@ namespace learncode.ReviewCode
             }
             return false;
         }
-        private bool Valid(int secondStart,int secondEnd,string num)
+        private bool Valid(int secondStart, int secondEnd, string num)
         {
             int n = num.Length;
             int firstStart = 0, firstEnd = secondStart - 1;
-            while(secondEnd<=n-1)
+            while (secondEnd <= n - 1)
             {
                 string third = StringAdd(num, firstStart, firstEnd, secondStart, secondEnd);
                 int thirdStart = secondEnd + 1;
                 int thirdEnd = secondEnd + third.Length;
-                if(thirdEnd>=n||!num.Substring(thirdStart,thirdEnd-thirdStart+1).Equals(third))
+                if (thirdEnd >= n || !num.Substring(thirdStart, thirdEnd - thirdStart + 1).Equals(third))
                 {
                     break;
                 }
@@ -353,30 +406,30 @@ namespace learncode.ReviewCode
                 firstEnd = secondEnd;
                 secondStart = thirdStart;
                 secondEnd = thirdEnd;
-                    
+
             }
             return false;
         }
-        private string StringAdd(string s,int firstStart,int firstEnd,int secondStart,int secondEnd)
+        private string StringAdd(string s, int firstStart, int firstEnd, int secondStart, int secondEnd)
         {
             StringBuilder third = new StringBuilder();
             int carry = 0, cur = 0;
             while (firstEnd >= firstStart || secondEnd >= secondStart || carry != 0)
             {
                 cur = carry;
-                if(firstEnd>=firstStart)
+                if (firstEnd >= firstStart)
                 {
                     cur += s[firstEnd] - '0';
                     --secondEnd;
                 }
-                if(secondEnd>=secondStart)
+                if (secondEnd >= secondStart)
                 {
                     cur += s[secondEnd] - '0';
                     --secondEnd;
                 }
                 carry = cur / 10;
                 cur %= 10;
-                third.Append((char)(cur+'0'));
+                third.Append((char)(cur + '0'));
             }
             char[] arr = third.ToString().ToCharArray();
             Array.Reverse(arr);

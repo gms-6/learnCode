@@ -19,8 +19,8 @@ namespace learncode
             Review test1 = new Review();
             int[] nums = { 1,5,11,5 };
             int[] nums1 = { 3};
-            int[][] mat = new int[][] { new int[] {7,0 }, new int[] { 4,4 }, new int[] {7,1}, new int[] {5,0 }, new int[] { 6, 1 }, new int[] { 5, 2 } };
-            var head = test.CanPartition(nums);
+            int[][] mat = new int[][] { new int[] {1,2,2,3,5 }, new int[] { 3,2,3,4,4 }, new int[] {2,4,5,3,1}, new int[] {6,7,1,4,5 }, new int[] { 5,1,1,2,4 }};
+            var head = test.PacificAtlantic(mat);
             //Show(nums1);
             Console.ReadKey();
         }
