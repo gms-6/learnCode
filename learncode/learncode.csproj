@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="classModel\RandomizedSet.cs" />
     <Compile Include="Model\Heap.cs" />
+    <Compile Include="Model\LinkedNode.cs" />
     <Compile Include="Model\ListNode.cs" />
     <Compile Include="Model\NewHeap.cs" />
     <Compile Include="Model\Node1.cs" />

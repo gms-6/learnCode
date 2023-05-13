@@ -25,14 +25,22 @@ namespace learncode
             //    new int[] {2,4,5,3,1}, 
             //    new int[] {6,7,1,4,5 }, 
             //    new int[] { 5,1,1,2,4 }};
-            char[][] mat = new char[][] {
-                new char[] {'.','X','.', '.', 'X' },
-                new char[] {'.','X','.', '.', 'X' },
-                new char[] {'.','.','.', '.', 'X' },
-                new char[] {'X','.','X', 'X', '.' },
-                new char[] {'X','.','.', '.', 'X' }
+            int[][] mat = new int[][] {
+                new int[] { -52,31  },
+                new int[] { -73,-26  },
+                new int[] { 82,97  },
+                new int[] { -65,-11  },
+                new int[] { -62,-11  },
+                new int[] { -62,-49  },
+                new int[] { 95,99  },
+                new int[] { 58,95  },
+                new int[] { -31,39  },
+                new int[] { 66,98  },
+                new int[] { -63,2  },
+                new int[] { 30,47  },
+                new int[] { -40,-26  }
             };
-            var head = test.CountBattleships(mat);
+            var head = test.EraseOverlapIntervals(mat);
             //Show(nums1);
             Console.ReadKey();
         }

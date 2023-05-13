@@ -13,6 +13,108 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public int PathSum(TreeNode root, int targetSum)
+        {
+
+        }
+        public int EraseOverlapIntervals(int[][] intervals)
+        {
+            Array.Sort(intervals, (a, b) => {
+                return a[1] - b[1];
+            });
+            int m = intervals.Length, n = 2;
+            int count = 0;
+            int pre1 = int.MinValue;
+            for (int i = 0; i < m; ++i)
+            {
+                if(intervals[i][0]>=pre1)
+                {
+                    count++;
+                    pre1 = intervals[i][1];
+                }
+            }
+            return m-count;
+        }
+        public LinkedNode Flatten(LinkedNode head)
+        {
+            LinkedNode tmpHead = head;
+            while (tmpHead != null)
+            {
+                if (tmpHead.child != null)
+                {
+                    LinkedNode head1 = tmpHead;
+                    tmpHead = FlattenConcat(tmpHead);
+                    if (head1.next != null)
+                    {
+                        tmpHead.next = head1.next;
+                        head.next.prev = tmpHead;
+                        head1.next = head.child;
+                        head1.child = null;
+                        tmpHead = tmpHead.next;
+                    }
+                }
+                else
+                    tmpHead = tmpHead.next;
+            }
+            return head;
+        }
+        public LinkedNode FlattenConcat(LinkedNode cur)
+        {
+            LinkedNode last = cur.child;
+            last.prev = cur;
+            while (last != null)
+            {
+                LinkedNode NextOne = last.next;
+                if (last.child != null)
+                {
+                    //Node NextOne=last.next;
+                    //Node nodechild=node.child;
+                    LinkedNode tmpHead = last;
+                    tmpHead = FlattenConcat(tmpHead);
+                    if (last.next != null)
+                    {
+                        tmpHead.next = last.next;
+                        last.next.prev = tmpHead;
+                        last.next = last.child;
+                        last.child = null;
+                        last = tmpHead.next;
+                    }
+                    else
+                        break;
+
+                }
+                else
+                {
+                    if (last.next == null)
+                        break;
+                    else
+                        last = last.next;
+                }
+            }
+            return last;
+        }
+        public int CharacterReplacement(string s, int k)
+        {
+            int n = s.Length;
+            if (n < 2)
+                return n;
+            int[] nums = new int[26];
+            int maxn = 0;
+            int left = 0, right = 0;
+            while (right < n)
+            {
+                nums[s[right] - 'A']++;
+                maxn = Math.Max(maxn, nums[s[right] - 'A']);
+                if (right - left + 1 - maxn > k)
+                {
+                    nums[s[left - 'A']]--;
+                    left++;
+                }
+                right++;
+            }
+            return right - left;
+        }
+
         public int CountBattleships(char[][] board)
         {
             int m = board.Length;
@@ -60,34 +162,88 @@ namespace learncode.ReviewCode
             }
             return ans;
         }
-        /// <summary>
-        /// 未提交
-        /// </summary>
-        /// <param name="heights"></param>
-        /// <returns></returns>
+
+        int[][] dir = new int[4][] { new int[] { 1, 0 }, new int[] { 0, 1 }, new int[] { -1, 0 }, new int[] { 0, -1 } };
+        int[][] heights;
+        int m, n;
         public IList<IList<int>> PacificAtlantic(int[][] heights)
         {
-            int m = heights.Length;
-            int n = heights[0].Length;
+            m = heights.Length;
+            n = heights[0].Length;
+            this.heights = heights;
             IList<IList<int>> list = new List<IList<int>>();
+            bool[][] pacific = new bool[m][];
+            bool[][] atlantic = new bool[m][];
             for (int i = 0; i < m; ++i)
             {
-                int j = 0;
-                bool res = true;
-                for (j = 0; j < n; ++j)
+                pacific[i] = new bool[n];
+                atlantic[i] = new bool[n];
+            }
+            //for (int i = 0; i < m; ++i)
+            //    PacificAtlanticDFS(i, 0, pacific);
+            //for (int j = 1; j < n; ++j)
+            //    PacificAtlanticDFS(0, j, pacific);
+            //for (int i = 0; i < m; ++i)
+            //    PacificAtlanticDFS(i, n - 1, atlantic);
+            //for (int j = 0; j < n - 1; ++j)
+            //    PacificAtlanticDFS(m - 1, j, atlantic);
+            for (int i = 0; i < m; ++i)
+                PacificAtlanticBFS(i, 0, pacific);
+            for (int j = 1; j < n; ++j)
+                PacificAtlanticBFS(0, j, pacific);
+            for (int i = 0; i < m; ++i)
+                PacificAtlanticBFS(i, n - 1, atlantic);
+            for (int j = 0; j < n - 1; ++j)
+                PacificAtlanticBFS(m - 1, j, atlantic);
+            for (int i = 0; i < m; ++i)
+            {
+                for (int j = 0; j < n; ++j)
                 {
-                    res = true;
-                    res &= PacificAtlanticLeftDFS(heights, i, j);
-                    res &= PacificAtlanticRightDFS(heights, i, j);
-                    if (res)
+                    if (pacific[i][j] && atlantic[i][j])
+                    {
                         list.Add(new List<int>() { i, j });
+                    }
                 }
             }
             return list;
         }
+        public void PacificAtlanticBFS(int row, int col, bool[][] ocean)
+        {
+            if (ocean[row][col])
+                return;
+            ocean[row][col] = true;
+            Queue<Tuple<int, int>> queue = new Queue<Tuple<int, int>>();
+            queue.Enqueue(new Tuple<int, int>(row, col));
+            while (queue.Count > 0)
+            {
+                Tuple<int, int> cell = queue.Dequeue();
+                foreach (int[] di in dir)
+                {
+                    int newRow = cell.Item1 + di[0];
+                    int newCol = cell.Item2 + di[1];
+                    if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n && heights[newRow][newCol] >= heights[cell.Item1][cell.Item2] && !ocean[newRow][newCol])
+                    {
+                        ocean[newRow][newCol] = true;
+                        queue.Enqueue(new Tuple<int, int>(newRow, newCol));
+                    }
+                }
+            }
+        }
         public void PacificAtlanticDFS(int row, int col, bool[][] ocean)
         {
-            if(oca)
+            if (ocean[row][col])
+                return;
+            ocean[row][col] = true;
+            foreach (int[] di in dir)
+            {
+                int newRow = row + di[0], newCol = col + di[1];
+                if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n && heights[newRow][newCol] >= heights[row][col])
+                {
+                    PacificAtlanticDFS(newRow, newCol, ocean);
+                }
+            }
+
+
         }
         private bool PacificAtlanticRightDFS(int[][] heights, int fir, int sec)
         {
