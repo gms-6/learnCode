@@ -15,7 +15,59 @@ namespace learncode.ReviewCode
         IList<int> list = new List<int>();
         public int PathSum(TreeNode root, int targetSum)
         {
+            IList<IList<int>> target = new List<IList<int>>();
+            IList<int> list = new List<int>();
+            list.Add(root.val);
+            PathSumDFS(root,target,list);
+            int count = 0;
+            int m = target.Count;
+            int ans = 0;
+            for(int i=0;i<m;++i)
+            {
+                int left = 0, right = 0,sum=target[i][0];
+                int n = target[i].Count;
+                while(right<n)
+                {
+                    if(sum<targetSum)
+                    {
+                        right++;
+                        sum += target[i][right];
+                    }
+                    else if(sum>=targetSum)
+                    {
+                        if (sum == targetSum)
+                            count++;
+                        while(sum>= targetSum&&left<right)
+                        {
+                            sum -= target[i][left];
+                            left++;
+                        }
+                    }
+                }
+            }
+            return count;
 
+        }
+        private void PathSumDFS(TreeNode root,IList<IList<int>> target,IList<int> list)
+        {
+            //list.Add(root.val);
+            if (root.left == null && root.right == null)
+            {
+                target.Add(new List<int>(list));
+                return;
+            }
+            if(root.left!=null)
+            {
+                list.Add(root.left.val);
+                PathSumDFS(root.left,target,list);
+                list.RemoveAt(list.Count-1);
+            }
+            if(root.right!=null)
+            {
+                list.Add(root.right.val);
+                PathSumDFS(root.right,target,list);
+                list.RemoveAt(list.Count-1);
+            }
         }
         public int EraseOverlapIntervals(int[][] intervals)
         {
