@@ -31,6 +31,8 @@ namespace learncode.ReviewCode
                     if(sum<targetSum)
                     {
                         right++;
+                        if (right >= n)
+                            break;
                         sum += target[i][right];
                     }
                     else if(sum>=targetSum)
@@ -42,6 +44,12 @@ namespace learncode.ReviewCode
                             sum -= target[i][left];
                             left++;
                         }
+                        if(left==right&&right<n-1)
+                        {
+                            right++;
+                            sum += target[i][right];
+                        }
+
                     }
                 }
             }
