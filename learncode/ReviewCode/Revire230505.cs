@@ -13,6 +13,19 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public int ArrangeCoins(int n)
+        {
+            int left = 1, right = n;
+            while(left<right)
+            {
+                int mid = (right - left + 1) / 2 + left;
+                if ((long)mid * (mid + 1) <= (long)2 * n)
+                    left = mid;
+                else
+                    right = mid - 1;
+            }
+            return left;
+        }
         public int[] CircularGameLosers(int n, int k)
         {
             int[] target = new int[n];
@@ -72,23 +85,23 @@ namespace learncode.ReviewCode
         public int PathSum(TreeNode root, int targetSum)
         {
             Dictionary<long, int> prefix = new Dictionary<long, int>();
-            prefix.Add(0,1);
-            return PathSumDFS(root,prefix,0,targetSum);
+            prefix.Add(0, 1);
+            return PathSumDFS(root, prefix, 0, targetSum);
 
         }
-        private int PathSumDFS(TreeNode root, Dictionary<long,int> prefix,long curr,int targetSum)
+        private int PathSumDFS(TreeNode root, Dictionary<long, int> prefix, long curr, int targetSum)
         {
             if (root == null)
                 return 0;
             int ret = 0;
             curr += root.val;
-            prefix.TryGetValue(curr-targetSum,out ret);
+            prefix.TryGetValue(curr - targetSum, out ret);
             if (prefix.ContainsKey(curr))
                 ++prefix[curr];
             else
-                prefix.Add(curr,1);
-            ret += PathSumDFS(root.left,prefix,curr,targetSum);
-            ret += PathSumDFS(root.right,prefix,curr,targetSum);
+                prefix.Add(curr, 1);
+            ret += PathSumDFS(root.left, prefix, curr, targetSum);
+            ret += PathSumDFS(root.right, prefix, curr, targetSum);
             --prefix[curr];
             return ret;
         }

@@ -40,7 +40,7 @@ namespace learncode
                 new int[] { 30,47  },
                 new int[] { -40,-26  }
             };
-            var head = test.CircularGameLosers(5,2);
+            var head = test.ArrangeCoins(1804289383);
             //Show(nums1);
             Console.ReadKey();
         }
