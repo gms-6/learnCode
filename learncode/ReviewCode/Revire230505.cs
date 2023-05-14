@@ -13,73 +13,89 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public int[] CircularGameLosers(int n, int k)
+        {
+            int[] target = new int[n];
+            List<int> list = new List<int>();
+            int i = 0;
+            int count = 1;
+            while (true)
+            {
+                target[i] += 1;
+                if (target[i] == 2)
+                    break;
+                i = (i + (count++ * k)) % n;
+            }
+            for (int j = 0; j < n; ++j)
+            {
+                if (target[j] == 0)
+                    list.Add(j + 1);
+            }
+            return list.ToArray();
+        }
+        public int[] FindRightInterval(int[][] intervals)
+        {
+            List<int> list = new List<int>();
+            int n = intervals.Length;
+            int[][] start = new int[n][];
+            for (int i = 0; i < n; ++i)
+            {
+                start[i] = new int[2];
+                start[i][0] = intervals[i][0];
+                start[i][1] = i;
+            }
+            Array.Sort(start, (a, b) =>
+            {
+                return a[0] - b[0];
+            });
+            int[] ans = new int[n];
+            for (int i = 0; i < n; ++i)
+            {
+                int left = 0;
+                int right = n - 1;
+                int target = -1;
+                while (left <= right)
+                {
+                    int mid = left + (right - left) / 2;
+                    if (start[mid][0] >= intervals[i][1])
+                    {
+                        target = start[mid][1];
+                        right = mid - 1;
+                    }
+                    else
+                        left = mid + 1;
+                }
+                ans[i] = target;
+            }
+            return ans;
+        }
         public int PathSum(TreeNode root, int targetSum)
         {
-            IList<IList<int>> target = new List<IList<int>>();
-            IList<int> list = new List<int>();
-            list.Add(root.val);
-            PathSumDFS(root,target,list);
-            int count = 0;
-            int m = target.Count;
-            int ans = 0;
-            for(int i=0;i<m;++i)
-            {
-                int left = 0, right = 0,sum=target[i][0];
-                int n = target[i].Count;
-                while(right<n)
-                {
-                    if(sum<targetSum)
-                    {
-                        right++;
-                        if (right >= n)
-                            break;
-                        sum += target[i][right];
-                    }
-                    else if(sum>=targetSum)
-                    {
-                        if (sum == targetSum)
-                            count++;
-                        while(sum>= targetSum&&left<right)
-                        {
-                            sum -= target[i][left];
-                            left++;
-                        }
-                        if(left==right&&right<n-1)
-                        {
-                            right++;
-                            sum += target[i][right];
-                        }
-
-                    }
-                }
-            }
-            return count;
+            Dictionary<long, int> prefix = new Dictionary<long, int>();
+            prefix.Add(0,1);
+            return PathSumDFS(root,prefix,0,targetSum);
 
         }
-        private void PathSumDFS(TreeNode root,IList<IList<int>> target,IList<int> list)
+        private int PathSumDFS(TreeNode root, Dictionary<long,int> prefix,long curr,int targetSum)
         {
-            //list.Add(root.val);
-            if (root.left == null && root.right == null)
-            {
-                target.Add(new List<int>(list));
-                return;
-            }
-            if(root.left!=null)
-            {
-                list.Add(root.left.val);
-                PathSumDFS(root.left,target,list);
-                list.RemoveAt(list.Count-1);
-            }
-            if(root.right!=null)
-            {
-                list.Add(root.right.val);
-                PathSumDFS(root.right,target,list);
-                list.RemoveAt(list.Count-1);
-            }
+            if (root == null)
+                return 0;
+            int ret = 0;
+            curr += root.val;
+            prefix.TryGetValue(curr-targetSum,out ret);
+            if (prefix.ContainsKey(curr))
+                ++prefix[curr];
+            else
+                prefix.Add(curr,1);
+            ret += PathSumDFS(root.left,prefix,curr,targetSum);
+            ret += PathSumDFS(root.right,prefix,curr,targetSum);
+            --prefix[curr];
+            return ret;
         }
         public int EraseOverlapIntervals(int[][] intervals)
         {
-            Array.Sort(intervals, (a, b) => {
+            Array.Sort(intervals, (a, b) =>
+            {
                 return a[1] - b[1];
             });
             int m = intervals.Length, n = 2;
@@ -87,13 +103,13 @@ namespace learncode.ReviewCode
             int pre1 = int.MinValue;
             for (int i = 0; i < m; ++i)
             {
-                if(intervals[i][0]>=pre1)
+                if (intervals[i][0] >= pre1)
                 {
                     count++;
                     pre1 = intervals[i][1];
                 }
             }
-            return m-count;
+            return m - count;
         }
         public LinkedNode Flatten(LinkedNode head)
         {

@@ -40,7 +40,7 @@ namespace learncode
                 new int[] { 30,47  },
                 new int[] { -40,-26  }
             };
-            var head = test.EraseOverlapIntervals(mat);
+            var head = test.CircularGameLosers(5,2);
             //Show(nums1);
             Console.ReadKey();
         }
