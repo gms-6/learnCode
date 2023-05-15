@@ -13,6 +13,59 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public IList<int> FindAnagrams(string s,string p)
+        {
+            IList<int> target=new List<int>();
+            int n = s.Length,m=p.Length;
+            if (n < m)
+                return target;
+            int[] source = new int[26];
+            for(int j=0;j<m;j++)
+            {
+                source[p[j] - 'a']++;
+            }
+            int i = 0;
+            int start = i;
+            while(i+m<=n)
+            {
+                IList<int> list = new List<int>(source);
+                bool flag = true;
+                for(;i<start+m;++i)
+                {
+                    if (list[s[i] - 'a'] > 0)
+                        list[s[i] - 'a']--;
+                    else
+                    {
+                        if (i < start + m)
+                            i++;
+                        start = i;
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag)
+                {
+                    target.Add(start);
+                    int left = start, right = i;
+                    while(right<n)
+                    {
+                        if (s[right] == s[left])
+                        {
+                            target.Add(left+1);
+                            left++;
+                            right++;
+                        }
+                        else
+                        {
+                            start= right;
+                            i = right; 
+                            break;
+                        }    
+                    }
+                }
+            }
+            return target;
+        }
         public IList<int> FindDuplicates(int[] nums)
         {
             IList<int> list = new List<int>();

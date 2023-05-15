@@ -40,7 +40,7 @@ namespace learncode
                 new int[] { 30,47  },
                 new int[] { -40,-26  }
             };
-            var head = test.FindDuplicates(nums);
+            var head = test.FindAnagrams("adfsdkjvkasabcsafacba","cba");
             //Show(nums1);
             Console.ReadKey();
         }
