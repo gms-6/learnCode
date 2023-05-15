@@ -13,6 +13,62 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public ListNode AddTwoNumbers(ListNode l1,ListNode l2)
+        {
+            Stack<int> stack1 = new Stack<int>();
+            Stack<int> stack2 = new Stack<int>();
+            Stack<int> res = new Stack<int>();
+            while(l1!=null||l2!=null)
+            {
+                if (l1 != null)
+                {
+                    stack1.Push(l1.val);
+                    l1 = l1.next;
+                }
+                if (l2 != null)
+                {
+                    stack2.Push(l2.val);
+                    l2 = l2.next;
+                }
+            }
+            int add = 0;
+            while(stack1.Count!=0||stack2.Count!=0)
+            {
+                int num1 = 0, num2 = 0;
+                int sum = 0;
+                if(stack1.Count!=0)
+                {
+                    num1 = stack1.Pop();
+                }
+                if(stack2.Count!=0)
+                {
+                    num2=stack2.Pop();
+                }
+                sum = num1 + num2+add;
+                if (sum >= 10)
+                {
+                    sum -= 10;
+                    add = 1;
+                }
+                else
+                    add = 0;
+                res.Push(sum);
+            }
+            if (add == 1)
+                res.Push(add);
+            ListNode head = new ListNode();
+            ListNode tmp = head;
+            while(res.Count!=0)
+            {
+                tmp.val=res.Pop();
+                if (res.Count != 0)
+                {
+                    tmp.next = new ListNode();
+                    tmp = tmp.next;
+                }
+            }
+            return head;
+        }
         public IList<int> FindAnagrams(string s,string p)
         {
             IList<int> target=new List<int>();

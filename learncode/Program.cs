@@ -17,8 +17,8 @@ namespace learncode
         {
             Revire230505 test = new Revire230505();
             Review test1 = new Review();
-            int[] nums = { 1,2,1,2,3,4 ,5,6,5};
-            int[] nums1 = { 3};
+            int[] nums1 = {1,2,3};
+            int[] nums2 = { 8,9,8,8};
             //int[][] mat = new int[][] { 
             //    new int[] {1,2,2,3,5 }, 
             //    new int[] { 3,2,3,4,4 }, 
@@ -40,7 +40,9 @@ namespace learncode
                 new int[] { 30,47  },
                 new int[] { -40,-26  }
             };
-            var head = test.FindAnagrams("adfsdkjvkasabcsafacba","cba");
+            var l1= test1.GenerateListNode(nums1);
+            var l2= test1.GenerateListNode(nums2);
+            var head = test.AddTwoNumbers(l1,l2);
             //Show(nums1);
             Console.ReadKey();
         }
