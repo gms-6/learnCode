@@ -17,7 +17,7 @@ namespace learncode
         {
             Revire230505 test = new Revire230505();
             Review test1 = new Review();
-            int[] nums = { 1,5,11,5 };
+            int[] nums = { 1,2,1,2,3,4 ,5,6,5};
             int[] nums1 = { 3};
             //int[][] mat = new int[][] { 
             //    new int[] {1,2,2,3,5 }, 
@@ -40,7 +40,7 @@ namespace learncode
                 new int[] { 30,47  },
                 new int[] { -40,-26  }
             };
-            var head = test.ArrangeCoins(1804289383);
+            var head = test.FindDuplicates(nums);
             //Show(nums1);
             Console.ReadKey();
         }

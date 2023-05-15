@@ -13,6 +13,29 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        public IList<int> FindDuplicates(int[] nums)
+        {
+            IList<int> list = new List<int>();
+            int n = nums.Length;
+            for(int i=0;i<n;++i)
+            {
+                if (nums[i]<0)
+                {
+                    if (nums[-nums[i] - 1] < 0)
+                        list.Add(-nums[i]);
+                    else
+                        nums[-nums[i] - 1] *= -1;
+                }
+                else
+                {
+                    if (nums[nums[i] - 1] < 0)
+                        list.Add(nums[i]);
+                    else
+                        nums[nums[i] - 1] *= -1;
+                }
+            }
+            return list;
+        }
         public int ArrangeCoins(int n)
         {
             int left = 1, right = n;
