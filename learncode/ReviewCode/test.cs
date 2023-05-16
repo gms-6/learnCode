@@ -8,7 +8,42 @@ namespace learncode.ReviewCode
 {
     public class test
     {
-        public 
+        /// <summary>
+        /// AAABBABABAABBB
+        /// 使字符串严格递增的最小修改次数，收藏
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public int minModeTimes(string str)
+        {
+            int n = str.Length;
+            int FirB = str.IndexOf('B');
+            if (FirB < 0)
+                return 0;
+            int LastA = str.LastIndexOf('A');
+            if (LastA < FirB)
+                return 0;
+            int r = 1;
+            for(int i=FirB+1;i<LastA;i++)
+            {
+                if (str[i] == 'A')
+                    r++;
+            }
+            int l = 0, min = r;
+            for(int i=FirB;i<=LastA;++i)
+            {
+                if (str[i] == 'B')
+                    l++;
+                else
+                    r--;
+                min = Math.Min(min,l+r);
+            }
+            return min;
+        }
+        public int FourSumCount(int[] nums1,int nums2, int[] nums3, int[] nums4)
+        {
+            return 0;
+        }
         public int minMoves(int[] nums)
         {
             int n=nums.Length;
