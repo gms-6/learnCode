@@ -14,13 +14,74 @@ namespace learncode.ReviewCode
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
         bool IsLeft = false;
+        Random ran = new Random();
+        public int MinMoves2(int[] nums)
+        {
+
+        }
+        public int QuickSelect(int[] nums,int left,int right,int index)
+        {
+            int q = RandomPartition(nums,left,right);
+            if (q == index)
+                return nums[q];
+            else
+                return 
+        }
+        public int RandomPartition(int[] nums,int left,int right)
+        {
+            int i = random.Next(right-left+1)+left;
+            int temp = nums[i];
+            nums[i] = nums[right];
+            nums[right] = temp;
+            return RandomPartitionpartition(nums,left,right);
+        }
+        public int RandomPartitionpartition(int[] nums,int left,int right)
+        {
+            int x = nums[right], i = left - 1;
+            for(int j=left;j<right;++j)
+            {
+                if(nums[j]<=x)
+                {
+                    ++i;
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
+                }
+            }
+            int temp = nums[i + 1];
+            nums[i + 1] = nums[right];
+            nums[right] = temp;
+            return i + 1;
+        }
+        public bool RepeatedSubstringPattern(string s)
+        {
+            int n = s.Length;
+            for (int i = 1; i * 2 <= n; ++i)
+            {
+                if (n % i == 0)
+                {
+                    bool match = true;
+                    for (int j = i; j < n; ++j)
+                    {
+                        if (s[j] != s[j - i])
+                        {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (match)
+                        return true;
+                }
+            }
+            return false;
+        }
         public bool Find132Pattern(int[] nums)
         {
             int n = nums.Length;
             if (n < 3)
                 return false;
             Array.Sort(nums);
-
+            return false;
         }
         public int FindContentChildren(int[] g, int[] s)
         {
