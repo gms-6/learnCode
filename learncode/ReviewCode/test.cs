@@ -8,14 +8,22 @@ namespace learncode.ReviewCode
 {
     public class test
     {
+        public 
         public int minMoves(int[] nums)
         {
             int n=nums.Length;
             int sum = 0;
-            for(int i=1;i<n;++i)
+            int min = int.MaxValue;
+            for(int i=0;i<n;++i)
             {
-                sum += nums[i] - nums[i - 1];
+                if (nums[i] < min)
+                    min = nums[i];
             }
+            for(int i=0;i<n;++i)
+            {
+                sum+= nums[i]-min;
+            }
+            
             return sum;
         }
         public int FindMinArrowShots(int[][] points)
