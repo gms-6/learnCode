@@ -13,6 +13,205 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+        bool IsLeft = false;
+        public bool Find132Pattern(int[] nums)
+        {
+            int n = nums.Length;
+            if (n < 3)
+                return false;
+            Array.Sort(nums);
+
+        }
+        public int FindContentChildren(int[] g, int[] s)
+        {
+            int m = g.Length;
+            int n = s.Length;
+            Array.Sort(g);
+            Array.Sort(s);
+            int GIndex = 0, SIndex = 0;
+            int count = 0;
+            while (GIndex < m && SIndex < n)
+            {
+                if (s[SIndex] >= g[GIndex])
+                {
+                    count++;
+                    SIndex++;
+                    GIndex++;
+                }
+                else
+                {
+                    SIndex++;
+                }
+            }
+            return count;
+        }
+        /// <summary>
+        /// AAABBABABAABBB
+        /// 使字符串严格递增的最小修改次数，收藏
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public int minModeTimes(string str)
+        {
+            int n = str.Length;
+            int FirB = str.IndexOf('B');
+            if (FirB < 0)
+                return 0;
+            int LastA = str.LastIndexOf('A');
+            if (LastA < FirB)
+                return 0;
+            int r = 1;
+            for (int i = FirB + 1; i < LastA; i++)
+            {
+                if (str[i] == 'A')
+                    r++;
+            }
+            int l = 0, min = r;
+            for (int i = FirB; i <= LastA; ++i)
+            {
+                if (str[i] == 'B')
+                    l++;
+                else
+                    r--;
+                min = Math.Min(min, l + r);
+            }
+            return min;
+        }
+        public int FourSumCount(int[] nums1, int nums2, int[] nums3, int[] nums4)
+        {
+            return 0;
+        }
+        public int minMoves(int[] nums)
+        {
+            int n = nums.Length;
+            int sum = 0;
+            int min = int.MaxValue;
+            for (int i = 0; i < n; ++i)
+            {
+                if (nums[i] < min)
+                    min = nums[i];
+            }
+            for (int i = 0; i < n; ++i)
+            {
+                sum += nums[i] - min;
+            }
+            return sum;
+        }
+        public int FindMinArrowShots(int[][] points)
+        {
+            int n = points.Length;
+            Array.Sort(points, (a, b) =>
+            {
+                if (a[0] != b[0])
+                    return a[0] > b[0] ? 1 : -1;
+                else
+                    return a[1] > b[1] ? 1 : -1; ;
+            });
+            int count = 1, min = points[0][1], pre = points[0][0];
+            for (int i = 1; i < n; ++i)
+            {
+                int num1 = points[i][0];
+                int num2 = points[i][1];
+                if (num1 == pre)
+                    continue;
+                if (num1 <= min)
+                {
+                    if (num2 < min)
+                    {
+                        min = num2;
+                        pre = num1;
+                    }
+                    continue;
+                }
+                count++;
+                min = num2;
+                pre = num1;
+            }
+            return count;
+        }
+        public TreeNode DeleteNode(TreeNode root, int key)
+        {
+            if (root == null)
+                return root;
+            TreeNode keyNode = FindKey(root, key);
+            if (keyNode == null)
+                return root;
+            TreeNode tmp = NodeSwap(keyNode, true);
+            if (IsLeft)
+                tmp.left = null;
+            else
+                tmp.right = null;
+            return root;
+        }
+        public TreeNode FindKey(TreeNode root, int key)
+        {
+            if (key == root.val)
+                return root;
+            else if (key < root.val)
+            {
+                if (root.left == null)
+                    return null;
+                else
+                    FindKey(root.left, key);
+            }
+            else
+            {
+                if (root.right == null)
+                    return null;
+                else
+                    FindKey(root.right, key);
+            }
+            return null;
+        }
+        public TreeNode NodeSwap(TreeNode root, bool flag)
+        {
+            if (flag)
+            {
+                if (root.left.left == null && root.left.right == null)
+                {
+                    IsLeft = flag;
+                    return root;
+                }
+                if (root.left == null)
+                {
+                    int temp = root.val;
+                    root.val = root.right.val;
+                    root.right.val = temp;
+                    return NodeSwap(root.right, flag);
+                }
+                else
+                {
+                    int temp = root.val;
+                    root.val = root.left.val;
+                    root.left.val = temp;
+                    flag = false;
+                    return NodeSwap(root.left, flag);
+                }
+            }
+            else
+            {
+                if (root.right.left == null && root.right.right == null)
+                {
+                    IsLeft = flag;
+                    return root;
+                }
+                if (root.right == null)
+                {
+                    int temp = root.val;
+                    root.val = root.left.val;
+                    root.left.val = temp;
+                    return NodeSwap(root.left, flag);
+                }
+                else
+                {
+                    int temp = root.val;
+                    root.val = root.right.val;
+                    root.right.val = temp;
+                    flag = true;
+                    return NodeSwap(root.right, flag);
+                }
+            }
+        }
 
         public int NumberofBoomerangs()
         {
