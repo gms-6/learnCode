@@ -8,8 +8,44 @@ namespace learncode.ReviewCode
 {
     public class test
     {
+        public int minMoves(int[] nums)
+        {
+            return 0;
+        }
+        public int FindMinArrowShots(int[][] points)
+        {
+            int n = points.Length;
+            Array.Sort(points, (a, b) =>
+            {
+                if (a[0] != b[0])
+                    return a[0] > b[0] ? 1 : -1;
+                else
+                    return a[1] > b[1] ? 1 : -1; ;
+            });
+            int count = 1, min = points[0][1], pre = points[0][0];
+            bool flag = false;
+            for (int i = 1; i < n; ++i)
+            {
+                int num1 = points[i][0];
+                int num2 = points[i][1];
+                if (num1 == pre)
+                    continue;
+                if (num1 <= min)
+                {
+                    if (num2 < min)
+                    {
+                        min = num2;
+                        pre = num1;
+                    }
+                    continue;
+                }
+                count++;
+                min = num2;
+                pre = num1;
+            }
+            return count;
 
-        
+        }
         public IList<IList<int>> LevelOrderBottom(TreeNode root)
         {
             IList<IList<int>> list = new List<IList<int>>();
@@ -19,16 +55,16 @@ namespace learncode.ReviewCode
 
             Queue<TreeNode> que = new Queue<TreeNode>();
             que.Enqueue(root);
-            while(que.Count!=0)
+            while (que.Count != 0)
             {
                 int len = que.Count;
                 IList<int> temp = new List<int>();
-                while(len-->0)
+                while (len-- > 0)
                 {
                     TreeNode node = que.Dequeue();
                     temp.Add(node.val);
                     if (node.left != null)
-                        que.Enqueue(node.left) ;
+                        que.Enqueue(node.left);
                     if (node.right != null)
                         que.Enqueue(node.right);
                 }
@@ -46,31 +82,31 @@ namespace learncode.ReviewCode
 
             return list;
         }
-        public void levelOrderDFS(TreeNode node,int deep,IList<IList<int>> list)
+        public void levelOrderDFS(TreeNode node, int deep, IList<IList<int>> list)
         {
             if (node == null)
                 return;
             deep++;
-            if(list.Count<deep)
+            if (list.Count < deep)
             {
                 IList<int> item = new List<int>();
                 list.Add(item);
             }
             list[deep - 1].Add(node.val);
-            levelOrderDFS(node.left,deep,list);
-            levelOrderDFS(node.right,deep,list);
+            levelOrderDFS(node.left, deep, list);
+            levelOrderDFS(node.right, deep, list);
         }
-        public void levelOrderBFS(TreeNode node,IList<IList<int>> list)
+        public void levelOrderBFS(TreeNode node, IList<IList<int>> list)
         {
             if (node == null)
                 return;
             Queue<TreeNode> que = new Queue<TreeNode>();
             que.Enqueue(node);
-            while(que.Count!=0)
+            while (que.Count != 0)
             {
                 IList<int> itemList = new List<int>();
                 int len = que.Count;
-                while(len>0)
+                while (len > 0)
                 {
                     TreeNode tmpNode = que.Dequeue();
                     itemList.Add(tmpNode.val);
@@ -140,13 +176,13 @@ namespace learncode.ReviewCode
                 list.Add(node.val);
                 if (node.left != null)
                     stack.Push(node.left);
-                if(node.right!=null)
+                if (node.right != null)
                 {
                     stack.Push(node.right);
                 }
             }
             int last = list.Count - 1;
-            for(int i=0;i<last;++i,--last)
+            for (int i = 0; i < last; ++i, --last)
             {
                 int temp = list[i];
                 list[i] = list[last];

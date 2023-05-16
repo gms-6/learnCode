@@ -13,9 +13,10 @@ namespace learncode.ReviewCode
         List<string> ans = new List<string>();
         int[] segments = new int[SEG_COUNT];
         IList<int> list = new List<int>();
+
         public int NumberofBoomerangs()
         {
-
+            return 0;
         }
         public ListNode AddTwoNumbers(ListNode l1,ListNode l2)
         {

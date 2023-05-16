@@ -17,6 +17,7 @@ namespace learncode
         {
             Revire230505 test = new Revire230505();
             Review test1 = new Review();
+            test tt = new test();
             int[] nums1 = {1,2,3};
             int[] nums2 = { 8,9,8,8};
             //int[][] mat = new int[][] { 
@@ -26,23 +27,21 @@ namespace learncode
             //    new int[] {6,7,1,4,5 }, 
             //    new int[] { 5,1,1,2,4 }};
             int[][] mat = new int[][] {
-                new int[] { -52,31  },
-                new int[] { -73,-26  },
-                new int[] { 82,97  },
-                new int[] { -65,-11  },
-                new int[] { -62,-11  },
-                new int[] { -62,-49  },
-                new int[] { 95,99  },
-                new int[] { 58,95  },
-                new int[] { -31,39  },
-                new int[] { 66,98  },
-                new int[] { -63,2  },
-                new int[] { 30,47  },
-                new int[] { -40,-26  }
+                new int[] {9,12  },
+                new int[] {1,10  },
+                new int[] { 4,11  },
+                new int[] { 8,12  },
+                new int[] { 3,9 },
+                new int[] { 6,9  },
+                new int[] { 6,7  }
+                //new int[] { 2,6  },
+                //new int[] { 2,7  },
+                //new int[] { 3,4  },
+                //new int[] { 3,5  },
+                //new int[] { 3,6  },
+                //new int[] { 5,9  }
             };
-            var l1= test1.GenerateListNode(nums1);
-            var l2= test1.GenerateListNode(nums2);
-            var head = test.AddTwoNumbers(l1,l2);
+            var head = tt.FindMinArrowShots(mat);
             //Show(nums1);
             Console.ReadKey();
         }
