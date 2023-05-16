@@ -23,7 +23,6 @@ namespace learncode.ReviewCode
                     return a[1] > b[1] ? 1 : -1; ;
             });
             int count = 1, min = points[0][1], pre = points[0][0];
-            bool flag = false;
             for (int i = 1; i < n; ++i)
             {
                 int num1 = points[i][0];
@@ -44,7 +43,6 @@ namespace learncode.ReviewCode
                 pre = num1;
             }
             return count;
-
         }
         public IList<IList<int>> LevelOrderBottom(TreeNode root)
         {
