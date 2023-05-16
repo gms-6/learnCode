@@ -41,7 +41,7 @@ namespace learncode
                 //new int[] { 3,6  },
                 //new int[] { 5,9  }
             };
-            var head = tt.FindMinArrowShots(mat);
+            var head = tt.FindContentChildren(mat);
             //Show(nums1);
             Console.ReadKey();
         }
