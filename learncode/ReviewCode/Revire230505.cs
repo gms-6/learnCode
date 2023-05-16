@@ -17,15 +17,25 @@ namespace learncode.ReviewCode
         Random ran = new Random();
         public int MinMoves2(int[] nums)
         {
-
+            int n = nums.Length, x = QuickSelect(nums, 0, n - 1, n / 2), ret = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                ret += Math.Abs(nums[i] - x);
+            }
+            return ret;
         }
-        public int QuickSelect(int[] nums,int left,int right,int index)
+
+        public int QuickSelect(int[] nums, int left, int right, int index)
         {
-            int q = RandomPartition(nums,left,right);
+            int q = RandomPartition(nums, left, right);
             if (q == index)
+            {
                 return nums[q];
+            }
             else
-                return 
+            {
+                return q < index ? QuickSelect(nums, q + 1, right, index) : QuickSelect(nums, left, q - 1, index);
+            }
         }
         public int RandomPartition(int[] nums,int left,int right)
         {
