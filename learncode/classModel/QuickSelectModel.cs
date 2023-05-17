@@ -55,35 +55,6 @@ namespace learncode.classModel
             }
             Swap(nums,low,start);
             return low;
-
-            //int randomIndex = start + random.Next(end - start + 1);
-            //Swap(nums, start, randomIndex);
-            //int pivot = nums[start];
-            //int low = start + 1, high = end;
-            //while (low < high)
-            //{
-            //    while (low < high && nums[low] >= pivot)
-            //    {
-            //        low++;
-            //    }
-            //    while (low < high && nums[high] < pivot)
-            //    {
-            //        high--;
-            //    }
-            //    if (low < high)
-            //    {
-            //        Swap(nums, low, high);
-            //    }
-            //}
-            //while (high > start && nums[high] < pivot)
-            //{
-            //    high--;
-            //}
-            //if (high > start)
-            //{
-            //    Swap(nums, start, high);
-            //}
-            //return high;
         }
 
         public void Swap(int[] nums, int index1, int index2)
@@ -92,30 +63,5 @@ namespace learncode.classModel
             nums[index1] = nums[index2];
             nums[index2] = temp;
         }
-
-
-
-        //public static int Select(int[] nums,int left,int right,int k)
-        //{
-        //    //k = k - 1;
-        //    int p = left;
-        //    for(int q=left;q<=right;q++)
-        //    {
-        //        if (nums[q] > nums[p])
-        //        {
-        //            int temp = nums[q];
-        //            nums[q] = nums[p];
-        //            nums[p] = temp;
-        //            ++p;
-        //        }
-        //    }
-        //    if (p == k)
-        //        return p;
-        //    else if (p < k)
-        //        return Select(nums, p + 1, right, k);
-        //    else
-        //        return Select(nums,left,p-1,k);
-        //}
-
     }
 }
