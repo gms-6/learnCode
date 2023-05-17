@@ -1409,7 +1409,7 @@ namespace learncode
         }
         public int QuickSelect(int[] nums, int low, int high, int k)
         {
-            if (high <= low)
+            if (low <= high)
                 return -1;
             int i = low;
             int j = high + 1;

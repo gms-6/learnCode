@@ -1,4 +1,5 @@
-﻿using learncode.Model;
+﻿using learncode.classModel;
+using learncode.Model;
 using learncode.ReviewCode;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace learncode
             Revire230505 test = new Revire230505();
             Review test1 = new Review();
             test tt = new test();
-            int[] nums1 = {1,2,3};
+            QuickSelectModel qu=new QuickSelectModel();
+            int[] nums1 = {7,9,1,2,-2,-1,11,12,5,3,10};
             int[] nums2 = { 8,9,8,8};
             //int[][] mat = new int[][] { 
             //    new int[] {1,2,2,3,5 }, 
@@ -41,7 +43,10 @@ namespace learncode
                 //new int[] { 3,6  },
                 //new int[] { 5,9  }
             };
-            var head = tt.FindContentChildren(mat);
+            //tt.QuickSelectTest(nums1,0,nums1.Length-1,2);
+            var ta = qu.FindKthLargest(nums1,6);
+            Array.Sort(nums1);
+            //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
             //Show(nums1);
             Console.ReadKey();
         }

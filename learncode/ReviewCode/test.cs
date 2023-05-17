@@ -8,13 +8,40 @@ namespace learncode.ReviewCode
 {
     public class test
     {
+        public void QuickSelectTest(int[] nums,int start,int end,int index)
+        {
+            //7,9,1,2,5,3,10
+            if (start > end)
+                return;
+            int l = start, r = end;
+            int mid = l + (r - l) / 2;
+            int pivot = nums[mid];
+            while(l<=r)
+            {
+                while (l <= r && nums[l] < pivot) l++;
+                while (l <= r && nums[r] > pivot) r--;
+                if(l<=r)
+                {
+                    int temp = nums[l];
+                    nums[l] = nums[r];
+                    nums[r] = temp;
+                    l++;
+                    r--;
+                }
+            }
+            if(index<=r)
+                QuickSelectTest(nums,start,r,index);
+            else
+                QuickSelectTest(nums,l,end,index);
+        }
+
         public bool Find132Pattern(int[] nums)
         {
             int n=nums.Length;
             if(n<3)
                 return false;
             Array.Sort(nums);
-
+            return false;
         }
         public int FindContentChildren(int[] g, int[] s)
         {
