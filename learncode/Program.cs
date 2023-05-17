@@ -16,7 +16,7 @@ namespace learncode
         public static int ADD = 0, MuLTIPLY = 1, SUBTRACK = 2, DIVIDE = 3;
         public static void Main()
         {
-            Revire230505 test = new Revire230505();
+            Revire230505 test = new Revire230505(); 
             Review test1 = new Review();
             test tt = new test();
             QuickSelectModel qu=new QuickSelectModel();
