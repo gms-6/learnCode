@@ -44,8 +44,18 @@ namespace learncode
                 //new int[] { 5,9  }
             };
             //tt.QuickSelectTest(nums1,0,nums1.Length-1,2);
-            var ta = qu.FindKthLargest(nums1,6);
-            Array.Sort(nums1);
+            int[] res = new int[11];
+            for(int i=0;i<11;++i)
+            {
+                res[i]= qu.FindK(nums1, i+1);
+            }
+            Show(res);
+            Array.Sort(nums1, (a, b) =>
+            {
+                return b - a>0?1:-1;
+            });
+            Show(nums1);
+
             //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
             //Show(nums1);
             Console.ReadKey();
