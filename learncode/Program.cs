@@ -16,7 +16,7 @@ namespace learncode
         public static int ADD = 0, MuLTIPLY = 1, SUBTRACK = 2, DIVIDE = 3;
         public static void Main()
         {
-            Revire230505 test = new Revire230505(); 
+            Review230505 test = new Review230505(); 
             Review test1 = new Review();
             test tt = new test();
             QuickSelectModel qu=new QuickSelectModel();
@@ -44,7 +44,7 @@ namespace learncode
                 //new int[] { 5,9  }
             };
             List<int> list = new List<int>(nums1);
-            tt.FieldSum(list);
+            var a=test.FindSubstringInWraproundString("abaab");
 
             //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
             //Show(nums1);

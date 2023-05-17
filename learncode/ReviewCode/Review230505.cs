@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace learncode.ReviewCode
 {
-    public class Revire230505
+    public class Review230505
     {
         static int SEG_COUNT = 4;
         List<string> ans = new List<string>();
@@ -15,6 +15,99 @@ namespace learncode.ReviewCode
         IList<int> list = new List<int>();
         bool IsLeft = false;
         Random ran = new Random();
+        public int FindSubstringInWraproundString(string s)
+        {
+            int n = s.Length;
+            int count = 0;
+            int start = 0;
+            int len = 1;
+            char pre = s[0];
+            HashSet<string> hash = new HashSet<string>();
+            for (int i = 1; i < n; ++i)
+            {
+                if (s[i] - 'a' > pre - 'a')
+                {
+                    if (s[i] - pre == 1)
+                    {
+                        len++;
+                    }
+                    else
+                    {
+                        for(int j=1;j<=len;++j)
+                        {
+                            for(int k= start; k+j<=start+len;k++)
+                            {
+                                string temp = s.Substring(k, j);
+                                if (hash.Add(s.Substring(k, j)))
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        start = i;
+                        len = 1;
+                    }
+                    pre = s[i];
+                }
+                else if (s[i] - 'a' < pre - 'a')
+                {
+                    int num = s[i] - pre + 26;
+                    if (num == 1)
+                    {
+                        len++;
+                    }
+                    else
+                    {
+                        for (int j = 1; j <= len; ++j)
+                        {
+                            for (int k = start; k + j <= start + len; k++)
+                            {
+                                string temp = s.Substring(k, j);
+
+                                if (hash.Add(s.Substring(k, j)))
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        start = i;
+                        len = 1;
+                    }
+                    pre = s[i];
+                }
+                else
+                {
+                    for (int j = 1; j <= len; ++j)
+                    {
+                        for (int k = start; k + j <= start + len; k++)
+                        {
+                            string temp = s.Substring(k, j);
+
+                            if (hash.Add(s.Substring(k, j)))
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                    start = i;
+                    len = 1;
+                    pre = s[i];
+                }
+            }
+            for (int j = 1; j <= len; ++j)
+            {
+                for (int k = start; k + j <= start + len; k++)
+                {
+                    string temp = s.Substring(k, j);
+
+                    if (hash.Add(s.Substring(k, j)))
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
         public int MinMoves2(int[] nums)
         {
             int n = nums.Length, x = QuickSelect(nums, 0, n - 1, n / 2), ret = 0;
