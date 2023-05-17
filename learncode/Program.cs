@@ -20,7 +20,7 @@ namespace learncode
             Review test1 = new Review();
             test tt = new test();
             QuickSelectModel qu=new QuickSelectModel();
-            int[] nums1 = {7,9,1,2,-2,-1,11,12,5,3,10};
+            int[] nums1 = {10,7,6,8,6,4,7,2,9};
             int[] nums2 = { 8,9,8,8};
             //int[][] mat = new int[][] { 
             //    new int[] {1,2,2,3,5 }, 
@@ -43,18 +43,8 @@ namespace learncode
                 //new int[] { 3,6  },
                 //new int[] { 5,9  }
             };
-            //tt.QuickSelectTest(nums1,0,nums1.Length-1,2);
-            int[] res = new int[11];
-            for(int i=0;i<11;++i)
-            {
-                res[i]= qu.FindK(nums1, i+1);
-            }
-            Show(res);
-            Array.Sort(nums1, (a, b) =>
-            {
-                return b - a>0?1:-1;
-            });
-            Show(nums1);
+            List<int> list = new List<int>(nums1);
+            tt.FieldSum(list);
 
             //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
             //Show(nums1);

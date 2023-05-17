@@ -8,6 +8,32 @@ namespace learncode.ReviewCode
 {
     public class test
     {
+        public int FieldSum(List<int> nums)
+        {
+            nums.Add(int.MaxValue);
+            int n = nums.Count;
+            Stack<int> stack = new Stack<int>();
+            int count = 0;
+            for(int i= 0; i < n;++i)
+            {
+                if (stack.Count == 0 || nums[stack.Peek()] > nums[i])
+                {
+                    stack.Push(i);
+                }
+                else
+                {
+                    while (stack.Count != 0 && nums[stack.Peek()] <= nums[i])
+                    {
+                        int top=stack.Pop();
+                        count += (i - top - 1);
+                    }
+                    stack.Push(i);
+
+                }
+            }
+            return count;
+        }
+
         public void QuickSelectTest(int[] nums,int start,int end,int index)
         {
             //7,9,1,2,5,3,10
