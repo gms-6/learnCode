@@ -8,6 +8,69 @@ namespace learncode.ReviewCode
 {
     public class test
     {
+        public int GetMaxSequence(int[] nums)
+        {
+            List<int> v = new List<int>(nums);
+            Stack<int> st=new Stack<int>();
+            List<int> vs=new List<int>();
+            vs.Add(0);
+            for(int i=1;i<v.Count+1;++i)
+            {
+                vs.Add(vs[i - 1] + v[i-1]);
+            }
+            v.Add(-1);
+            int top = 0, start = 0, end = 0, ret = 0;
+            for(int i=0;i<v.Count;++i)
+            {
+                if (st.Count == 0 || v[st.Peek()] <= v[i])
+                    st.Push(i);
+                else
+                {
+                    while (st.Count != 0 && v[st.Peek()] > v[i])
+                    {
+                        top = st.Pop();
+                        int tmp = vs[i] - vs[top];
+                        tmp = tmp * v[top];
+                        if(tmp>ret)
+                        {
+                            ret = tmp;
+                            start = top + 1;
+                            end = i;
+                        }
+                    }
+                    st.Push(top);
+                    v[top] = v[i];
+                }
+            }
+            return ret;
+        }
+        public int LargestRectangleArea(int[] nums)
+        {
+            List<int> list=new List<int>(nums);
+            Stack<int> st = new Stack<int>();
+            list.Add(-1);
+            int ret = 0, top = 0;
+            for(int i=0;i<list.Count;++i)
+            {
+                if (st.Count == 0 || list[st.Peek()] <= list[i])
+                {
+                    st.Push(i);
+                }
+                else
+                {
+                    while (st.Count != 0 && list[st.Peek()] > list[i])
+                    {
+                        top=st.Pop();
+                        int tmp = (i - top) * list[top];
+                        if(tmp>ret)
+                            ret = tmp;
+                    }
+                    st.Push(top); ;
+                    list[top] = list[i];
+                }
+            }
+            return ret;
+        }
         public int FieldSum(List<int> nums)
         {
             nums.Add(int.MaxValue);

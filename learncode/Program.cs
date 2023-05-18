@@ -20,7 +20,7 @@ namespace learncode
             Review test1 = new Review();
             test tt = new test();
             QuickSelectModel qu=new QuickSelectModel();
-            int[] nums1 = {10,7,6,8,6,4,7,2,9};
+            int[] nums1 = {3,1,6,4,5,2};
             int[] nums2 = { 8,9,8,8};
             //int[][] mat = new int[][] { 
             //    new int[] {1,2,2,3,5 }, 
@@ -43,8 +43,7 @@ namespace learncode
                 //new int[] { 3,6  },
                 //new int[] { 5,9  }
             };
-            List<int> list = new List<int>(nums1);
-            var a=test.FindSubstringInWraproundString("abaab");
+            var a= tt.GetMaxSequence(nums1);
 
             //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
             //Show(nums1);
