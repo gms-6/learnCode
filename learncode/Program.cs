@@ -20,7 +20,7 @@ namespace learncode
             Review test1 = new Review();
             test tt = new test();
             QuickSelectModel qu=new QuickSelectModel();
-            int[] nums1 = {3,1,6,4,5,2};
+            int[] nums1 = { 1, 1, 2, 2, 2 };
             int[] nums2 = { 8,9,8,8};
             //int[][] mat = new int[][] { 
             //    new int[] {1,2,2,3,5 }, 
@@ -43,7 +43,8 @@ namespace learncode
                 //new int[] { 3,6  },
                 //new int[] { 5,9  }
             };
-            var a= tt.GetMaxSequence(nums1);
+            string[] strs = { "011", "1", "11", "0", "010", "1", "10", "1", "1", "0", "0", "0", "01111", "011", "11", "00", "11", "10", "1", "0", "0", "0", "0", "101", "001110", "1", "0", "1", "0", "0", "10", "00100", "0", "10", "1", "1", "1", "011", "11", "11", "10", "10", "0000", "01", "1", "10", "0" }; 
+            var a= test.FindMaxForm(strs,5,3);
 
             //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
             //Show(nums1);

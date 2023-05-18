@@ -15,98 +15,257 @@ namespace learncode.ReviewCode
         IList<int> list = new List<int>();
         bool IsLeft = false;
         Random ran = new Random();
+        int max = 0;
+        int numm = 0, numn = 0;
+        public int FindMaxForm(string[] strs, int m, int n)
+        {
+            int len = strs.Length;
+            bool[] flag = new bool[len];
+            numm = m;
+            numn = n;
+            FindMaxFormDFS(0, 0, strs, 0, 0);
+            return max;
+        }
+        public void FindMaxFormDFS(int depth, int index, string[] strs, int curM, int curN)
+        {
+            if (depth >= strs.Length)
+                return;
+            for (int i = index; i < strs.Length; ++i)
+            {
+                int zero = 0, one = 0;
+                for (int j = 0; j < strs[i].Length; ++j)
+                {
+                    if (strs[i][j] == '0')
+                        zero++;
+                    else
+                        one++;
+                }
+                if (zero + curM > numm || one + curN > numn)
+                {
+                    continue;
+                }
+                if (depth + 1 > max)
+                    max = depth + 1;
+                if (max == strs.Length)
+                    return;
+                FindMaxFormDFS(depth + 1, i + 1, strs, curM + zero, curN + one);
+                if (max == strs.Length)
+                    return;
+            }
+        }
+        public bool Makesquare(int[] matchsticks)
+        {
+            int totalLen = matchsticks.Sum();
+            if (totalLen % 4 != 0)
+                return false;
+            int n = matchsticks.Length;
+            int len = totalLen / 4;
+            int[] dp = new int[1 << n];
+            for (int i = 0; i < dp.Length; ++i)
+            {
+                dp[i] = -1;
+            }
+            dp[0] = 0;
+            for (int s = 1; s < dp.Length; ++s)
+            {
+                for (int k = 0; k < n; ++k)
+                {
+                    if ((s & (1 << k)) == 0)
+                        continue;
+                    int s1 = s & ~(1 << k);
+                    if (dp[s1] >= 0 && dp[s1] + matchsticks[k] <= len)
+                    {
+                        dp[s] = (dp[s1] + matchsticks[k]) % len;
+                        break;
+                    }
+                }
+            }
+            return dp[(1 << n) - 1] == 0;
+
+
+            //Array.Sort(matchsticks, (a, b) => b - a);
+            //int[] edges = new int[4];
+            //return MakesquareDFS(0,matchsticks,edges,totalLen/4);
+        }
+        public bool MakesquareDFS(int index, int[] match, int[] edges, int len)
+        {
+            //  2, 2, 2,1,1
+            if (index == match.Length)
+                return true;
+            for (int i = 0; i < edges.Length; ++i)
+            {
+                edges[i] += match[index];
+                if (edges[i] <= len && MakesquareDFS(index + 1, match, edges, len))
+                    return true;
+                edges[i] -= match[index];
+            }
+            return false;
+        }
+        public string ValidIPAddress(string queryIP)
+        {
+            string[] str = queryIP.Split('.', ':');
+            int n = str.Length;
+            StringBuilder res = new StringBuilder();
+            bool flag = false;
+            if (n == 4)
+            {
+                res.Append(IsIPv4(str));
+            }
+            else if (n == 8)
+            {
+                res.Append(IsIPv6(str));
+
+            }
+            else
+            {
+                res.Append("Neither");
+            }
+            return res.ToString();
+        }
+        public string IsIPv4(string[] str)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                int len = str[i].Length;
+                if (len > 3 || len == 0)
+                    return "Neither";
+                if (str[i][0] == '0' && len > 1)
+                    return "Neither";
+                int sum = 0;
+                int count = 0;
+                for (int k = len - 1; k >= 0; --k)
+                {
+                    if (str[i][k] < 48 && str[i][k] > 57)
+                        return "Neither";
+                    sum = (str[i][k] - '0') * (int)Math.Pow(10, count++) + sum;
+                }
+                if (sum < 0 || sum > 255)
+                    return "Neither";
+            }
+            return "IPv4";
+        }
+        public string IsIPv6(string[] str)
+        {
+            for (int i = 0; i < 8; ++i)
+            {
+                int len = str[i].Length;
+                if (len == 0 || len > 4)
+                    return "Neither";
+                for (int j = 0; j < len; ++j)
+                {
+                    if (!((str[i][j] >= 48 && str[i][j] <= 57) || (str[i][j] >= 65 && str[i][j] <= 70) || (str[i][j] >= 97 && str[i][j] <= 102)))
+                        return "Neither";
+
+                }
+            }
+            return "IPv6";
+        }
         public int FindSubstringInWraproundString(string s)
         {
-            int n = s.Length;
-            int count = 0;
-            int start = 0;
-            int len = 1;
-            char pre = s[0];
-            HashSet<string> hash = new HashSet<string>();
-            for (int i = 1; i < n; ++i)
+            int[] dp = new int[26];
+            int k = 0;
+            for (int i = 0; i < s.Length; ++i)
             {
-                if (s[i] - 'a' > pre - 'a')
-                {
-                    if (s[i] - pre == 1)
-                    {
-                        len++;
-                    }
-                    else
-                    {
-                        for(int j=1;j<=len;++j)
-                        {
-                            for(int k= start; k+j<=start+len;k++)
-                            {
-                                string temp = s.Substring(k, j);
-                                if (hash.Add(s.Substring(k, j)))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        start = i;
-                        len = 1;
-                    }
-                    pre = s[i];
-                }
-                else if (s[i] - 'a' < pre - 'a')
-                {
-                    int num = s[i] - pre + 26;
-                    if (num == 1)
-                    {
-                        len++;
-                    }
-                    else
-                    {
-                        for (int j = 1; j <= len; ++j)
-                        {
-                            for (int k = start; k + j <= start + len; k++)
-                            {
-                                string temp = s.Substring(k, j);
-
-                                if (hash.Add(s.Substring(k, j)))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        start = i;
-                        len = 1;
-                    }
-                    pre = s[i];
-                }
+                if (i > 0 && (s[i] - s[i - 1] + 26) % 26 == 1)
+                    ++k;
                 else
-                {
-                    for (int j = 1; j <= len; ++j)
-                    {
-                        for (int k = start; k + j <= start + len; k++)
-                        {
-                            string temp = s.Substring(k, j);
-
-                            if (hash.Add(s.Substring(k, j)))
-                            {
-                                count++;
-                            }
-                        }
-                    }
-                    start = i;
-                    len = 1;
-                    pre = s[i];
-                }
+                    k = 1;
+                dp[s[i] - 'a'] = Math.Max(dp[s[i] - 'a'], k);
             }
-            for (int j = 1; j <= len; ++j)
-            {
-                for (int k = start; k + j <= start + len; k++)
-                {
-                    string temp = s.Substring(k, j);
+            return dp.Sum();
 
-                    if (hash.Add(s.Substring(k, j)))
-                    {
-                        count++;
-                    }
-                }
-            }
-            return count;
+
+
+            //int n = s.Length;
+            //int count = 0;
+            //int start = 0;
+            //int len = 1;
+            //char pre = s[0];
+            //HashSet<string> hash = new HashSet<string>();
+            //for (int i = 1; i < n; ++i)
+            //{
+            //    if (s[i] - 'a' > pre - 'a')
+            //    {
+            //        if (s[i] - pre == 1)
+            //        {
+            //            len++;
+            //        }
+            //        else
+            //        {
+            //            for(int j=1;j<=len;++j)
+            //            {
+            //                for(int k= start; k+j<=start+len;k++)
+            //                {
+            //                    string temp = s.Substring(k, j);
+            //                    if (hash.Add(s.Substring(k, j)))
+            //                    {
+            //                        count++;
+            //                    }
+            //                }
+            //            }
+            //            start = i;
+            //            len = 1;
+            //        }
+            //        pre = s[i];
+            //    }
+            //    else if (s[i] - 'a' < pre - 'a')
+            //    {
+            //        int num = s[i] - pre + 26;
+            //        if (num == 1)
+            //        {
+            //            len++;
+            //        }
+            //        else
+            //        {
+            //            for (int j = 1; j <= len; ++j)
+            //            {
+            //                for (int k = start; k + j <= start + len; k++)
+            //                {
+            //                    string temp = s.Substring(k, j);
+
+            //                    if (hash.Add(s.Substring(k, j)))
+            //                    {
+            //                        count++;
+            //                    }
+            //                }
+            //            }
+            //            start = i;
+            //            len = 1;
+            //        }
+            //        pre = s[i];
+            //    }
+            //    else
+            //    {
+            //        for (int j = 1; j <= len; ++j)
+            //        {
+            //            for (int k = start; k + j <= start + len; k++)
+            //            {
+            //                string temp = s.Substring(k, j);
+
+            //                if (hash.Add(s.Substring(k, j)))
+            //                {
+            //                    count++;
+            //                }
+            //            }
+            //        }
+            //        start = i;
+            //        len = 1;
+            //        pre = s[i];
+            //    }
+            //}
+            //for (int j = 1; j <= len; ++j)
+            //{
+            //    for (int k = start; k + j <= start + len; k++)
+            //    {
+            //        string temp = s.Substring(k, j);
+
+            //        if (hash.Add(s.Substring(k, j)))
+            //        {
+            //            count++;
+            //        }
+            //    }
+            //}
+            //return count;
         }
         public int MinMoves2(int[] nums)
         {
@@ -130,20 +289,20 @@ namespace learncode.ReviewCode
                 return q < index ? QuickSelect(nums, q + 1, right, index) : QuickSelect(nums, left, q - 1, index);
             }
         }
-        public int RandomPartition(int[] nums,int left,int right)
+        public int RandomPartition(int[] nums, int left, int right)
         {
-            int i = random.Next(right-left+1)+left;
+            int i = random.Next(right - left + 1) + left;
             int temp = nums[i];
             nums[i] = nums[right];
             nums[right] = temp;
-            return RandomPartitionpartition(nums,left,right);
+            return RandomPartitionpartition(nums, left, right);
         }
-        public int RandomPartitionpartition(int[] nums,int left,int right)
+        public int RandomPartitionpartition(int[] nums, int left, int right)
         {
             int x = nums[right], i = left - 1;
-            for(int j=left;j<right;++j)
+            for (int j = left; j < right; ++j)
             {
-                if(nums[j]<=x)
+                if (nums[j] <= x)
                 {
                     ++i;
                     int tmp = nums[i];
@@ -381,12 +540,12 @@ namespace learncode.ReviewCode
         {
             return 0;
         }
-        public ListNode AddTwoNumbers(ListNode l1,ListNode l2)
+        public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
             Stack<int> stack1 = new Stack<int>();
             Stack<int> stack2 = new Stack<int>();
             Stack<int> res = new Stack<int>();
-            while(l1!=null||l2!=null)
+            while (l1 != null || l2 != null)
             {
                 if (l1 != null)
                 {
@@ -400,19 +559,19 @@ namespace learncode.ReviewCode
                 }
             }
             int add = 0;
-            while(stack1.Count!=0||stack2.Count!=0)
+            while (stack1.Count != 0 || stack2.Count != 0)
             {
                 int num1 = 0, num2 = 0;
                 int sum = 0;
-                if(stack1.Count!=0)
+                if (stack1.Count != 0)
                 {
                     num1 = stack1.Pop();
                 }
-                if(stack2.Count!=0)
+                if (stack2.Count != 0)
                 {
-                    num2=stack2.Pop();
+                    num2 = stack2.Pop();
                 }
-                sum = num1 + num2+add;
+                sum = num1 + num2 + add;
                 if (sum >= 10)
                 {
                     sum -= 10;
@@ -426,9 +585,9 @@ namespace learncode.ReviewCode
                 res.Push(add);
             ListNode head = new ListNode();
             ListNode tmp = head;
-            while(res.Count!=0)
+            while (res.Count != 0)
             {
-                tmp.val=res.Pop();
+                tmp.val = res.Pop();
                 if (res.Count != 0)
                 {
                     tmp.next = new ListNode();
@@ -437,24 +596,24 @@ namespace learncode.ReviewCode
             }
             return head;
         }
-        public IList<int> FindAnagrams(string s,string p)
+        public IList<int> FindAnagrams(string s, string p)
         {
-            IList<int> target=new List<int>();
-            int n = s.Length,m=p.Length;
+            IList<int> target = new List<int>();
+            int n = s.Length, m = p.Length;
             if (n < m)
                 return target;
             int[] source = new int[26];
-            for(int j=0;j<m;j++)
+            for (int j = 0; j < m; j++)
             {
                 source[p[j] - 'a']++;
             }
             int i = 0;
             int start = i;
-            while(i+m<=n)
+            while (i + m <= n)
             {
                 IList<int> list = new List<int>(source);
                 bool flag = true;
-                for(;i<start+m;++i)
+                for (; i < start + m; ++i)
                 {
                     if (list[s[i] - 'a'] > 0)
                         list[s[i] - 'a']--;
@@ -467,24 +626,24 @@ namespace learncode.ReviewCode
                         break;
                     }
                 }
-                if(flag)
+                if (flag)
                 {
                     target.Add(start);
                     int left = start, right = i;
-                    while(right<n)
+                    while (right < n)
                     {
                         if (s[right] == s[left])
                         {
-                            target.Add(left+1);
+                            target.Add(left + 1);
                             left++;
                             right++;
                         }
                         else
                         {
-                            start= right;
-                            i = right; 
+                            start = right;
+                            i = right;
                             break;
-                        }    
+                        }
                     }
                 }
             }
@@ -494,9 +653,9 @@ namespace learncode.ReviewCode
         {
             IList<int> list = new List<int>();
             int n = nums.Length;
-            for(int i=0;i<n;++i)
+            for (int i = 0; i < n; ++i)
             {
-                if (nums[i]<0)
+                if (nums[i] < 0)
                 {
                     if (nums[-nums[i] - 1] < 0)
                         list.Add(-nums[i]);
@@ -516,7 +675,7 @@ namespace learncode.ReviewCode
         public int ArrangeCoins(int n)
         {
             int left = 1, right = n;
-            while(left<right)
+            while (left < right)
             {
                 int mid = (right - left + 1) / 2 + left;
                 if ((long)mid * (mid + 1) <= (long)2 * n)
