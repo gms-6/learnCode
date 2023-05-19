@@ -17,6 +17,36 @@ namespace learncode.ReviewCode
         Random ran = new Random();
         int max = 0;
         int numm = 0, numn = 0;
+        public IList<IList<int>> LevelOrder3(TreeNode root)
+        {
+            IList<IList<int>> list = new List<IList<int>>();
+            if (root == null)
+                return list;
+            Queue<TreeNode> que = new Queue<TreeNode>();
+            que.Enqueue(root);
+            int depth = 0;
+            while (que.Count != 0)
+            {
+                depth++;
+                int cnt = que.Count;
+                IList<int> target = new List<int>();
+                while (cnt-- > 0)
+                {
+                    TreeNode node = que.Dequeue();
+                    target.Add(node.val);
+                    if (node.left != null)
+                        que.Enqueue(node.left);
+                    if (node.right != null)
+                        que.Enqueue(node.right);
+                }
+                if (depth % 2 != 0)
+                {
+                    target = target.Reverse().ToList();
+                }
+                list.Add(target);
+            }
+            return list;
+        }
         public int FindMaxForm(string[] strs, int m, int n)
         {
             int len = strs.Length;
