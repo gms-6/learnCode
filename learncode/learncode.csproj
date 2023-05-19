@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classModel\MyBag.cs" />
     <Compile Include="classModel\QuickSelectModel.cs" />
     <Compile Include="classModel\RandomizedSet.cs" />
     <Compile Include="Model\Heap.cs" />
