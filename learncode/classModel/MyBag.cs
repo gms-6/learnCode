@@ -26,51 +26,65 @@ namespace learncode.classModel
                     cnt++;
                 }
             }
-            for(long i=1;i<=cnt;++i)
-            {
-                for(long j = m; j >= v[(int)i-1];j--)
-                    
-            }
+            return 0;
         }
         public int NPFull(int[] v, int[] w,int m)
         {
             int n = v.Length;
-            int[][] dp = new int[n+1][];
-            for(int i=0;i<n+1;i++)
+            //int[][] dp = new int[n+1][];
+            int[] dp = new int[n+1];
+            //for(int i=0;i<n+1;i++)
+            //{
+            //    dp[i] = new int[m + 1];
+            //}
+            for(int i=1;i<=n;++i)
             {
-                dp[i] = new int[m + 1];
+                for (int j = m; j <= m; ++j)
+                    dp[j] = Math.Max(dp[j], dp[j - v[i - 1]] + w[i-1]);
             }
-            for(int i=1;i<n+1;i++)
-            {
-                for(int j=1;j<m+1;j++)
-                {
-                    dp[i][j] = dp[i - 1][j];
-                    if (j >= v[i-1])
-                        dp[i][j] = Math.Max(dp[i][j], dp[i][j - v[i - 1]] + w[i-1]);
-                }
-                Show(dp);
-            }
-            return dp[n][m];
+            return dp[m];
+            //for(int i=1;i<n+1;i++)
+            //{
+            //    for(int j=1;j<m+1;j++)
+            //    {
+            //        dp[i][j] = dp[i - 1][j];
+            //        if (j >= v[i-1])
+            //            dp[i][j] = Math.Max(dp[i][j], dp[i][j - v[i - 1]] + w[i-1]);
+            //    }
+            //    Show(dp);
+            //}
+            //return dp[n][m];
         }
+
         public int NP01(int[] v, int[] w,int m)
         {
             int n = v.Length;
-            int[][] dp = new int[n+1][];
-            for(int i = 0; i <= n; i++)
+            //int[][] dp = new int[n+1][];
+            int[] dp = new int[m + 1];
+            //for(int i = 0; i <= n; i++)
+            //{
+            //    dp[i] = new int[m+1];
+            //}
+            for (int i = 1; i <= n; ++i)
             {
-                dp[i] = new int[m+1];
-            }
-            for(int i=1;i<=n;++i)
-            {
-                for(int j=1;j<=m;++j)
+                for(int j = m; j >= v[i-1];--j)
                 {
-                    dp[i][j] = dp[i - 1][j];
-                    if (j >= v[i-1])
-                        dp[i][j] = Math.Max(dp[i][j], dp[i - 1][j - v[i-1]] + w[i-1]);
+                    dp[j] = Math.Max(dp[j], dp[j - v[i - 1]] + w[i-1]);
                 }
                 Show(dp);
             }
-            return dp[n][m];
+            return dp[m];
+            //for(int i=1;i<=n;++i)
+            //{
+            //    for(int j=1;j<=m;++j)
+            //    {
+            //        dp[i][j] = dp[i - 1][j];
+            //        if (j >= v[i-1])
+            //            dp[i][j] = Math.Max(dp[i][j], dp[i - 1][j - v[i-1]] + w[i-1]);
+            //    }
+            //    Show(dp);
+            //}
+            //return dp[n][m];
 
         }
 
@@ -85,6 +99,15 @@ namespace learncode.classModel
                     Console.Write(dp[i][j]+"  ");
                 }
                 Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+        private void Show(int[] dp)
+        {
+            int n = dp.Length;
+            for (int i = 0; i < n; ++i)
+            {
+                Console.Write(dp[i]+" ");
             }
             Console.WriteLine();
         }
