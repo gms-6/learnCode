@@ -14,42 +14,113 @@ namespace learncode
         public static int TARGET = 24;
         public static double EPSILON = 1e-6;
         public static int ADD = 0, MuLTIPLY = 1, SUBTRACK = 2, DIVIDE = 3;
+        static IList<string> list = new List<string>();
+        static int[][] dir = new int[4][] { new int[] { 1, 0 }, new int[] { -1, 0 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
         public static void Main()
         {
-            Review230505 test = new Review230505(); 
-            Review test1 = new Review();
-            test tt = new test();
-            QuickSelectModel qu=new QuickSelectModel();
-            MyBag NP = new MyBag();
-            int[] nums1 = { 4,1,2,3,4 };
-            int[] nums2 = { 5,2,4,4,5};
-            //int[][] mat = new int[][] { 
-            //    new int[] {1,2,2,3,5 }, 
-            //    new int[] { 3,2,3,4,4 }, 
-            //    new int[] {2,4,5,3,1}, 
-            //    new int[] {6,7,1,4,5 }, 
-            //    new int[] { 5,1,1,2,4 }};
-            int[][] mat = new int[][] {
-                new int[] {4,5 },
-                new int[] { 1,2},
-                new int[] { 2,4 },
-                new int[] {  },
-                new int[] {},
-                new int[] { },
-                new int[] { }
-                //new int[] { 2,6  },
-                //new int[] { 2,7  },
-                //new int[] { 3,4  },
-                //new int[] { 3,5  },
-                //new int[] { 3,6  },
-                //new int[] { 5,9  }
-            };
-            var a= NP.NP01(nums1, nums2,10);
+            string[] LStr = Console.ReadLine().Split(' ');
+            string[] RStr = Console.ReadLine().Split(' ');
+            int Llen = Convert.ToInt32(LStr[0]);
+            int Rlen = Convert.ToInt32(RStr[0]);
+            int[] L = new int[Llen];
+            int[] R = new int[Rlen];
+            IList<IList<int>> list = new List<IList<int>>();
+            for (int i = 1; i < LStr.Length; ++i)
+                L[i - 1] = Convert.ToInt32(LStr[i]);
+            for (int i = 1; i < RStr.Length; ++i)
+                R[i - 1] = Convert.ToInt32(RStr[i]);
+            Array.Sort(R);
+            int count = 0;
+            for (int i = 0; i < Rlen; ++i)
+            {
+                if (i != 0 && R[i] == R[i - 1])
+                    continue;
+                count += 2;
+                int num = 0;
+                IList<int> tmp = new List<int>();
+                tmp.Add(R[i]);
+                for (int j = 0; j < Llen; ++j)
+                {
+                    if (LStr[j + 1].Contains(R[i].ToString()))
+                    {
+                        tmp.Add(j);
+                        tmp.Add(L[j]);
+                        count += 2;
+                    }
+                }
+                if (tmp.Count != 1)
+                    list.Add(tmp);
+                else
+                    count -= 2;
+            }
+            Console.Write(count + " ");
+            foreach (var indexList in list)
+            {
+                Console.Write(indexList[0] + " " + (indexList.Count - 1) / 2 + " ");
+                for (int i = 1; i < indexList.Count; ++i)
+                {
+                    Console.Write(indexList[i] + " ");
+                }
+            }
 
-            //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
-            //Show(nums1);
-            Console.ReadKey();
         }
+        public static bool DFS(int[][] map, bool[][] path, int curx, int cury, int m, int n)
+        {
+            if (curx == m - 1 && cury == n - 1)
+                return true;
+            int count = 0;
+            for (int i = 0; i < dir.Length; ++i)
+            {
+                int x = curx + dir[i][0];
+                int y = cury + dir[i][1];
+                if (x < 0 || x >= m || y < 0 || y >= n || path[x][y] || map[x][y] != 0)
+                    continue;
+                count++;
+                path[x][y] = true;
+                list.Add($"({x},{y})");
+                if (DFS(map, path, x, y, m, n))
+                    return true;
+                else
+                    list.RemoveAt(list.Count - 1);
+            }
+            return false;
+        }
+        //public static void Main()
+        //{
+        //    Review230505 test = new Review230505(); 
+        //    Review test1 = new Review();
+        //    test tt = new test();
+        //    QuickSelectModel qu=new QuickSelectModel();
+        //    MyBag NP = new MyBag();
+        //    int[] nums1 = { 4,1,2,3,4 };
+        //    int[] nums2 = { 5,2,4,4,5};
+        //    //int[][] mat = new int[][] { 
+        //    //    new int[] {1,2,2,3,5 }, 
+        //    //    new int[] { 3,2,3,4,4 }, 
+        //    //    new int[] {2,4,5,3,1}, 
+        //    //    new int[] {6,7,1,4,5 }, 
+        //    //    new int[] { 5,1,1,2,4 }};
+        //    int[][] mat = new int[][] {
+        //        new int[] {4,5 },
+        //        new int[] { 1,2},
+        //        new int[] { 2,4 },
+        //        new int[] {  },
+        //        new int[] {},
+        //        new int[] { },
+        //        new int[] { }
+        //        //new int[] { 2,6  },
+        //        //new int[] { 2,7  },
+        //        //new int[] { 3,4  },
+        //        //new int[] { 3,5  },
+        //        //new int[] { 3,6  },
+        //        //new int[] { 5,9  }
+        //    };
+        //    var a= NP.NP01(nums1, nums2,10);
+
+        //    //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
+        //    //Show(nums1);
+        //    Console.ReadKey();
+        //}
         /// <summary>
         /// O(N)
         /// </summary>
