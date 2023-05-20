@@ -16,54 +16,150 @@ namespace learncode
         public static int ADD = 0, MuLTIPLY = 1, SUBTRACK = 2, DIVIDE = 3;
         static IList<string> list = new List<string>();
         static int[][] dir = new int[4][] { new int[] { 1, 0 }, new int[] { -1, 0 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
+        static bool flag = false;
         public static void Main()
         {
-            string[] LStr = Console.ReadLine().Split(' ');
-            string[] RStr = Console.ReadLine().Split(' ');
-            int Llen = Convert.ToInt32(LStr[0]);
-            int Rlen = Convert.ToInt32(RStr[0]);
-            int[] L = new int[Llen];
-            int[] R = new int[Rlen];
-            IList<IList<int>> list = new List<IList<int>>();
-            for (int i = 1; i < LStr.Length; ++i)
-                L[i - 1] = Convert.ToInt32(LStr[i]);
-            for (int i = 1; i < RStr.Length; ++i)
-                R[i - 1] = Convert.ToInt32(RStr[i]);
-            Array.Sort(R);
-            int count = 0;
-            for (int i = 0; i < Rlen; ++i)
+            int n = Convert.ToInt32(Console.ReadLine());
+            string[] str = Console.ReadLine().Split(' ');
+            int[] nums = new int[n];
+            bool[] flag = new bool[n];
+            IList<int> fir3 = new List<int>();
+            IList<int> sec5 = new List<int>();
+            for (int i = 0; i < n; ++i)
             {
-                if (i != 0 && R[i] == R[i - 1])
-                    continue;
-                count += 2;
-                int num = 0;
-                IList<int> tmp = new List<int>();
-                tmp.Add(R[i]);
-                for (int j = 0; j < Llen; ++j)
+                nums[i] = Convert.ToInt32(str[i]);
+                if (nums[i] % 3 == 0 && nums[i] % 5 != 0)
                 {
-                    if (LStr[j + 1].Contains(R[i].ToString()))
-                    {
-                        tmp.Add(j);
-                        tmp.Add(L[j]);
-                        count += 2;
-                    }
+                    fir.Add(nums[i]);
+                    flag[i] = true;
                 }
-                if (tmp.Count != 1)
-                    list.Add(tmp);
-                else
-                    count -= 2;
-            }
-            Console.Write(count + " ");
-            foreach (var indexList in list)
-            {
-                Console.Write(indexList[0] + " " + (indexList.Count - 1) / 2 + " ");
-                for (int i = 1; i < indexList.Count; ++i)
+                else if (nums[i] % 5 == 0 && nums[i] % 3 != 0)
                 {
-                    Console.Write(indexList[i] + " ");
+                    sec.Add(nums[i]);
+                    flag[i] = true;
                 }
             }
 
         }
+        public static bool DFS()
+        {
+
+        }
+        //public static void Main()
+        //{
+        //    string[] str = Console.ReadLine().Split('-');
+        //    Dictionary<string, int> dic = new Dictionary<string, int>();
+        //    Init(dic);
+        //    bool res = IsFirBigger(str[0], str[1], dic);
+        //    if (flag)
+        //        Console.WriteLine();
+        //    else
+        //    {
+        //        if (res)
+        //            Console.WriteLine(str[0]);
+        //        else
+        //            Console.WriteLine(str[1]);
+        //    }
+        //}
+        public static void Init(Dictionary<string, int> dic)
+        {
+            dic.Add("3", 1);
+            dic.Add("4", 2);
+            dic.Add("5", 3);
+            dic.Add("6", 4);
+            dic.Add("7", 5);
+            dic.Add("8", 6);
+            dic.Add("9", 7);
+            dic.Add("10", 8);
+            dic.Add("J", 9);
+            dic.Add("Q", 10);
+            dic.Add("K", 11);
+            dic.Add("A", 12);
+            dic.Add("2", 13);
+            dic.Add("joker", 14);
+            dic.Add("JOKER", 15);
+
+        }
+        public static bool IsFirBigger(string str1, string str2, Dictionary<string, int> dic)
+        {
+            string[] fir = str1.Split(' ');
+            int m = fir.Length;
+            string[] sec = str2.Split(' ');
+            int n = sec.Length;
+            if (m == 2 && fir[0].Length == 5)
+                return true;
+            if (n == 2 && sec[0].Length == 5)
+                return false;
+            if (m == n)
+            {
+                if (dic[fir[0].ToString()] > dic[sec[0].ToString()])
+                    return true;
+                else if (dic[fir[0].ToString()] > dic[sec[0].ToString()])
+                    return false;
+            }
+            else
+            {
+                if (m == 4)
+                    return true;
+                else if (n == 4)
+                    return false;
+                else
+                {
+                    flag = true;
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        //public static void Main()
+        //{
+        //    string[] LStr = Console.ReadLine().Split(' ');
+        //    string[] RStr = Console.ReadLine().Split(' ');
+        //    int Llen = Convert.ToInt32(LStr[0]);
+        //    int Rlen = Convert.ToInt32(RStr[0]);
+        //    int[] L = new int[Llen];
+        //    int[] R = new int[Rlen];
+        //    IList<IList<int>> list = new List<IList<int>>();
+        //    for (int i = 1; i < LStr.Length; ++i)
+        //        L[i - 1] = Convert.ToInt32(LStr[i]);
+        //    for (int i = 1; i < RStr.Length; ++i)
+        //        R[i - 1] = Convert.ToInt32(RStr[i]);
+        //    Array.Sort(R);
+        //    int count = 0;
+        //    for (int i = 0; i < Rlen; ++i)
+        //    {
+        //        if (i != 0 && R[i] == R[i - 1])
+        //            continue;
+        //        count += 2;
+        //        int num = 0;
+        //        IList<int> tmp = new List<int>();
+        //        tmp.Add(R[i]);
+        //        for (int j = 0; j < Llen; ++j)
+        //        {
+        //            if (LStr[j + 1].Contains(R[i].ToString()))
+        //            {
+        //                tmp.Add(j);
+        //                tmp.Add(L[j]);
+        //                count += 2;
+        //            }
+        //        }
+        //        if (tmp.Count != 1)
+        //            list.Add(tmp);
+        //        else
+        //            count -= 2;
+        //    }
+        //    Console.Write(count + " ");
+        //    foreach (var indexList in list)
+        //    {
+        //        Console.Write(indexList[0] + " " + (indexList.Count - 1) / 2 + " ");
+        //        for (int i = 1; i < indexList.Count; ++i)
+        //        {
+        //            Console.Write(indexList[i] + " ");
+        //        }
+        //    }
+
+        //}
         public static bool DFS(int[][] map, bool[][] path, int curx, int cury, int m, int n)
         {
             if (curx == m - 1 && cury == n - 1)

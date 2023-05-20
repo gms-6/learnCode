@@ -17,6 +17,36 @@ namespace learncode.ReviewCode
         Random ran = new Random();
         int max = 0;
         int numm = 0, numn = 0;
+        public int MinDistance(string word1, string word2)
+        {
+            int m = word1.Length;
+            int n = word2.Length;
+            if (m * n == 0)
+                return m + n;
+            int[][] dp = new int[m+1][];
+            for (int i = 0; i < n + 1; ++i)
+                dp[i] = new int[n + 1];
+            for(int i=0;i<n+1;++i)
+            {
+                dp[i][0] = i;
+            }
+            for (int j = 0; j < m + 1; ++j)
+                dp[0][j] = j;
+            for(int i=1;i<n+1;++i)
+            {
+                for(int j=1;j<m+1;++j)
+                {
+                    if(word1[i]!=word2[j])
+                    {
+                        int fir = dp[i - 1][j - 1]+1;
+                        int sec = dp[i - 1][j]+1;
+                        int thi = dp[i][j - 1]+1;
+                        dp[i][j] = Math.Min(fir,Math.Min(sec,thi));
+                    }
+                }
+            }
+            return dp[m][n];
+        }
         public IList<IList<int>> LevelOrder3(TreeNode root)
         {
             IList<IList<int>> list = new List<IList<int>>();
