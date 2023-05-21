@@ -20,10 +20,23 @@ namespace learncode
 
         public static void Main()
         {
-            Review230505 review230505 = new Review230505();
-            var a=review230505.MinLength("CCDAABBDCD");
+            Review230505 test = new Review230505();
+            Review test1 = new Review();
+            test tt = new test();
+            MyBag NP = new MyBag();
+            string[] str = { "10", "0", "1" };
+            int[] nums1 = { 4, 1, 2, 3, 4 };
+            int[] nums2 = { 5, 2, 4, 4, 5 };
+            int[][] mat = new int[][] {
+                new int[] { 1,5,9 },
+                new int[] { 10,11,13},
+                new int[] { 12,13,15}
+            };
+            var a = test.FindMaxForm(str,1,1);
 
-
+            //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
+            //Show(nums1);
+            Console.ReadKey();
         }
         public static void Init(Dictionary<string, int> dic)
         {

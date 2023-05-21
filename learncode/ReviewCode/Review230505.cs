@@ -17,6 +17,53 @@ namespace learncode.ReviewCode
         Random ran = new Random();
         int max = 0;
         int numm = 0, numn = 0;
+        public int KthSmallest(int[][] matrix, int k)
+        {
+            int n = matrix.Length;
+            if (n == 1 || k == 1)
+                return matrix[0][0];
+            int target = matrix[0][0], count = 1;
+            IList<int[]> list = new List<int[]>();
+            bool[][] path = new bool[n][];
+            for (int i = 0; i < n; ++i)
+                path[i] = new bool[n];
+            path[0][0] = true;
+            list.Add(new int[] { matrix[0][1], 0, 1 });
+            list.Add(new int[] { matrix[1][0], 1, 0 });
+            path[0][1] = true;
+            path[1][0] = true;
+            while (count != k)
+            {
+                int[] temp = new int[3];
+                int min = int.MaxValue;
+                int tarX = 0, tarY = 0;
+                for (int i = 0; i < list.Count; ++i)
+                {
+                    if (list[i][0] < min)
+                    {
+                        min = list[i][0];
+                        tarX = list[i][1];
+                        tarY = list[i][2];
+                        temp = list[i];
+                    }
+                }
+
+                list.Remove(temp);
+                target = min;
+                count++;
+                if (tarX + 1 < n && !path[tarX + 1][tarY])
+                {
+                    list.Add(new int[] { matrix[tarX + 1][tarY], tarX + 1, tarY });
+                    path[tarX + 1][tarY] = true;
+                }
+                if (tarY + 1 < n && !path[tarX][tarY + 1])
+                {
+                    list.Add(new int[] { matrix[tarX][tarY + 1], tarX, tarY + 1 });
+                    path[tarX][tarY + 1] = true; ;
+                }
+            }
+            return target;
+        }
         public int PunishmentNumber(int n)
         {
             int index = 1;
@@ -116,7 +163,7 @@ namespace learncode.ReviewCode
                 int count = 0;
                 foreach (int index in list)
                 {
-                    s = s.Remove(index-2*count++,2);
+                    s = s.Remove(index - 2 * count++, 2);
                 }
             }
             return s.Length;
@@ -184,11 +231,41 @@ namespace learncode.ReviewCode
         public int FindMaxForm(string[] strs, int m, int n)
         {
             int len = strs.Length;
-            bool[] flag = new bool[len];
-            numm = m;
-            numn = n;
-            FindMaxFormDFS(0, 0, strs, 0, 0);
-            return max;
+            int[][][] dp = new int[len + 1][][];
+            for (int i = 0; i < len + 1; ++i)
+            {
+                dp[i] = new int[m + 1][];
+                for (int j = 0; j < m + 1; ++j)
+                {
+                    dp[i][j] = new int[n + 1];
+                }
+            }
+            for (int i = 1; i < len + 1; ++i)
+            {
+                int zero = 0, one = 0;
+                for (int k = 0; k < strs[i-1].Length; ++k)
+                    if (strs[i-1][k] == '0')
+                        zero++;
+                one = strs[i-1].Length - zero;
+                for (int j = 0; j < m + 1; ++j)
+                {
+                    for(int k=0;k<n+1;++k)
+                    {
+                        dp[i][j][k] = dp[i - 1][j][k];
+                        if(j>=zero&&k>=one)
+                        {
+                            dp[i][j][k] = Math.Max(dp[i][j][k],dp[i-1][j-zero][k-one]+1);
+                        }
+                    }
+                }
+            }
+            return dp[len][m][n];
+
+            //bool[] flag = new bool[len];
+            //numm = m;
+            //numn = n;
+            //FindMaxFormDFS(0, 0, strs, 0, 0);
+            //return max;
         }
         public void FindMaxFormDFS(int depth, int index, string[] strs, int curM, int curN)
         {

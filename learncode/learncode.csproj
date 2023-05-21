@@ -46,6 +46,7 @@
     <Compile Include="classModel\MyBag.cs" />
     <Compile Include="classModel\QuickSelectModel.cs" />
     <Compile Include="classModel\RandomizedSet.cs" />
+    <Compile Include="classModel\SortMethod.cs" />
     <Compile Include="Model\Heap.cs" />
     <Compile Include="Model\LinkedNode.cs" />
     <Compile Include="Model\ListNode.cs" />
