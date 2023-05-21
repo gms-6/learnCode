@@ -17,31 +17,135 @@ namespace learncode.ReviewCode
         Random ran = new Random();
         int max = 0;
         int numm = 0, numn = 0;
+        public int PunishmentNumber(int n)
+        {
+            int index = 1;
+            int sum = 0;
+            while (index <= n)
+            {
+                int pow = index * index;
+                if (PunishmentNumberDFS(pow.ToString(), 0, 0, index))
+                    sum += pow;
+                index++;
+            }
+            return sum;
+        }
+        public bool PunishmentNumberDFS(string str, int index, int sum, int target)
+        {
+            if (index == str.Length)
+            {
+                if (sum != target)
+                    return false;
+                else
+                    return true;
+            }
+            for (int i = index; i < str.Length; ++i)
+            {
+                if (str[i] == '0')
+                {
+                    int value = 0;
+                    if (PunishmentNumberDFS(str, i + 1, sum + value, target))
+                        return true;
+                    break;
+                }
+
+                for (int j = i; j < str.Length; ++j)
+                {
+                    int value = PunishmentNumbercalcSum(str, i, j);
+                    if (PunishmentNumberDFS(str, j + 1, sum + value, target))
+                        return true;
+                }
+                break;
+            }
+            return false;
+        }
+        public int PunishmentNumbercalcSum(string str, int i, int j)
+        {
+            int sum = 0;
+            int count = 0;
+            for (int k = j; k >= i; --k)
+            {
+                sum = (str[k] - '0') * (int)Math.Pow(10, count++) + sum;
+            }
+            return sum;
+        }
+        public string MakeSmallestPalindrome(string s)
+        {
+            int n = s.Length;
+            char[] res = s.ToCharArray();
+            int start = 0, end = 0;
+            start = n / 2 - 1;
+            if (n % 2 == 0)
+                end = n / 2;
+            else
+            {
+                end = n / 2 + 1;
+            }
+            while (start >= 0)
+            {
+                if (s[start] != s[end])
+                {
+                    if (s[start] < s[end])
+                    {
+                        res[end] = s[start];
+                    }
+                    else
+                    {
+                        res[start] = s[end];
+                    }
+                }
+                start--;
+                end++;
+            }
+            return new string(res);
+        }
+        public int MinLength(string s)
+        {
+            int n = s.Length;
+            while (s.Contains("AB") || s.Contains("CD"))
+            {
+                List<int> list = new List<int>();
+                for (int i = 0; i < s.Length - 1; ++i)
+                {
+                    if (s[i] == 'A' && s[i + 1] == 'B' || s[i] == 'C' && s[i + 1] == 'D')
+                    {
+                        list.Add(i);
+                    }
+                }
+
+                int count = 0;
+                foreach (int index in list)
+                {
+                    s = s.Remove(index-2*count++,2);
+                }
+            }
+            return s.Length;
+        }
         public int MinDistance(string word1, string word2)
         {
             int m = word1.Length;
             int n = word2.Length;
             if (m * n == 0)
                 return m + n;
-            int[][] dp = new int[m+1][];
+            int[][] dp = new int[m + 1][];
             for (int i = 0; i < n + 1; ++i)
                 dp[i] = new int[n + 1];
-            for(int i=0;i<n+1;++i)
+            for (int i = 0; i < n + 1; ++i)
             {
                 dp[i][0] = i;
             }
             for (int j = 0; j < m + 1; ++j)
                 dp[0][j] = j;
-            for(int i=1;i<n+1;++i)
+            for (int i = 1; i < n + 1; ++i)
             {
-                for(int j=1;j<m+1;++j)
+                for (int j = 1; j < m + 1; ++j)
                 {
-                    if(word1[i]!=word2[j])
+                    if (word1[i] != word2[j])
                     {
-                        int fir = dp[i - 1][j - 1]+1;
-                        int sec = dp[i - 1][j]+1;
-                        int thi = dp[i][j - 1]+1;
-                        dp[i][j] = Math.Min(fir,Math.Min(sec,thi));
+                        int fir = dp[i - 1][j - 1] + 1;
+                        int sec = dp[i - 1][j] + 1;
+                        int thi = dp[i][j - 1] + 1;
+                        dp[i][j] = Math.Min(fir, Math.Min(sec, thi));
                     }
                 }
             }

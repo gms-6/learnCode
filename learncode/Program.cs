@@ -17,50 +17,14 @@ namespace learncode
         static IList<string> list = new List<string>();
         static int[][] dir = new int[4][] { new int[] { 1, 0 }, new int[] { -1, 0 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
         static bool flag = false;
+
         public static void Main()
         {
-            int n = Convert.ToInt32(Console.ReadLine());
-            string[] str = Console.ReadLine().Split(' ');
-            int[] nums = new int[n];
-            bool[] flag = new bool[n];
-            IList<int> fir3 = new List<int>();
-            IList<int> sec5 = new List<int>();
-            for (int i = 0; i < n; ++i)
-            {
-                nums[i] = Convert.ToInt32(str[i]);
-                if (nums[i] % 3 == 0 && nums[i] % 5 != 0)
-                {
-                    fir.Add(nums[i]);
-                    flag[i] = true;
-                }
-                else if (nums[i] % 5 == 0 && nums[i] % 3 != 0)
-                {
-                    sec.Add(nums[i]);
-                    flag[i] = true;
-                }
-            }
+            Review230505 review230505 = new Review230505();
+            var a=review230505.MinLength("CCDAABBDCD");
+
 
         }
-        public static bool DFS()
-        {
-
-        }
-        //public static void Main()
-        //{
-        //    string[] str = Console.ReadLine().Split('-');
-        //    Dictionary<string, int> dic = new Dictionary<string, int>();
-        //    Init(dic);
-        //    bool res = IsFirBigger(str[0], str[1], dic);
-        //    if (flag)
-        //        Console.WriteLine();
-        //    else
-        //    {
-        //        if (res)
-        //            Console.WriteLine(str[0]);
-        //        else
-        //            Console.WriteLine(str[1]);
-        //    }
-        //}
         public static void Init(Dictionary<string, int> dic)
         {
             dic.Add("3", 1);
