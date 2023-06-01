@@ -20,22 +20,24 @@ namespace learncode
 
         public static void Main()
         {
-            Review230505 test = new Review230505();
-            Review test1 = new Review();
-            test tt = new test();
-            MyBag NP = new MyBag();
-            string[] str = { "10", "0", "1" };
-            int[] nums1 = { 4, 1, 2, 3, 4 };
-            int[] nums2 = { 5, 2, 4, 4, 5 };
-            int[][] mat = new int[][] {
-                new int[] { 1,5,9 },
-                new int[] { 10,11,13},
-                new int[] { 12,13,15}
-            };
-            var a = test.FindMaxForm(str,1,1);
-
-            //tt.QuickSelectTest(nums1, 0, nums1.Length-1,11) ;
+            Review230601 review230601= new Review230601();
+            //Review230505 test = new Review230505();
+            //Review test1 = new Review();
+            //test tt = new test();
+            //MyBag NP = new MyBag();
+            //string[] str = { "10", "0", "1" };
+            int[] nums1 = {-4,-3,-2,-1,0,1,2,3,12 };
+            //int[] nums2 = { 5, 2, 4, 4, 5 };
+            //int[][] mat = new int[][] {
+            //    new int[] { 1,5,9 },
+            //    new int[] { 10,11,13},
+            //    new int[] { 12,13,15}
+            //};
+            var a=review230601.GenerateMatrix(6);
+            Show(a);
             //Show(nums1);
+
+
             Console.ReadKey();
         }
         public static void Init(Dictionary<string, int> dic)
@@ -1485,7 +1487,19 @@ namespace learncode
 
 
         }
-
+        public static void Show(int[][] nums)
+        {
+            int m = nums.Length;
+            int n = nums[0].Length;
+            for(int i=0;i<m;++i)
+            {
+                for(int j=0;j<n;++j)
+                {
+                    Console.Write(nums[i][j]+" ");
+                }
+                Console.WriteLine();
+            }
+        }
         public static void Show(IList<int> a)
         {
             for (int i = 0; i < a.Count; i++)
