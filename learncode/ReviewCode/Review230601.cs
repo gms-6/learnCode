@@ -146,5 +146,49 @@ namespace learncode.ReviewCode
             }
             return dummy.next; ;
         }
-    }
+        public TreeNode invertTree(TreeNode root)
+        {
+            //if(root==null)
+            //    return null;
+            //invertTree(root.left);
+            //invertTree(root.right);
+            //TreeNode temp = root.left;
+            //root.left = root.right;
+            //root.right= temp;
+            //return root;
+
+            if(root==null)
+                return null;
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+            while(queue.Count>0)
+            {
+                int count = queue.Count;
+                while(count-->0)
+                {
+                    TreeNode node = queue.Dequeue();
+                    TreeNode temp = node.left;
+                    node.left = node.right;
+                    node.right = temp;
+                    if(node.left!=null) queue.Enqueue(node.left);
+                    if (node.right != null) queue.Enqueue(node.right);
+                }
+            }
+            return root;
+        }
+        public bool isSymmetric1(TreeNode root)
+        {
+            return isSymmetric1compare(root.left, root.right);
+        }
+
+        private bool isSymmetric1compare(TreeNode left, TreeNode right)
+        {
+            if (left == null && right != null) return false;
+            else if (left != null && right == null) return false;
+            else if (left == null && right == null) return true;
+            else if(left.val!=right.val) return false;
+            bool l = isSymmetric1compare(left.left,right.right);
+            bool r = isSymmetric1compare(left.right,right.left);
+            return l && r;
+        }
 }
