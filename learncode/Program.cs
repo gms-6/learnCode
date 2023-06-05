@@ -24,17 +24,18 @@ namespace learncode
             //Review230505 test = new Review230505();
             //Review test1 = new Review();
             //test tt = new test();
-            //MyBag NP = new MyBag();
+            MyBag NP = new MyBag();
             //string[] str = { "10", "0", "1" };
-            int[] nums1 = {-4,-3,-2,-1,0,1,2,3,12 };
-            //int[] nums2 = { 5, 2, 4, 4, 5 };
+            int[] nums1 = {4,7,1,2,8,5,9 };
+            int[] nums2 = { 2,5,8,3,3,4,8 };
             //int[][] mat = new int[][] {
             //    new int[] { 1,5,9 },
             //    new int[] { 10,11,13},
             //    new int[] { 12,13,15}
             //};
-            var a=review230601.GenerateMatrix(6);
-            Show(a);
+            NP.NP01(nums1,nums2,20);
+            //var a=review230601.GenerateMatrix(6);
+            //Show(a);
             //Show(nums1);
 
 

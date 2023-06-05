@@ -96,7 +96,7 @@ namespace learncode.classModel
             {
                 for(int j=0;j<n;++j)
                 {
-                    Console.Write(dp[i][j]+"  ");
+                    Console.Write(dp[i][j].ToString().PadRight(5));
                 }
                 Console.WriteLine();
             }
@@ -107,7 +107,7 @@ namespace learncode.classModel
             int n = dp.Length;
             for (int i = 0; i < n; ++i)
             {
-                Console.Write(dp[i]+" ");
+                Console.Write(dp[i].ToString().PadRight(5));
             }
             Console.WriteLine();
         }
