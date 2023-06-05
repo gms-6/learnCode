@@ -39,7 +39,7 @@ namespace learncode.classModel
             //}
             for(int i=1;i<=n;++i)
             {
-                for (int j = m; j <= m; ++j)
+                for (int j = v[i-1]; j <= m; ++j)
                     dp[j] = Math.Max(dp[j], dp[j - v[i - 1]] + w[i-1]);
             }
             return dp[m];
