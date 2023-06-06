@@ -34,11 +34,22 @@ namespace learncode
             //    new int[] { 12,13,15}
             //};
             //NP.NP01(nums1,nums2,20);
-            var a=review230601.MinNum(12);
-            Show(a);
+            //review230601.Rate(10,5);
             //Show(a);
             //Show(nums1);
-
+            double min = double.MaxValue;
+            double minRate = 0;
+            for(double i=10.0/7;i<10;i+=0.1)
+            {
+                double temp = review230601.GetMaxRate(i);
+                Console.WriteLine();
+                if (temp < min)
+                {
+                    minRate = i;
+                    min = temp;
+                }
+            }
+            Console.WriteLine("最低单价比例为"+minRate+"\n最低单价为"+min);
 
             Console.ReadKey();
         }

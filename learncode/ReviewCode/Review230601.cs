@@ -9,6 +9,26 @@ namespace learncode.ReviewCode
 {
     public class Review230601
     {
+        public void Rate(int x,int y)
+        {
+            double irr = 10 / 7;
+            double r = 0.7*x-y;
+            double r1 = x-0.7 * y ;
+            Console.WriteLine("MAX:"+x);
+            Console.WriteLine("MIN:" + y);
+                Console.WriteLine("净得:"+r);
+            Console.WriteLine("费用"+r1+" 单价1.2，总花费："+1.2*r1);
+            Console.WriteLine("换算单价："+1.2*r1/r);
+        }
+        public double GetMaxRate(double r0)
+        {
+            double r = (r0 - 0.7)/(0.7*r0-1);
+            double res = 0;
+            res = 1.2 * r;
+            Console.WriteLine("x比y的比例为:" + r0);
+            Console.WriteLine("换算单价：" + res);
+            return res;
+        }
         public int MinNum(int num)
         {
             //int m = (int)Math.Sqrt(num);
