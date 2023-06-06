@@ -9,18 +9,20 @@ namespace learncode.ReviewCode
 {
     public class Review230601
     {
-        public double Rate(out double r0,double x, double y = 1)
+        public double Rate(double price,double x, double y = 1)
         {
-            r0 = x / y;
+            double r0 = x / y;
             double r1 = 0.7 * x - y;
             double r2 = x - 0.7 * y;
-            Console.WriteLine("MAX:" + x);
-            Console.WriteLine("MIN:" + y);
-            Console.WriteLine("x/y比例："+r0);
-            Console.WriteLine("净得:" + r1);
-            Console.WriteLine("花费" + r2 + " 单价1.2，总花费：" + 1.2 * r2);
-            Console.WriteLine("换算单价：" + 1.2 * r2 / r1);
-            return 1.2 * r2 / r1;
+            double r3 = price * r2 / r1;
+            //Console.WriteLine("MAX:" + x);
+            //Console.WriteLine("MIN:" + y);
+            Console.WriteLine("x/y比例："+r0.ToString("0.00"));
+            //Console.WriteLine("净得:" + r1);
+            //Console.WriteLine("花费" + r2 + " 单价1.2，总花费：" + 1.2 * r2);
+            Console.WriteLine("换算单价：" + r3.ToString("0.00"));
+            Console.WriteLine("100w积分花费"+(price*100).ToString("0.00")+"\n实际到账积分"+(100*r1/r2).ToString("0.00"));
+            return r3;
         }
         public double GetMaxRate(double r0)
         {
