@@ -9,20 +9,22 @@ namespace learncode.ReviewCode
 {
     public class Review230601
     {
-        public void Rate(int x,int y)
+        public double Rate(out double r0,double x, double y = 1)
         {
-            double irr = 10 / 7;
-            double r = 0.7*x-y;
-            double r1 = x-0.7 * y ;
-            Console.WriteLine("MAX:"+x);
+            r0 = x / y;
+            double r1 = 0.7 * x - y;
+            double r2 = x - 0.7 * y;
+            Console.WriteLine("MAX:" + x);
             Console.WriteLine("MIN:" + y);
-                Console.WriteLine("净得:"+r);
-            Console.WriteLine("费用"+r1+" 单价1.2，总花费："+1.2*r1);
-            Console.WriteLine("换算单价："+1.2*r1/r);
+            Console.WriteLine("x/y比例："+r0);
+            Console.WriteLine("净得:" + r1);
+            Console.WriteLine("花费" + r2 + " 单价1.2，总花费：" + 1.2 * r2);
+            Console.WriteLine("换算单价：" + 1.2 * r2 / r1);
+            return 1.2 * r2 / r1;
         }
         public double GetMaxRate(double r0)
         {
-            double r = (r0 - 0.7)/(0.7*r0-1);
+            double r = (r0 - 0.7) / (0.7 * r0 - 1);
             double res = 0;
             res = 1.2 * r;
             Console.WriteLine("x比y的比例为:" + r0);
@@ -61,9 +63,9 @@ namespace learncode.ReviewCode
                 dp[i] = int.MaxValue;
             for (int i = 0; i <= num; ++i)
             {
-                for (int j = 1; j*j <= i; ++j)
+                for (int j = 1; j * j <= i; ++j)
                 {
-                    dp[i] = Math.Min(dp[i], dp[i-j*j]+1);
+                    dp[i] = Math.Min(dp[i], dp[i - j * j] + 1);
                 }
                 Program.Show(dp);
             }

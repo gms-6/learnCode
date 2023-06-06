@@ -41,13 +41,13 @@ namespace learncode
             double minRate = 0;
             for(double i=10.0/7;i<10;i+=0.1)
             {
-                double temp = review230601.GetMaxRate(i);
-                Console.WriteLine();
-                if (temp < min)
+                var temp=review230601.Rate(out double r0,i);
+                if(temp<min)
                 {
-                    minRate = i;
                     min = temp;
+                    minRate = r0;
                 }
+                Console.WriteLine();
             }
             Console.WriteLine("最低单价比例为"+minRate+"\n最低单价为"+min);
 
