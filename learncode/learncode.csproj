@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classModel\Ap\Cell.cs" />
+    <Compile Include="classModel\Ap\CellCoordinate.cs" />
+    <Compile Include="classModel\Ap\Class1.cs" />
+    <Compile Include="classModel\Ap\Path.cs" />
     <Compile Include="classModel\MyBag.cs" />
     <Compile Include="classModel\QuickSelectModel.cs" />
     <Compile Include="classModel\RandomizedSet.cs" />

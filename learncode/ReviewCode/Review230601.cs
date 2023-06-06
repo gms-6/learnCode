@@ -9,6 +9,46 @@ namespace learncode.ReviewCode
 {
     public class Review230601
     {
+        public int MinNum(int num)
+        {
+            //int m = (int)Math.Sqrt(num);
+            //int[] v=new int[m];
+            //for(int i=0;i < m; i++)
+            //    v[i] = (i+1)*(i + 1);
+            //int[][] dp = new int[m+1][];
+            //for (int i = 0; i <= m; ++i)
+            //    dp[i] = new int[num+1];
+            //for(int i=1;i<m+1;++i)
+            //{
+            //    for(int j=1;j<num+1;++j)
+            //    {
+            //        dp[i][j] = int.MaxValue;
+            //        if(j-i*i>=0)
+
+            //    }
+            //    Program.Show(dp);
+            //}
+            //return dp[m][num];
+            ////int m = (int)Math.Sqrt(num);
+            //int[] v = new int[num + 1];
+            //for (int i = 0; i < m; ++i)
+            //{
+            //    v[i] = (i + 1) * (i + 1);
+            //}
+            int[] dp = new int[num + 1];
+            dp[0] = 0;
+            for (int i = 1; i < num + 1; ++i)
+                dp[i] = int.MaxValue;
+            for (int i = 0; i <= num; ++i)
+            {
+                for (int j = 1; j*j <= i; ++j)
+                {
+                    dp[i] = Math.Min(dp[i], dp[i-j*j]+1);
+                }
+                Program.Show(dp);
+            }
+            return dp[num];
+        }
         public int RemoveDuplicates(int[] nums)
         {
             int n = nums.Length;

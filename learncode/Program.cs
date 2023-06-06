@@ -33,8 +33,9 @@ namespace learncode
             //    new int[] { 10,11,13},
             //    new int[] { 12,13,15}
             //};
-            NP.NP01(nums1,nums2,20);
-            //var a=review230601.GenerateMatrix(6);
+            //NP.NP01(nums1,nums2,20);
+            var a=review230601.MinNum(12);
+            Show(a);
             //Show(a);
             //Show(nums1);
 
@@ -1488,6 +1489,10 @@ namespace learncode
 
 
         }
+        public static void Show(int num)
+        {
+            Console.WriteLine(num);
+        }
         public static void Show(int[][] nums)
         {
             int m = nums.Length;
@@ -1513,7 +1518,7 @@ namespace learncode
         {
             for (int i = 0; i < a.Length; i++)
             {
-                Console.Write(a[i] + " ");
+                Console.Write(a[i].ToString().PadRight(15));
             }
             Console.WriteLine();
         }
