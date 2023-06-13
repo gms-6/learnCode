@@ -3,6 +3,7 @@ using learncode.Model;
 using learncode.ReviewCode;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace learncode
         static int[][] dir = new int[4][] { new int[] { 1, 0 }, new int[] { -1, 0 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
         static bool flag = false;
 
-        public static void Main()
+        static void Main()
         {
             Review230601 review230601= new Review230601();
             //Review230505 test = new Review230505();
@@ -33,27 +34,19 @@ namespace learncode
             //    new int[] { 10,11,13},
             //    new int[] { 12,13,15}
             //};
-            //NP.NP01(nums1,nums2,20);
-            //review230601.Rate(10,5);
-            //Show(a);
-            //Show(nums1);
-            double min = double.MaxValue;
-            double minRate = 0;
-            for(double i=10.0/7;i<10;i+=0.1)
-            {
-                var temp=review230601.Rate(1.0,i);
-                if(temp<min)
-                {
-                    min = temp;
-                    minRate = i;
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine("最低单价比例为"+minRate.ToString("0.00")+"\n最低单价为"+min.ToString("0.00"));
+            string a = "123";
+            string b = "123";
+            Console.WriteLine(string.ReferenceEquals(a,b));
 
             Console.ReadKey();
         }
-        public static void Init(Dictionary<string, int> dic)
+        public static int GetN()
+        {
+            int i = 1;
+            return i;
+        }
+        
+        static void Init(Dictionary<string, int> dic)
         {
             dic.Add("3", 1);
             dic.Add("4", 2);
