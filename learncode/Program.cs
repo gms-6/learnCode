@@ -1,6 +1,7 @@
 ﻿using learncode.classModel;
 using learncode.Model;
 using learncode.ReviewCode;
+using learncode.tools;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -21,22 +22,32 @@ namespace learncode
 
         static void Main()
         {
-            Review230601 review230601= new Review230601();
-            //Review230505 test = new Review230505();
-            //Review test1 = new Review();
-            //test tt = new test();
-            MyBag NP = new MyBag();
-            //string[] str = { "10", "0", "1" };
-            int[] nums1 = {4,7,1,2,8,5,9 };
-            int[] nums2 = { 2,5,8,3,3,4,8 };
-            //int[][] mat = new int[][] {
-            //    new int[] { 1,5,9 },
-            //    new int[] { 10,11,13},
-            //    new int[] { 12,13,15}
-            //};
-            string a = "123";
-            string b = "123";
-            Console.WriteLine(string.ReferenceEquals(a,b));
+            //Review230601 review230601= new Review230601();
+            ////Review230505 test = new Review230505();
+            ////Review test1 = new Review();
+            ////test tt = new test();
+            //MyBag NP = new MyBag();
+            ////string[] str = { "10", "0", "1" };
+            //int[] nums1 = {4,7,1,2,8,5,9 };
+            //int[] nums2 = { 2,5,8,3,3,4,8 };
+            ////int[][] mat = new int[][] {
+            ////    new int[] { 1,5,9 },
+            ////    new int[] { 10,11,13},
+            ////    new int[] { 12,13,15}
+            ////};
+            //string a = "123";
+            //string b = "123";
+            //Console.WriteLine(string.ReferenceEquals(a,b));
+            string url = "http://172.17.51.94:8080/a/b/c/";
+            string post = "客户端请求";
+            string server = "172.17.51.94";
+            TcpServer tcpServer= new TcpServer();
+            tcpServer.Listen();
+            while (true)
+            {
+                Console.ReadLine();
+                tcpServer.Connect(server,"客户端请求");
+            }
 
             Console.ReadKey();
         }
