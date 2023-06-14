@@ -109,6 +109,7 @@
     <Compile Include="ReviewCode\Review230505.cs" />
     <Compile Include="ReviewCode\Review230601.cs" />
     <Compile Include="ReviewCode\test.cs" />
+    <Compile Include="ThreadTest\ManualResetEventTest.cs" />
     <Compile Include="tools\Http.cs" />
     <Compile Include="tools\TcpServer.cs" />
   </ItemGroup>

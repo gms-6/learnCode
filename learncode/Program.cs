@@ -1,6 +1,7 @@
 ﻿using learncode.classModel;
 using learncode.Model;
 using learncode.ReviewCode;
+using learncode.ThreadTest;
 using learncode.tools;
 using System;
 using System.Collections.Generic;
@@ -41,12 +42,11 @@ namespace learncode
             string url = "http://172.17.51.94:8080/a/b/c/";
             string post = "客户端请求";
             string server = "172.17.51.94";
-            TcpServer tcpServer= new TcpServer();
-            tcpServer.Listen();
-            while (true)
+            ManualResetEventTest manual = new ManualResetEventTest();
+            while(true)
             {
-                Console.ReadLine();
-                tcpServer.Connect(server,"客户端请求");
+                int i = Convert.ToInt32(Console.ReadLine());
+                manual.SetMethod(i);
             }
 
             Console.ReadKey();
