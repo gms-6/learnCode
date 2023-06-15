@@ -39,15 +39,16 @@ namespace learncode
             //string a = "123";
             //string b = "123";
             //Console.WriteLine(string.ReferenceEquals(a,b));
-            string url = "http://172.17.51.94:8080/a/b/c/";
+            string url = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/";
+            string url1 = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/feedbackTask";
             string post = "客户端请求";
             string server = "172.17.51.94";
-            TcpServer test = new TcpServer();
-            test.Listen();
+            Http test = new Http();
+            test.HttpServer(url);
             while(true)
             {
                 Console.ReadLine();
-                test.Connect("","");
+                test.HttpPostRequest(url1, post,out string response);
             }
             Console.ReadKey();
         }

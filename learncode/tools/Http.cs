@@ -16,12 +16,15 @@ namespace learncode.tools
         public bool HttpPostRequest_1(string url,string postDataStr)
         {
             byte[] postMsg = Encoding.UTF8.GetBytes(postDataStr);
+
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength =postMsg.Length;
+
             Stream requestWriter = request.GetRequestStream();
             requestWriter.Write(postMsg,0,postMsg.Length);
+
             Console.WriteLine("客户端发送消息成功：" + postDataStr);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
