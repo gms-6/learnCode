@@ -11,21 +11,17 @@ namespace learncode.tools
     public class TcpServer
     {
         public TcpClient client;
-        IPEndPoint ipe = new IPEndPoint(IPAddress.Parse("172.17.51.94"), 13000);
+        IPEndPoint ipe = new IPEndPoint(IPAddress.Parse("172.17.51.94"), 8080);
+        public TcpServer()
+        {
+            client = new TcpClient(ipe);
+        }
         public void Connect(string server, string message)
         {
             try
             {
-                int port = 13000;
-                //IPEndPoint ipe = new IPEndPoint(IPAddress.Parse("172.17.51.94"), port);
-
-                client = new TcpClient(ipe);
-
-                //client.Connect(server,port);
-                //client.Close();
-
-                client.Connect(server, port);
-
+                if(!client.Connected)
+                    client.Connect(ipe);
                 byte[] data = Encoding.UTF8.GetBytes(message);
                 NetworkStream stream = client.GetStream();
                 stream.Write(data, 0, data.Length);

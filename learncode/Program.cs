@@ -42,13 +42,13 @@ namespace learncode
             string url = "http://172.17.51.94:8080/a/b/c/";
             string post = "客户端请求";
             string server = "172.17.51.94";
-            ManualResetEventTest manual = new ManualResetEventTest();
+            TcpServer test = new TcpServer();
+            test.Listen();
             while(true)
             {
-                int i = Convert.ToInt32(Console.ReadLine());
-                manual.SetMethod(i);
+                Console.ReadLine();
+                test.Connect("","");
             }
-
             Console.ReadKey();
         }
         public static int GetN()
@@ -56,7 +56,7 @@ namespace learncode
             int i = 1;
             return i;
         }
-        
+
         static void Init(Dictionary<string, int> dic)
         {
             dic.Add("3", 1);
@@ -219,14 +219,14 @@ namespace learncode
         /// <param name="nums"></param>
         /// <param name="n"></param>
         /// <param name="cur"></param>
-        public void shiftDown(int[] nums,int n,int cur)
+        public void shiftDown(int[] nums, int n, int cur)
         {
             int child = 2 * cur + 1;
-            while(child<n)
+            while (child < n)
             {
                 if (child + 1 < n && nums[child + 1] < nums[child])
                     ++child;
-                if(nums[child]<nums[cur])
+                if (nums[child] < nums[cur])
                 {
                     int temp = nums[child];
                     nums[child] = nums[cur];
@@ -242,10 +242,10 @@ namespace learncode
         /// <param name="nums"></param>
         /// <param name="n"></param>
         /// <param name="cur"></param>
-        public void shiftUP(int[] nums,int n,int cur)
+        public void shiftUP(int[] nums, int n, int cur)
         {
             int parent = (cur - 1) / 2;
-            while(cur>0)
+            while (cur > 0)
             {
                 if (nums[parent] > nums[cur])
                 {
@@ -264,11 +264,11 @@ namespace learncode
         /// </summary>
         /// <param name="nums"></param>
         /// <param name="n"></param>
-        public void createHeapDown(int[] nums,int n)
+        public void createHeapDown(int[] nums, int n)
         {
-            for(int i=(n-2)/2;i>=0;--i)
+            for (int i = (n - 2) / 2; i >= 0; --i)
             {
-                shiftDown(nums,n,i);
+                shiftDown(nums, n, i);
             }
         }
         /// <summary>
@@ -276,11 +276,11 @@ namespace learncode
         /// </summary>
         /// <param name="nums"></param>
         /// <param name="n"></param>
-        public void createHeapUp(int[] nums,int n)
+        public void createHeapUp(int[] nums, int n)
         {
-            for(int i=1;i<n;++i)
+            for (int i = 1; i < n; ++i)
             {
-                shiftUP(nums,n,i);
+                shiftUP(nums, n, i);
             }
         }
         public IList<IList<string>> SolveNQueens(int n)
@@ -1512,11 +1512,11 @@ namespace learncode
         {
             int m = nums.Length;
             int n = nums[0].Length;
-            for(int i=0;i<m;++i)
+            for (int i = 0; i < m; ++i)
             {
-                for(int j=0;j<n;++j)
+                for (int j = 0; j < n; ++j)
                 {
-                    Console.Write(nums[i][j]+" ");
+                    Console.Write(nums[i][j] + " ");
                 }
                 Console.WriteLine();
             }
