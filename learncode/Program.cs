@@ -23,6 +23,7 @@ namespace learncode
 
         static void Main()
         {
+            #region 
             //Review230601 review230601= new Review230601();
             ////Review230505 test = new Review230505();
             ////Review test1 = new Review();
@@ -39,18 +40,226 @@ namespace learncode
             //string a = "123";
             //string b = "123";
             //Console.WriteLine(string.ReferenceEquals(a,b));
-            string url = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/";
-            string url1 = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/feedbackTask";
-            string post = "客户端请求";
-            string server = "172.17.51.94";
-            Http test = new Http();
-            test.HttpServer(url);
-            while(true)
+
+            //string url = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/";
+            //string url1 = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/feedbackTask";
+            //string post = "客户端请求";
+            //string server = "172.17.51.94";
+            //Http test = new Http();
+            //test.HttpServer(url);
+            //while(true)
+            //{
+            //    Console.ReadLine();
+            //    test.HttpPostRequest(url1, post,out string response);
+            //}
+            #endregion
+            #region
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //double[][] pos = new double[n][];
+            //double left = int.MaxValue;
+            //double right = 0;
+            //for(int i=0;i<n;++i)
+            //{
+            //    pos[i] = new double[2];
+            //    string[] temp = Console.ReadLine().Split(' ');
+            //    pos[i][0] = Convert.ToDouble(temp[0]);
+            //    pos[i][1] = Convert.ToDouble(temp[0]);
+            //    var templeft = Math.Min(pos[i][0],pos[i][1]);
+            //    left = Math.Min(left,templeft);
+            //    var tempright = Math.Max(pos[i][0],pos[i][1]);
+            //    right = Math.Max(right,tempright);
+            //}
+            //while(left<right)
+            //{
+            //    double mid = Math.Ceiling((left+right)/2);
+            //    var dis = GetDisSum(pos,mid);
+            //    var disL = GetDisSum(pos,mid-0.5);
+            //    var disR = GetDisSum(pos,mid+0.5);
+            //    if(dis<=disL&&dis<=disR)
+            //    {
+            //        Console.WriteLine(dis);
+            //        Console.ReadKey();
+            //        return;
+            //    }
+            //    if (dis < disL)
+            //        left = mid + 0.5;
+            //    else if (dis < disR)
+            //        right = mid - 0.5;
+            //}
+            //Console.WriteLine(0);
+            #endregion
+            #region
+            //while (true)
+            //{
+            //    int n = Convert.ToInt32(Console.ReadLine());
+            //    Dictionary<int, int> dic = new Dictionary<int, int>();
+            //    int count = DistributingCandy(n, dic);
+            //    Console.WriteLine(count);
+            //}
+            #endregion
+            #region
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //string[] str = Console.ReadLine().Split(' ');
+            //int[] nums = new int[n];
+            //for (int i = 0; i < n; ++i)
+            //    nums[i] = Convert.ToInt32(str[i]);
+            //int dis = 0, sum = 0;
+            //for(int i=0;i<n;++i)
+            //{
+            //    if (dis - nums[i] > 0)
+            //        sum += dis - nums[i];
+            //    dis = 100 - nums[i];
+            //}
+            //Console.WriteLine(sum);
+            #endregion
+            #region
+            //string[] str = Console.ReadLine().Split(' ');
+            //int n = str.Length;
+            //int count = 0;
+            //for (int i = 0; i < n; ++i)
+            //    count += Convert.ToInt32(str[i]);
+            //int index = 1,sum=0;
+            //int[] res = new int[n];
+            //while(sum<count)
+            //{
+            //    if (index % 7 == 0 || index.ToString().Contains("7"))
+            //    {
+            //        sum++;
+            //        res[index % n - 1] += 1;
+            //    }
+            //    index++;
+            //}
+            //for (int i = 0; i < n; ++i)
+            //    Console.Write(res[i]+" ");
+
+
+
+
+            //for (int i = 1; i <= n; ++i)
+            //{
+            //    if (i % 7 == 0 || i.ToString().Contains("7"))
+            //        Console.Write("过".PadRight(5));
+            //    else
+            //        Console.Write(i.ToString().PadRight(5));
+            //    i++;
+            //    if (i % 7 == 0 || i.ToString().Contains("7"))
+            //        Console.Write("过".PadRight(5));
+            //    else
+            //        Console.Write(i.ToString().PadRight(5)); ;
+            //    i++;
+            //    if (i % 7 == 0 || i.ToString().Contains("7"))
+            //        Console.Write("过".PadRight(5));
+            //    else
+            //        Console.Write(i.ToString().PadRight(5)); ;
+            //    Console.WriteLine();
+            //}
+            #endregion
+            #region
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //string[] idStr = Console.ReadLine().Split(',');
+            //string[] scoreStr = Console.ReadLine().Split(',');
+            //int[] id = new int[n];
+            //int[] score = new int[n];
+            //for (int i = 0; i < n; ++i)
+            //    id[i] = Convert.ToInt32(idStr[i]);
+            //for (int i = 0; i < n; ++i)
+            //    score[i] = Convert.ToInt32(scoreStr[i]);
+            //Dictionary<int, List<int>> dic = new Dictionary<int, List<int>>();
+            //List<int[]> list = new List<int[]>();
+
+            //for(int i=0;i<n;++i)
+            //{
+            //    if (dic.ContainsKey(id[i]))
+            //        dic[id[i]].Add(score[i]);
+            //    else
+            //        dic.Add(id[i],new List<int>() { score[i]});
+            //}
+            //foreach(var tmp in dic)
+            //{
+            //    if(tmp.Value.Count>=3)
+            //    {
+            //        int sum = 0,index=tmp.Value.Count-1;
+            //        tmp.Value.Sort();
+            //        sum = tmp.Value[index] + tmp.Value[index - 1] + tmp.Value[index - 2];
+            //        list.Add(new int[2] {tmp.Key,sum});
+            //    }
+            //}
+            //var array = list.ToArray();
+            //Array.Sort(array, (a, b) =>
+            //{
+            //    if (a[1] > b[1])
+            //    {
+            //        return -1;
+            //    }
+            //    else if(a[1]<b[1])
+            //        return 1;
+            //    else
+            //    {
+            //        if (a[0] > b[0])
+            //            return -1;
+            //        else
+            //            return 1;
+            //    }
+            //});
+            //for(int i=0;i<array.Length;++i)
+            //{
+            //    if (i == array.Length - 1)
+            //        Console.Write(array[i][0]);
+            //    else
+            //        Console.Write(array[i][0]+",");
+            //}
+            #endregion
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            var list = dic.ToList().ToArray() ;
+            Array.Sort(list, (a, b) =>
             {
-                Console.ReadLine();
-                test.HttpPostRequest(url1, post,out string response);
-            }
+                if (a.Value > b.Value)
+                    return -1;
+                else if (a.Value < b.Value)
+                    return 1;
+                else
+                {
+                    if (a.Key > b.Key)
+                        return 1;
+                    else
+                        return -1;
+                }
+            });
             Console.ReadKey();
+        }
+        public static int DistributingCandy(int num, Dictionary<int, int> dic)
+        { 
+            if (num == 1)
+                return 0;
+            if (dic.ContainsKey(num))
+                return dic[num];
+            if (num % 2 == 0)
+            {
+                int count = 0;
+                count = DistributingCandy(num / 2, dic) + 1;
+                dic.Add(num, count);
+                return count;
+            }
+            else
+            {
+                int add = 0, del = 0;
+                add = DistributingCandy(num + 1, dic) + 1;
+                del = DistributingCandy(num - 1, dic) + 1;
+                dic.Add(num, Math.Min(add, del)); ;
+                return Math.Min(add, del);
+            }
+        }
+        public static double GetDisSum(double[][] pos, double cur)
+        {
+            double sum = 0;
+            foreach (var p in pos)
+            {
+                if (p[1] < cur)
+                    sum += cur - p[1];
+                else if (p[0] > cur)
+                    sum += p[0] - cur;
+            }
+            return sum;
         }
         public static int GetN()
         {
