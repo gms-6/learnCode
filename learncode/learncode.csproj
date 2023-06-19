@@ -113,6 +113,7 @@
     <Compile Include="ThreadTest\AwaitTest.cs" />
     <Compile Include="ThreadTest\ManualResetEventTest.cs" />
     <Compile Include="ThreadTest\SemaphoreTest.cs" />
+    <Compile Include="tools\EventLearn\EventTest.cs" />
     <Compile Include="tools\Http.cs" />
     <Compile Include="tools\TcpServer.cs" />
   </ItemGroup>
