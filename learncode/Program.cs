@@ -267,18 +267,131 @@ namespace learncode
             //    count++;
             //}
             #endregion
-            int n = Convert.ToInt32(Console.ReadLine());
-            int res = 0;
-            for(int i=0;i<n;++i)
-            {
-                string s= string.Concat(Console.ReadLine().Split(','));
-                for(int j=0;j<s.Length;++j)
-                {
-                    string ConStr = s.Substring(j, s.Length - j)+ s.Substring(0, j);
-                    int a=Convert.ToInt32(ConStr,2);
-                    Console.WriteLine(ConStr+"  "+a);
-                }
-            }
+            #region
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //int res = 0;
+            //for(int i=0;i<n;++i)
+            //{
+            //    string s= string.Concat(Console.ReadLine().Split(','));
+            //    for(int j=0;j<s.Length;++j)
+            //    {
+            //        string ConStr = s.Substring(j, s.Length - j)+ s.Substring(0, j);
+            //        int a=Convert.ToInt32(ConStr,2);
+            //        Console.WriteLine(ConStr+"  "+a);
+            //    }
+            //}
+            #endregion
+            #region
+            //List<int[]> list = new List<int[]>();
+            //string str = null;
+            //int yCount = 0, NCount = 0;
+            //while((str=Console.ReadLine())!="")
+            //{
+            //    string[] area = str.Split(' ');
+            //    int n = area.Length;
+            //    int[] temp = new int[n];
+            //    for(int i=0;i<n;++i)
+            //    {
+            //        if (area[i] == "1")
+            //        {
+            //            temp[i] = 1;
+            //            yCount += 1;
+            //        }
+            //        else if (area[i] == "2")
+            //        {
+            //            temp[i] = 2;
+            //            NCount += 1;
+            //        }
+            //        else if (area[i] == "3")
+            //            temp[i] = 3;
+            //    }
+            //    list.Add(temp);
+            //}
+            //if(yCount==0)
+            //{
+            //    Console.WriteLine(-1);
+            //    return;
+            //}
+            //if(NCount==0)
+            //{
+            //    Console.WriteLine(0);
+            //    return;
+            //}    
+            //int[][] dir = new int[4][] { new int[] { -1, 0 }, new int[] { 1, 0 }, new int[] { 0, -1 }, new int[] { 0, 1 } };
+            //int preCount = NCount;
+            //int day = 0;
+            //while (true)
+            //{
+            //    for (int i = 0; i < list.Count; ++i)
+            //    {
+            //        for (int j = 0; j < list[i].Length; ++j)
+            //        {
+            //            if (list[i][j] == 1)
+            //            {
+            //                for (int k = 0; k < 4; ++k)
+            //                {
+            //                    int newX = i + dir[k][0];
+            //                    int newY = j + dir[k][1];
+            //                    if (newX < 0 || newX >= list.Count || newY < 0 || newY >= list[i].Length)
+            //                        continue;
+            //                    if (list[newX][newY] == 2)
+            //                    {
+            //                        list[newX][newY] = 4;
+            //                        NCount--;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    if (preCount==NCount)
+            //        break;
+            //    day++;
+            //    for (int i=0;i<list.Count;i++)
+            //    {
+            //        for(int j = 0; j < list[i].Length;++j)
+            //        {
+            //            if (list[i][j] == 4)
+            //                list[i][j] = 1;
+            //        }
+            //    }
+            //    Show(list.ToArray());
+            //    preCount = NCount;
+            //}
+            //if (NCount == 0)
+            //    Console.WriteLine(day);
+            //else
+            //    Console.WriteLine(-1);
+            #endregion
+            #region
+            //string str = Console.ReadLine();
+            //int k = Convert.ToInt32(Console.ReadLine());
+            //Stack<char> stack = new Stack<char>();
+            //for (int i = 0; i < str.Length; ++i)
+            //{
+            //    while (stack.Count != 0 && k > 0 && stack.Peek() > str[i])
+            //    {
+            //        k--;
+            //        stack.Pop();
+            //    }
+            //    stack.Push(str[i]);
+            //}
+            //for(int i=0;i<k;++i)
+            //{
+            //    stack.Pop();
+            //}
+            //List<char> list = new List<char>();
+            //while(stack.Count!=0)
+            //{
+            //    list.Add(stack.Pop());
+            //}
+            //for(int start=0,end=list.Count-1;start<=end; ++start,--end)
+            //{
+            //    var temp = list[start];
+            //    list[start] = list[end];
+            //    list[end] = temp;
+            //}
+            //Console.Write(new string(list.ToArray()));
+            #endregion
             Console.ReadKey();
         }
         public static int DistributingCandy(int num, Dictionary<int, int> dic)
