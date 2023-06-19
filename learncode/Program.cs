@@ -209,22 +209,76 @@ namespace learncode
             //        Console.Write(array[i][0]+",");
             //}
             #endregion
-            Dictionary<int, int> dic = new Dictionary<int, int>();
-            var list = dic.ToList().ToArray() ;
-            Array.Sort(list, (a, b) =>
+            #region
+            //Dictionary<int, int> dic = new Dictionary<int, int>();
+            //var list = dic.ToList().ToArray() ;
+            //Array.Sort(list, (a, b) =>
+            //{
+            //    if (a.Value > b.Value)
+            //        return -1;
+            //    else if (a.Value < b.Value)
+            //        return 1;
+            //    else
+            //    {
+            //        if (a.Key > b.Key)
+            //            return 1;
+            //        else
+            //            return -1;
+            //    }
+            //});
+            #endregion
+            #region
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //int spaceN = n - 1,count=1,num=1;
+            //bool flag = true;
+            //while(count<=n)
+            //{
+            //    for(int i=0;i<spaceN*4;++i)
+            //    {
+            //        Console.Write(" ");
+            //    }
+
+            //    int max = num + count-1;
+            //    if (count % 2 == 1)
+            //        flag = true;
+            //    else
+            //        flag = false;
+            //    if(flag)
+            //    {
+            //        for(int i=num;i<=max;++i)
+            //        {
+            //            Console.Write(i.ToString().PadRight(4,'*'));
+            //            if (i != max)
+            //                Console.Write("    ");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        for(int i=max;i>=num;--i)
+            //        {
+            //            Console.Write(i.ToString().PadRight(4,'*'));
+            //            if (i != num)
+            //                Console.Write("    ");
+            //        }
+            //    }
+            //    Console.WriteLine();
+            //    num = max + 1;
+            //    spaceN--;
+            //    count++;
+            //}
+            #endregion
+            int n = Convert.ToInt32(Console.ReadLine());
+            int res = 0;
+            for(int i=0;i<n;++i)
             {
-                if (a.Value > b.Value)
-                    return -1;
-                else if (a.Value < b.Value)
-                    return 1;
-                else
+                string s= string.Concat(Console.ReadLine().Split(','));
+                for(int j=0;j<s.Length;++j)
                 {
-                    if (a.Key > b.Key)
-                        return 1;
-                    else
-                        return -1;
+                    string ConStr = s.Substring(j, s.Length - j)+ s.Substring(0, j);
+                    int a=Convert.ToInt32(ConStr,2);
+                    Console.WriteLine(ConStr+"  "+a);
                 }
-            });
+            }
             Console.ReadKey();
         }
         public static int DistributingCandy(int num, Dictionary<int, int> dic)
