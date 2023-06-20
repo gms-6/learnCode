@@ -589,29 +589,29 @@ namespace learncode
             //else
             //    Console.WriteLine("no");
             #endregion
-
-            int n = Convert.ToInt32(Console.ReadLine());
-            int[] a = new int[n];
-            int[] b = new int[n];
-            string[] aStr = Console.ReadLine().Split(' ');
-            string[] bStr = Console.ReadLine().Split(' ');
-            for(int i=0;i<n;++i)
-            {
-                a[i] = Convert.ToInt32(aStr[i]);
-                b[i] = Convert.ToInt32(bStr[i]);
-            }
-            int l = 0, r = n - 1;
-            int res = 0;
-            for(int i=0;i<n;++i)
-            {
-                if (a[i] > b[l])
-                {
-                    l++;
-                    res++;
-                }
-            }
-            Console.WriteLine(res);
-
+            #region
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //int[] a = new int[n];
+            //int[] b = new int[n];
+            //string[] aStr = Console.ReadLine().Split(' ');
+            //string[] bStr = Console.ReadLine().Split(' ');
+            //for(int i=0;i<n;++i)
+            //{
+            //    a[i] = Convert.ToInt32(aStr[i]);
+            //    b[i] = Convert.ToInt32(bStr[i]);
+            //}
+            //int l = 0, r = n - 1;
+            //int res = 0;
+            //for(int i=0;i<n;++i)
+            //{
+            //    if (a[i] > b[l])
+            //    {
+            //        l++;
+            //        res++;
+            //    }
+            //}
+            //Console.WriteLine(res);
+            #endregion
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)
