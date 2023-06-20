@@ -1630,6 +1630,13 @@ namespace learncode
             }
             return CanFinishTopSort(list, tp, din);
         }
+        /// <summary>
+        /// 拓扑排序
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="tp"></param>
+        /// <param name="din"></param>
+        /// <returns></returns>
         public bool CanFinishTopSort(IList<IList<int>> list, IList<int> tp, int[] din)
         {
             Queue<int> que = new Queue<int>();

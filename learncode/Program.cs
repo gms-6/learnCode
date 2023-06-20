@@ -494,37 +494,116 @@ namespace learncode
             //}
             #endregion
             #endregion
-
-            string[] fir = Console.ReadLine().Split(' ');
-            int count = Convert.ToInt32(fir[0]);
-            int num = Convert.ToInt32(fir[1]);
-            int[] nums = new int[count];
-            string[] str = Console.ReadLine().Split(' ');
-            for(int i=0;i<count;++i)
+            #region
+            //string[] fir = Console.ReadLine().Split(' ');
+            //int count = Convert.ToInt32(fir[0]);
+            //int num = Convert.ToInt32(fir[1]);
+            //int[] nums = new int[count];
+            //string[] str = Console.ReadLine().Split(' ');
+            //for(int i=0;i<count;++i)
+            //{
+            //    nums[i] = Convert.ToInt32(str[i]);
+            //}
+            //int pre = 0;
+            //Dictionary<int, int> dic = new Dictionary<int, int>();
+            //bool flag = false;
+            //for(int i=0;i<count;++i)
+            //{
+            //    pre += nums[i];
+            //    pre %= num;
+            //    if(dic.ContainsKey(pre))
+            //    {
+            //        flag = true;
+            //        break;
+            //    }
+            //    dic.Add(pre,1);
+            //}
+            //if (flag)
+            //{
+            //    Console.WriteLine(1);
+            //}
+            //else
+            //    Console.WriteLine(0);
+            #endregion
+            #region
+            //int count = Convert.ToInt32(Console.ReadLine());
+            //int[] loc = new int[count];
+            //string[] strs = Console.ReadLine().Split(' ');
+            //for(int i=0;i<count; i++)
+            //{
+            //    loc[i] = Convert.ToInt32(strs[i]);
+            //}
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //Array.Sort(loc);
+            //int min = 1, max = loc[count - 1] - loc[0];
+            //while(min<max)
+            //{
+            //    int mid = min + (max - min) / 2;
+            //    if(CanPlant(mid,loc,n))
+            //    {
+            //        min = mid;
+            //    }
+            //    else
+            //    {
+            //        max = mid - 1;
+            //    }
+            //}
+            //Console.WriteLine(max);
+            #endregion
+            int n = Convert.ToInt32(Console.ReadLine());
+            List<List<int>> list = new List<List<int>>();
+            int[] din = new int[n];
+            for(int i=0;i<n;++i)
             {
-                nums[i] = Convert.ToInt32(str[i]);
+                list.Add(new List<int>());
             }
-            int pre = 0;
-            Dictionary<int, int> dic = new Dictionary<int, int>();
-            bool flag = false;
-            for(int i=0;i<count;++i)
+            string s = null;
+            while ((s = Console.ReadLine()) != "")
             {
-                pre += nums[i];
-                pre %= num;
-                if(dic.ContainsKey(pre))
+                string[] str = s.Split(' ');
+                int a = Convert.ToInt32(str[0]);
+                int b = Convert.ToInt32(str[1]);
+                list[a].Add(b);
+                din[b]++;
+            }
+            Queue<int> que = new Queue<int>();
+            int count = 0;
+            for(int i=0;i<n;++i)
+            {
+                if (din[i] == 0)
+                    que.Enqueue(i);
+            }
+            while(que.Count!=0)
+            {
+                int num = que.Dequeue();
+                count++;
+                for(int i=0;i<list[num].Count;++i)
                 {
-                    flag = true;
-                    break;
+                    if (--din[list[num][i]] == 0)
+                        que.Enqueue(list[num][i]);
                 }
-                dic.Add(pre,1);
             }
-            if (flag)
-            {
-                Console.WriteLine(1);
-            }
+            if (count == n)
+                Console.WriteLine("yes");
             else
-                Console.WriteLine(0);
+                Console.WriteLine("no");
+            
+
             Console.ReadKey();
+        }
+        public static bool CanPlant(int mid, int[] loc, int n)
+        {
+            int count = 1;
+            int pre = loc[0];
+            for (int i = 1; i < loc.Length; ++i)
+            {
+                if (loc[i] - pre >= mid)
+                {
+                    pre = loc[i];
+                    count++;
+                }
+            }
+            return count >= n;
         }
 
         public static int DistributingCandy(int num, Dictionary<int, int> dic)
