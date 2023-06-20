@@ -23,6 +23,7 @@ namespace learncode
 
         static void Main()
         {
+            #region
             #region 
             //Review230601 review230601= new Review230601();
             ////Review230505 test = new Review230505();
@@ -392,55 +393,142 @@ namespace learncode
             //}
             //Console.Write(new string(list.ToArray()));
             #endregion
-            string str = Console.ReadLine();
-            int n = str.Length;
-            Stack<char> stack = new Stack<char>();
-            for(int i=0;i<n;++i)
+            #region
+            //string str = Console.ReadLine();
+            //int n = str.Length;
+            //Stack<char> stack = new Stack<char>();
+            //for(int i=0;i<n;++i)
+            //{
+            //    if (str[i]==']')
+            //    {
+            //        int num = 0;
+            //        StringBuilder tmp = new StringBuilder();
+            //        char pre = stack.Peek();
+            //        while (pre != '[')
+            //        {
+            //            tmp.Append(pre);
+            //            stack.Pop();
+            //            pre=stack.Peek();
+            //        }
+            //        string target= tmp.ToString();
+            //        stack.Pop();
+            //        int pow = 0;
+            //        while(stack.Count!=0&&(stack.Peek()>='0'&&stack.Peek()<='9'))
+            //        {
+            //            num = (stack.Pop() - '0')*(int)Math.Pow(10,pow++)+num;
+            //        }
+            //        for(int j=0;j<num;++j)
+            //        {
+            //            for(int k=target.Length-1;k>=0;k--)
+            //            {
+            //                stack.Push(target[k]);
+            //            }
+            //        }
+            //    }
+            //    else
+            //        stack.Push(str[i]);
+            //}
+            //StringBuilder res = new StringBuilder();
+            //while (stack.Count != 0)
+            //    res.Append(stack.Pop());
+            //string strS = res.ToString();
+            //char[] chars = new char[strS.Length];
+            //for(int start=0,end=strS.Length-1;start<strS.Length;start++,end--)
+            //{
+            //    chars[end] = strS[start];
+            //}
+            //Console.WriteLine(new String(chars));
+            #endregion
+            #region
+            //string IsaTeam = "We are a team";
+            //string IsnotaTeam = "We are not a team";
+            //string error = "da pian zi";
+            //string nullStr = "NULL";
+            //string[] fir = Console.ReadLine().Split(' ');
+            //int n = Convert.ToInt32(fir[0]);
+            //int m = Convert.ToInt32(fir[1]);
+            //if (!(n >= 1 && n <= 100000 && m >= 1 && m <= 100000))
+            //{
+            //    Console.WriteLine(nullStr);
+            //    return;
+            //}
+            //int[][] nums = new int[m][];
+            //for (int i = 0; i < m; ++i)
+            //{
+            //    string[] tmp = Console.ReadLine().Split(' ');
+            //    nums[i] = new int[3];
+            //    nums[i][0] = Convert.ToInt32(tmp[0]);
+            //    nums[i][1] = Convert.ToInt32(tmp[1]);
+            //    nums[i][2] = Convert.ToInt32(tmp[2]);
+
+            //}
+            //UnionFind unionFind = new UnionFind();
+            //unionFind.Init(n);
+            //for (int i = 0; i < m; ++i)
+            //{
+            //    if (!(nums[i][0] >= 1 && nums[i][0] <= n && nums[i][1] >= 1 && nums[i][1] <= n && (nums[i][2] == 0 || nums[i][2] == 1)))
+            //    {
+            //        continue;
+            //    }
+            //    if (nums[i][2] == 0)
+            //    {
+            //        unionFind.merge(nums[i][0] - 1, nums[i][1] - 1);
+            //    }
+            //}
+            //for (int i = 0; i < m; ++i)
+            //{
+            //    if (!(nums[i][0] >= 1 && nums[i][0] <= n && nums[i][1] >= 1 && nums[i][1] <= n && (nums[i][2] == 0 || nums[i][2] == 1)))
+            //    {
+            //        Console.WriteLine(error);
+            //        continue;
+            //    }
+            //    if (nums[i][2] == 1)
+            //    {
+            //        int x = unionFind.Find(nums[i][0] - 1);
+            //        int y = unionFind.Find(nums[i][1] - 1);
+            //        if (x == y)
+            //            Console.WriteLine(IsaTeam);
+            //        else
+            //            Console.WriteLine(IsnotaTeam);
+            //    }
+            //}
+            #endregion
+            #endregion
+
+            string[] fir = Console.ReadLine().Split(' ');
+            int count = Convert.ToInt32(fir[0]);
+            int num = Convert.ToInt32(fir[1]);
+            int[] nums = new int[count];
+            string[] str = Console.ReadLine().Split(' ');
+            for(int i=0;i<count;++i)
             {
-                if (str[i]==']')
+                nums[i] = Convert.ToInt32(str[i]);
+            }
+            int pre = 0;
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            bool flag = false;
+            for(int i=0;i<count;++i)
+            {
+                pre += nums[i];
+                pre %= num;
+                if(dic.ContainsKey(pre))
                 {
-                    int num = 0;
-                    StringBuilder tmp = new StringBuilder();
-                    char pre = stack.Peek();
-                    while (pre != '[')
-                    {
-                        tmp.Append(pre);
-                        stack.Pop();
-                        pre=stack.Peek();
-                    }
-                    string target= tmp.ToString();
-                    stack.Pop();
-                    int pow = 0;
-                    while(stack.Count!=0&&(stack.Peek()>='0'&&stack.Peek()<='9'))
-                    {
-                        num = (stack.Pop() - '0')*(int)Math.Pow(10,pow++)+num;
-                    }
-                    for(int j=0;j<num;++j)
-                    {
-                        for(int k=target.Length-1;k>=0;k--)
-                        {
-                            stack.Push(target[k]);
-                        }
-                    }
+                    flag = true;
+                    break;
                 }
-                else
-                    stack.Push(str[i]);
+                dic.Add(pre,1);
             }
-            StringBuilder res = new StringBuilder();
-            while (stack.Count != 0)
-                res.Append(stack.Pop());
-            string strS = res.ToString();
-            char[] chars = new char[strS.Length];
-            for(int start=0,end=strS.Length-1;start<strS.Length;start++,end--)
+            if (flag)
             {
-                chars[end] = strS[start];
+                Console.WriteLine(1);
             }
-            Console.WriteLine(new String(chars));
+            else
+                Console.WriteLine(0);
             Console.ReadKey();
         }
-        
+
         public static int DistributingCandy(int num, Dictionary<int, int> dic)
-        { 
+        {
             if (num == 1)
                 return 0;
             if (dic.ContainsKey(num))

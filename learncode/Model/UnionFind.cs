@@ -10,12 +10,15 @@ namespace learncode.Model
     {
         private List<int> parent;
 
-
+        public UnionFind()
+        {
+            parent = new List<int>();
+        }
         public void Init(int n)
         {
-            for(int i=0;i<n;i++)
+            for (int i = 0; i < n; i++)
             {
-                parent[i] = i;
+                parent.Add(i);
             }
         }
         public int Find(int x)
@@ -28,7 +31,7 @@ namespace learncode.Model
                 return parent[x];
             }
         }
-        public void merge(int i,int j)
+        public void merge(int i, int j)
         {
             parent[Find(j)] = Find(i);
         }
