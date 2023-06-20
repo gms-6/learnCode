@@ -98,6 +98,7 @@
     <Compile Include="Model\NewHeap.cs" />
     <Compile Include="Model\Node1.cs" />
     <Compile Include="Model\Trie.cs" />
+    <Compile Include="Model\UnionFind.cs" />
     <Compile Include="Model\WordDictionary.cs" />
     <Compile Include="MyLinkedList.cs" />
     <Compile Include="Model\Node.cs" />
