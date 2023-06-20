@@ -550,44 +550,67 @@ namespace learncode
             //}
             //Console.WriteLine(max);
             #endregion
+            #region
+            //int n = Convert.ToInt32(Console.ReadLine());
+            //List<List<int>> list = new List<List<int>>();
+            //int[] din = new int[n];
+            //for(int i=0;i<n;++i)
+            //{
+            //    list.Add(new List<int>());
+            //}
+            //string s = null;
+            //while ((s = Console.ReadLine()) != "")
+            //{
+            //    string[] str = s.Split(' ');
+            //    int a = Convert.ToInt32(str[0]);
+            //    int b = Convert.ToInt32(str[1]);
+            //    list[a].Add(b);
+            //    din[b]++;
+            //}
+            //Queue<int> que = new Queue<int>();
+            //int count = 0;
+            //for(int i=0;i<n;++i)
+            //{
+            //    if (din[i] == 0)
+            //        que.Enqueue(i);
+            //}
+            //while(que.Count!=0)
+            //{
+            //    int num = que.Dequeue();
+            //    count++;
+            //    for(int i=0;i<list[num].Count;++i)
+            //    {
+            //        if (--din[list[num][i]] == 0)
+            //            que.Enqueue(list[num][i]);
+            //    }
+            //}
+            //if (count == n)
+            //    Console.WriteLine("yes");
+            //else
+            //    Console.WriteLine("no");
+            #endregion
+
             int n = Convert.ToInt32(Console.ReadLine());
-            List<List<int>> list = new List<List<int>>();
-            int[] din = new int[n];
+            int[] a = new int[n];
+            int[] b = new int[n];
+            string[] aStr = Console.ReadLine().Split(' ');
+            string[] bStr = Console.ReadLine().Split(' ');
             for(int i=0;i<n;++i)
             {
-                list.Add(new List<int>());
+                a[i] = Convert.ToInt32(aStr[i]);
+                b[i] = Convert.ToInt32(bStr[i]);
             }
-            string s = null;
-            while ((s = Console.ReadLine()) != "")
-            {
-                string[] str = s.Split(' ');
-                int a = Convert.ToInt32(str[0]);
-                int b = Convert.ToInt32(str[1]);
-                list[a].Add(b);
-                din[b]++;
-            }
-            Queue<int> que = new Queue<int>();
-            int count = 0;
+            int l = 0, r = n - 1;
+            int res = 0;
             for(int i=0;i<n;++i)
             {
-                if (din[i] == 0)
-                    que.Enqueue(i);
-            }
-            while(que.Count!=0)
-            {
-                int num = que.Dequeue();
-                count++;
-                for(int i=0;i<list[num].Count;++i)
+                if (a[i] > b[l])
                 {
-                    if (--din[list[num][i]] == 0)
-                        que.Enqueue(list[num][i]);
+                    l++;
+                    res++;
                 }
             }
-            if (count == n)
-                Console.WriteLine("yes");
-            else
-                Console.WriteLine("no");
-            
+            Console.WriteLine(res);
 
             Console.ReadKey();
         }
