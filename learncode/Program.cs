@@ -612,7 +612,7 @@ namespace learncode
             //}
             //Console.WriteLine(res);
             #endregion
-
+            Task.Run(() => { },);
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)

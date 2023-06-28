@@ -21,7 +21,6 @@ namespace learncode.tools
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength =postMsg.Length;
-
             Stream requestWriter = request.GetRequestStream();
             requestWriter.Write(postMsg,0,postMsg.Length);
 
@@ -87,7 +86,7 @@ namespace learncode.tools
         private void Listen()
         {
             ThreadPool.SetMinThreads(1,1);
-            ThreadPool.SetMinThreads(500,500);
+            ThreadPool.SetMaxThreads(500,500);
             while(true)
             {
                 HttpListenerContext httpListener = listener.GetContext();
