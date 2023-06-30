@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace learncode.classModel.Ap
 {
-    public class Cell
+    public class Node
     {
         public int g;
         public int h;
         public CellCoordinate Coordinate { get; set; }
-        public Cell parent;
-        public Cell(CellCoordinate newCor, Cell par)
+        public Node parent;
+        public Node(CellCoordinate newCor, Node par)
         {
             Coordinate = newCor;
             parent = par;
+        }
+        public Node(CellCoordinate newCor)
+        {
+            Coordinate.X=newCor.X;
+            Coordinate.Y=newCor.Y;
         }
         public int GetF()
         {

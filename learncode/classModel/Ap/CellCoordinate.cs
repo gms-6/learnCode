@@ -25,7 +25,15 @@ namespace learncode.classModel.Ap
             else
                 return false;
         }
+        public CellCoordinate(int x,int y)
+        {
+            X= x; ;
+            Y = y;
+        }
+        public CellCoordinate()
+        {
 
+        }
 
     }
 }
