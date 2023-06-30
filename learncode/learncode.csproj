@@ -117,6 +117,7 @@
     <Compile Include="ThreadTest\SemaphoreTest.cs" />
     <Compile Include="tools\EventLearn\EventTest.cs" />
     <Compile Include="tools\Http.cs" />
+    <Compile Include="tools\Mysql.cs" />
     <Compile Include="tools\TcpServer.cs" />
   </ItemGroup>
   <ItemGroup>
