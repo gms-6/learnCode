@@ -9,6 +9,51 @@ namespace learncode.ReviewCode
 {
     public class Review230601
     {
+        public bool CanPartitionKSubsets1(int[] nums,int k)
+        {
+            int sum = 0;
+            foreach(int num in nums)
+                sum+= num;
+            if (sum % k != 0)
+                return false;
+            int[] bucket=new int[k];
+            int m = sum / k, n = nums.Length;
+            for(int i=0;i<k;++i)
+                bucket[i]=m;
+            Array.Sort(bucket, (a, b) =>
+            {
+                if (a < b)
+                    return 1;
+                else
+                    return -1;
+            });
+
+        }
+        public bool CanPartitionKSubsets1BackTrack(int[] nums,int t,int k, int[] bucket)
+        {
+            if(t==nums.Length)
+                return true;
+            else
+            {
+                bool ret = false;
+                for(int i=0;i<k;++i)
+                {
+                    if (i > 0 && bucket[i - 1] == bucket[i])
+                        continue;
+                    if (nums[t] <= bucket[i])
+                    {
+                        bucket[i] -= nums[t];
+                        bool tmp = CanPartitionKSubsets1BackTrack(nums, t + 1, k, bucket);
+                        if (tmp)
+                            return true;
+                        ret = ret || tmp;
+                        bucket[i] += nums[t];
+                    }
+                }
+                return ret;
+            }
+        }
+
         public double Rate(double price,double x, double y = 1)
         {
             double r0 = x / y;
