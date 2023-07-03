@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace learncode.tools
 {
-    internal class Mysql
+    public class Mysql
     {
     }
 }
