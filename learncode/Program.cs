@@ -614,7 +614,7 @@ namespace learncode
             #endregion
 
             Http http = new Http();
-            string url = "http://172.17.51.94:8080/wcs/commonApi/";
+            string url = "http://172.17.51.35:8080/wcs/commonApi/";
             http.HttpServer(url);
             Console.ReadKey();
         }
