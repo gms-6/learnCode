@@ -102,9 +102,9 @@ namespace learncode.classModel.Ap
                 path.Add(current.Coordinate);
                 current = current.parent;
             }
+            path.Reverse();
 
-
-            return path.Reverse();
+            return path;
         }
         private bool isWalls(CellCoordinate coordinate)
         {
