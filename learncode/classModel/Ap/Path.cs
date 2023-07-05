@@ -51,8 +51,12 @@ namespace learncode.classModel.Ap
         {
             walls.Clear();
         }
+        public void ShowPath(int maxX,int maxY, CellCoordinate start, CellCoordinate end)
+        {
+            
+        }
 
-        public IList<CellCoordinate> GetPath(CellCoordinate start, CellCoordinate end)
+        public List<CellCoordinate> GetPath(CellCoordinate start, CellCoordinate end)
         {
             List<Node> openSet = new List<Node>();
             List<Node> closeSet = new List<Node>();
@@ -113,6 +117,8 @@ namespace learncode.classModel.Ap
                 if(tmp==coordinate)
                     return true;
             }
+            if (coordinate.X <= 0 || coordinate.X > mapSize.X || coordinate.Y <= 0 || coordinate.Y > mapSize.Y)
+                return true;
             return false;
         }
         public Node FindNodeInList(List<Node> set, CellCoordinate coordinate)
