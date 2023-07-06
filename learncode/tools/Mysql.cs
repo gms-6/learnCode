@@ -10,7 +10,7 @@ namespace learncode.tools
 {
     public class Mysql
     {
-        string connStr = $"server =172.17.51.1;port=3306;database=WICSDB_SYF;user=wics;password=wics;SslMode=None;Connect Timeout=180;pooling=true;charset=utf8";
+        string connStr = $"server =;port=3306;database=WICSDB_SYF;user=wics;password=wics;SslMode=None;Connect Timeout=180;pooling=true;charset=utf8";
 
         public void Execute(string sql)
         {
