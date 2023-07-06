@@ -89,7 +89,6 @@
     <Compile Include="classModel\Ap\Class1.cs" />
     <Compile Include="classModel\Ap\Path.cs" />
     <Compile Include="classModel\MyBag.cs" />
-    <Compile Include="classModel\Mysql.cs" />
     <Compile Include="classModel\QuickSelectModel.cs" />
     <Compile Include="classModel\RandomizedSet.cs" />
     <Compile Include="classModel\SortMethod.cs" />

@@ -613,9 +613,12 @@ namespace learncode
             //Console.WriteLine(res);
             #endregion
 
-            Http http = new Http();
-            string url = "http://172.17.51.35:8080/wcs/commonApi/";
-            http.HttpServer(url);
+            //Http http = new Http();
+            //string url = "http://172.17.51.35:8080/wcs/commonApi/";
+            //http.HttpServer(url);
+            string sql = "insert into `REQUEST_QUEUE_INFO` (REQUEST_INFO,CREATE_TIME) values('{\"header\":{\"tenantId\":\"1324612093508423681\",\"warehouseId\":\"1331132640505434114\",\"businessType\":\"deviceStatus\"},\"body\":[{\"deviceName\":\"堆垛机1\",\"alarmMessage\":\"通讯异常/\",\"deviceStatus\":3,\"deviceType\":1}]}','2023/7/6 15:23:29')";
+            Mysql mysql = new Mysql();
+            mysql.Execute(sql);
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)
