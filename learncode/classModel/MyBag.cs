@@ -32,7 +32,7 @@ namespace learncode.classModel
         {
             int n = v.Length;
             //int[][] dp = new int[n+1][];
-            int[] dp = new int[n+1];
+            int[] dp = new int[m+1];
             //for(int i=0;i<n+1;i++)
             //{
             //    dp[i] = new int[m + 1];

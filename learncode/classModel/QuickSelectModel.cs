@@ -10,27 +10,27 @@ namespace learncode.classModel
     {
         Random random = new Random();
 
-        public int FindK(int[] nums,int k)
+        public int FindK(int[] nums, int k)
         {
-            return QuickSelectKBig(nums,0,nums.Length-1,k-1);
+            return QuickSelectKBig(nums, 0, nums.Length - 1, k - 1);
         }
-        public int QuickSelectKBig(int[] nums,int start,int end,int k)
+        public int QuickSelectKBig(int[] nums, int start, int end, int k)
         {
-            int pivot = partition(nums,start,end);
+            int pivot = partition(nums, start, end);
             if (pivot == k)
                 return nums[k];
             else if (pivot > k)
                 return QuickSelectKBig(nums, start, pivot - 1, k);
             else
-                return QuickSelectKBig(nums, pivot, end, k);
+                return QuickSelectKBig(nums, pivot + 1, end, k);
         }
-        public int partition(int[] nums,int start,int end)
+        public int partition(int[] nums, int start, int end)
         {
-            int ranIndex = start + random.Next(end-start+1);
+            int ranIndex = start + random.Next(end - start + 1);
             int pivot = nums[ranIndex];
-            Swap(nums,ranIndex,start);
+            Swap(nums, ranIndex, start);
             int l = start, r = end;
-            while(l<r)
+            while (l < r)
             {
                 while (l < r && nums[r] <= pivot)
                     r--;
@@ -41,8 +41,6 @@ namespace learncode.classModel
             }
             nums[l] = pivot;
             return l;
-
-
         }
 
 
