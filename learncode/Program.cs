@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace learncode
@@ -612,13 +613,45 @@ namespace learncode
             //}
             //Console.WriteLine(res);
             #endregion
+            #region
+            //int[] nums = {3,6,2,3,4,5,4,7,2 };
+            //Review230601 review230601 = new Review230601();
+            //int sum = 0,max=int.MinValue;
+            //foreach (int num in nums)
+            //{
+            //    sum += num;
+            //    if (max < num)
+            //        max = num;
+            //}
+            //int res = 0;
+            //for (int i=max;i<=sum;++i)
+            //{
+            //    if (sum % i != 0)
+            //        continue;
+            //    if(review230601.CanPartitionKSubsets1(nums, sum/i))
+            //    {
+            //        res = sum / i;
+            //        break;
+            //    }
+            //}
+            ////bool res=review230601.CanPartitionKSubsets1(nums,4);
+            //Console.WriteLine(res);
+            #endregion
 
-            //Http http = new Http();
-            //string url = "http://172.17.51.35:8080/wcs/commonApi/";
-            //http.HttpServer(url);
-            string sql = "insert into `REQUEST_QUEUE_INFO` (REQUEST_INFO,CREATE_TIME) values('{\"header\":{\"tenantId\":\"1324612093508423681\",\"warehouseId\":\"1331132640505434114\",\"businessType\":\"deviceStatus\"},\"body\":[{\"deviceName\":\"堆垛机1\",\"alarmMessage\":\"通讯异常/\",\"deviceStatus\":3,\"deviceType\":1}]}','2023/7/6 15:23:29')";
-            Mysql mysql = new Mysql();
-            mysql.Execute(sql);
+            bool res = Semaphore.TryOpenExisting("Sem1",out Semaphore sem);
+            if(res)
+            {
+                Console.WriteLine();
+                while(true)
+                {
+                    Console.ReadKey();
+                    sem.Release();
+                }
+            }
+            else
+            {
+                Console.WriteLine("获取信号量失败");
+            }
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)

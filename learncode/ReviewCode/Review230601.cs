@@ -27,7 +27,7 @@ namespace learncode.ReviewCode
                 else
                     return -1;
             });
-            return false;
+            return CanPartitionKSubsets1BackTrack(nums,0,k,bucket);
         }
         public bool CanPartitionKSubsets1BackTrack(int[] nums,int t,int k, int[] bucket)
         {
