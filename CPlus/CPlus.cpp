@@ -7,6 +7,7 @@
 #include <algorithm>
 #include<string>
 #include<thread>
+#include "MySqlModel.cpp"
 
 using namespace std;
 
@@ -67,15 +68,8 @@ int main()
 	std::cout << res<<"="<<sum; */
 #pragma endregion
 
-	int v[] = { 1,2,3,4,5 };
-	cout << sizeof(v) << endl;
-	cout << sizeof(v[0]) << endl;
-	cout << sizeof(v) / sizeof(v[0]) << endl;
-	int n = 9;
-	int i = 1;
-	vector<int> dp(n + 1);
-	for (int num : dp)
-		cout << num << "  " << i++ << endl;
+	MySqlModel sqlModel;
+	sqlModel.connect();
 
 }
 
