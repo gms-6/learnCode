@@ -1,3 +1,5 @@
+
+
 class MySqlModel
 {
 public:
