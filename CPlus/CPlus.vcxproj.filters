@@ -24,5 +24,8 @@
     <ClCompile Include="MyBag.cpp">
       <Filter>classModel</Filter>
     </ClCompile>
+    <ClCompile Include="MySqlModel.cpp">
+      <Filter>classModel</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
