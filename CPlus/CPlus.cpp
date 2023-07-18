@@ -6,12 +6,14 @@
 #include <vector>
 #include <algorithm>
 #include<string>
+#include<thread>
 
 using namespace std;
 
 int main()
 {
-	ifstream reader("D:/test.txt");
+#pragma region MyRegion
+	/*ifstream reader("D:/test.txt");
 	vector<int> list;
 	string str;
 	while (getline(reader, str))
@@ -62,7 +64,19 @@ int main()
 		}
 		res += to_string(n);
 	}
-	std::cout << res<<"="<<sum;
+	std::cout << res<<"="<<sum; */
+#pragma endregion
+
+	int v[] = { 1,2,3,4,5 };
+	cout << sizeof(v) << endl;
+	cout << sizeof(v[0]) << endl;
+	cout << sizeof(v) / sizeof(v[0]) << endl;
+	int n = 9;
+	int i = 1;
+	vector<int> dp(n + 1);
+	for (int num : dp)
+		cout << num << "  " << i++ << endl;
+
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

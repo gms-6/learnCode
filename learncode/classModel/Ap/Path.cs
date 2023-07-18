@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace learncode.classModel.Ap
@@ -33,7 +34,7 @@ namespace learncode.classModel.Ap
         }
         public void SetVerticalOrDiagonal(direction dir)
         {
-            switch(dir)
+            switch (dir)
             {
                 case direction.Around:
                     dirCount = 4;
@@ -51,9 +52,9 @@ namespace learncode.classModel.Ap
         {
             walls.Clear();
         }
-        public void ShowPath(int maxX,int maxY, CellCoordinate start, CellCoordinate end)
+        public void ShowPath(int maxX, int maxY, CellCoordinate start, CellCoordinate end)
         {
-            
+
         }
 
         public List<CellCoordinate> GetPath(CellCoordinate start, CellCoordinate end)
@@ -76,32 +77,32 @@ namespace learncode.classModel.Ap
                     break;
                 closeSet.Add(current);
                 openSet.Remove(current);
-                for (int i=0;i<dirCount;++i)
+                for (int i = 0; i < dirCount; ++i)
                 {
                     CellCoordinate newCor = new CellCoordinate(current.Coordinate.X + directions[i].X, current.Coordinate.Y + directions[i].Y);
-                    if (isWalls(newCor) || FindNodeInList(closeSet, newCor)==null)
+                    if (isWalls(newCor) || FindNodeInList(closeSet, newCor) == null)
                         continue;
-                    int cost = current.g +i<4 ? 10 : 14;
-                    Node next = FindNodeInList(openSet,newCor);
-                    if(next==null)
+                    int cost = current.g + i < 4 ? 10 : 14;
+                    Node next = FindNodeInList(openSet, newCor);
+                    if (next == null)
                     {
-                        next = new Node(newCor,current);
-                        next.g=cost;
-                        next.h = Heuristic(newCor,end);
+                        next = new Node(newCor, current);
+                        next.g = cost;
+                        next.h = Heuristic(newCor, end);
                         openSet.Add(next);
                     }
                     else
                     {
-                        if(cost<next.g)
+                        if (cost < next.g)
                         {
-                            next.g=cost;
+                            next.g = cost;
                             next.parent = current;
-                        }    
+                        }
                     }
                 }
             }
             List<CellCoordinate> path = new List<CellCoordinate>();
-            while(current!=null)
+            while (current != null)
             {
                 path.Add(current.Coordinate);
                 current = current.parent;
@@ -110,11 +111,120 @@ namespace learncode.classModel.Ap
 
             return path;
         }
+        public List<CellCoordinate> FindPath(CellCoordinate start, CellCoordinate end)
+        {
+            List<Node> openSet = new List<Node>();
+            List<Node> closeSet = new List<Node>();
+            Node cur = null;
+            openSet.Add(new Node(start));
+            while (openSet.Count != 0)
+            {
+                cur = openSet[0];
+                foreach (var cell in openSet)
+                {
+                    if (cell.GetF() < cur.GetF())
+                    {
+                        cur = cell;
+                    }
+                }
+                if (cur.Coordinate == end)
+                {
+                    break;
+                }
+                openSet.Remove(cur);
+                closeSet.Add(cur);
+                for (int i = 0; i < dirCount; ++i)
+                {
+                    CellCoordinate newCor = new CellCoordinate(cur.Coordinate.X + directions[i].X, cur.Coordinate.Y + directions[i].Y);
+                    if (isWalls(newCor) || FindNodeInList(closeSet, newCor) == null)
+                        continue;
+                    int cost = cur.g + i < 4 ? 10 : 14;
+                    Node next = FindNodeInList(openSet, newCor);
+                    if (next == null)
+                    {
+                        next.g = cost;
+                        next.h = Heuristic(newCor, end);
+                        next.parent = cur;
+                    }
+                    else
+                    {
+                        if (cost < next.g)
+                        {
+                            next.g = cost;
+                            next.parent = cur;
+                        }
+                    }
+                }
+            }
+            List<CellCoordinate> path = new List<CellCoordinate>();
+            while (cur != null)
+            {
+                path.Add(cur.Coordinate);
+                cur = cur.parent;
+            }
+            path.Reverse();
+            return path;
+        }
+
+
+        public List<CellCoordinate> FindPath1(CellCoordinate start, CellCoordinate end)
+        {
+            List<Node> openSet = new List<Node>();
+            List<Node> closeSet = new List<Node>();
+            Node cur = null;
+            openSet.Add(new Node(start));
+            while (openSet.Count != 0)
+            {
+                cur = openSet[0];
+                foreach (var node in openSet)
+                {
+                    if(node.GetF()<cur.GetF())
+                    {
+                        cur = node;
+                    }
+                }
+                if (cur.Coordinate == end)
+                    break;
+                openSet.Remove(cur);
+                closeSet.Add(cur);
+                for(int i=0;i<dirCount;++i)
+                {
+                    CellCoordinate cell = new CellCoordinate(cur.Coordinate.X + directions[i].X, cur.Coordinate.Y + directions[i].Y);
+                    if (isWalls(cell) || FindNodeInList(closeSet, cell) == null)
+                        continue;
+                    int cost = cur.g + i < 4 ? 10 : 14;
+                    Node next = FindNodeInList(openSet,cell);
+                    if(next==null)
+                    {
+                        next.g = cost;
+                        next.h = Heuristic(cell,end);
+                        next.parent = cur;
+                    }
+                    else
+                    {
+                        if(cost<next.g)
+                        {
+                            next.g = cost;
+                            next.parent = cur;
+                        }
+                    }
+                }
+            }
+            List<CellCoordinate> path = new List<CellCoordinate>();
+            while(cur!=null)
+            {
+                path.Add(cur.Coordinate);
+                cur = cur.parent;
+            }
+            path.Reverse();
+            return path;
+
+        }
         private bool isWalls(CellCoordinate coordinate)
         {
-            foreach(var tmp in walls)
+            foreach (var tmp in walls)
             {
-                if(tmp==coordinate)
+                if (tmp == coordinate)
                     return true;
             }
             if (coordinate.X <= 0 || coordinate.X > mapSize.X || coordinate.Y <= 0 || coordinate.Y > mapSize.Y)
@@ -123,20 +233,20 @@ namespace learncode.classModel.Ap
         }
         public Node FindNodeInList(List<Node> set, CellCoordinate coordinate)
         {
-            foreach(var tmp in set)
+            foreach (var tmp in set)
             {
-                if(tmp.Coordinate==coordinate)
+                if (tmp.Coordinate == coordinate)
                     return tmp;
             }
             return null;
         }
-        private int Euclidean(CellCoordinate cor1,CellCoordinate cor2)
+        private int Euclidean(CellCoordinate cor1, CellCoordinate cor2)
         {
-            return (int)Math.Sqrt(Math.Pow(cor1.X-cor2.X,2)+Math.Pow(cor1.Y-cor2.Y,2));
+            return (int)Math.Sqrt(Math.Pow(cor1.X - cor2.X, 2) + Math.Pow(cor1.Y - cor2.Y, 2));
         }
-        public int manhatten(CellCoordinate cor1,CellCoordinate cor2)
+        public int manhatten(CellCoordinate cor1, CellCoordinate cor2)
         {
-            return Math.Abs(cor1.X - cor2.X) + Math.Abs(cor1.Y-cor2.Y);
+            return Math.Abs(cor1.X - cor2.X) + Math.Abs(cor1.Y - cor2.Y);
         }
     }
 }
