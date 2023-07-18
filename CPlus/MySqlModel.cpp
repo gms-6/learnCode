@@ -28,12 +28,17 @@ public:
 			return false;
 		}
 		MYSQL_RES* result = mysql_store_result(conn);
+		int colNum = mysql_num_fields(result);
 		if (result != nullptr)
 		{
 			MYSQL_ROW row;
 			while ((row = mysql_fetch_row(result)))
 			{
-				cout << row[0] << "\t" << row[1] << "\t" << row[2] << "\t" << row[3] << endl;;
+				for (int i = 0; i < colNum; ++i)
+				{
+					cout << row[i] << "\t";
+				}
+				cout << endl;
 			}
 			mysql_free_result(result);
 		}
