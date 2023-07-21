@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using learncode.Ioc;
 
 namespace learncode
 {
@@ -637,21 +638,29 @@ namespace learncode
             ////bool res=review230601.CanPartitionKSubsets1(nums,4);
             //Console.WriteLine(res);
             #endregion
+            #region
+            //bool res = Semaphore.TryOpenExisting("Sem1",out Semaphore sem);
+            //if(res)
+            //{
+            //    Console.WriteLine();
+            //    while(true)
+            //    {
+            //        Console.ReadKey();
+            //        sem.Release();
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("获取信号量失败");
+            //}
+            #endregion
 
-            bool res = Semaphore.TryOpenExisting("Sem1",out Semaphore sem);
-            if(res)
-            {
-                Console.WriteLine();
-                while(true)
-                {
-                    Console.ReadKey();
-                    sem.Release();
-                }
-            }
-            else
-            {
-                Console.WriteLine("获取信号量失败");
-            }
+            IoC.RegisterDependencies();
+
+            var service= IoC.Resolve<IService>();
+            service.DoSomething();
+
+
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)
