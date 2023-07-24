@@ -8,6 +8,11 @@ namespace learncode.ReviewCode
 {
     public class test
     {
+        public int GetTest()
+        {
+            Console.WriteLine("123");
+            return 1;
+        }
         public int GetMaxSequence(int[] nums)
         {
             List<int> v = new List<int>(nums);

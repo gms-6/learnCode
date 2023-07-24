@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using learncode.Ioc;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace learncode
 {
@@ -655,13 +657,23 @@ namespace learncode
             //}
             #endregion
 
-            IoC.RegisterDependencies();
+            //Assembly assembly = typeof(Program).Assembly;
+            //Console.WriteLine(assembly.FullName);
 
-            var service= IoC.Resolve<IService>();
-            service.DoSomething();
-
-
-            Console.ReadKey();
+            //AssemblyName assemName = assembly.GetName();
+            //Console.WriteLine(assemName.Name);
+            //Console.WriteLine($"{assemName.Version.Major}  {assemName.Version.Minor}");
+            //Console.WriteLine(assembly.CodeBase);
+            //Program p = new Program();
+            //Assembly assembly = p.GetType().Assembly;
+            ////Console.WriteLine(p.GetType().Assembly.Location);
+            //Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
+            //var test = Assembly.Load("learncode").CreateInstance("test");
+            
+            //test test = (test)Assembly.Load("learncode").CreateInstance("learncode.ReviewCode.test") ;
+            //test.GetTest();
+            ////learncode.ReviewCode.test
+            //Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)
         {

@@ -14,12 +14,14 @@ namespace learncode.Ioc
         private static ContainerBuilder builder;
 
 
+      
+
         public static void RegisterDependencies()
         {
             builder = new ContainerBuilder();
 
-            builder.RegisterType<Service>().Named<IService>("Service");
-            builder.RegisterType<Service1>().As<IService>();
+            builder.RegisterType<Service>().Named<IService>(nameof(Service));
+            builder.RegisterType<Service1>().Named<IService>(nameof(Service1));
 
             container = builder.Build();
         }
@@ -30,6 +32,11 @@ namespace learncode.Ioc
         }
 
     }
+
+
+
+
+
 
     public interface IService
     {
