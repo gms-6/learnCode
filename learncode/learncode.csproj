@@ -108,6 +108,9 @@
     <Compile Include="classModel\SortMethod.cs" />
     <Compile Include="Extension\ExtensionMethods.cs" />
     <Compile Include="Ioc\IoC.cs" />
+    <Compile Include="LinqModel\LinqTest.cs" />
+    <Compile Include="LinqModel\Model\Racer.cs" />
+    <Compile Include="LinqModel\Model\Team.cs" />
     <Compile Include="Model\Heap.cs" />
     <Compile Include="Model\LinkedNode.cs" />
     <Compile Include="Model\ListNode.cs" />

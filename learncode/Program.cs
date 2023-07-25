@@ -656,7 +656,7 @@ namespace learncode
             //    Console.WriteLine("获取信号量失败");
             //}
             #endregion
-
+            #region
             //Assembly assembly = typeof(Program).Assembly;
             //Console.WriteLine(assembly.FullName);
 
@@ -666,14 +666,20 @@ namespace learncode
             //Console.WriteLine(assembly.CodeBase);
             //Program p = new Program();
             //Assembly assembly = p.GetType().Assembly;
-            ////Console.WriteLine(p.GetType().Assembly.Location);
+            ////Console.WriteLine(p.GetType().Assembly.Location);   
             //Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
             //var test = Assembly.Load("learncode").CreateInstance("test");
-            
+
             //test test = (test)Assembly.Load("learncode").CreateInstance("learncode.ReviewCode.test") ;
             //test.GetTest();
             ////learncode.ReviewCode.test
             //Console.ReadKey();
+            #endregion
+
+            List<int> list = Enumerable.Repeat(1000,10).ToList();
+            foreach (var num in list)
+                Console.WriteLine(num);
+            Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)
         {
