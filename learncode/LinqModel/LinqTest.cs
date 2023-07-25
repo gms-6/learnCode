@@ -12,7 +12,7 @@ namespace learncode.LinqModel
         IList<Racer> racer=new List<Racer>();
         public IEnumerable<bool> GetRacers()
         {
-            var res = racer.Where(r => r.FirstName == "N").Where(r => r.Wins == 1).Select(r=>r.Starts==2);
+            var res = racer.Where(r => r.FirstName == "N").Where(r => r.Wins == 1).Select(r=>r.Starts>=2);
             return res;
         }
     }
