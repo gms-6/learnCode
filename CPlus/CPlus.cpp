@@ -241,10 +241,140 @@ cout << res;*/
 			cout << res;*/
 #pragma endregion
 
+#pragma region 8
+			/*map<int, int> tablemap;
+				int count;
+				cin >> count;
+				string inputStr;
+				for (int i = 0; i < count; ++i)
+				{
+					getline(cin,inputStr);
+					int a, b;
+					cin >> a >> b;
+					tablemap[a]+=b;
+				}
+				for (pair<int, int> tmp : tablemap)
+				{
+					cout << tmp.first << " " << tmp.second << endl;
+				}*/
+#pragma endregion
 
+#pragma region 9
+				/*set<char> HashSet;
+					string num;
+					getline(cin,num);
 
+					for (int i = num.size() - 1; i >= 0; --i)
+					{
+						auto ite = HashSet.find(num[i]);
+						if (ite == HashSet.end())
+						{
+							HashSet.insert(num[i]);
+							cout << num[i];
+						}
+					}*/
+#pragma endregion
 
+#pragma region MyRegion
+					/*vector<int> numSet;
+						numSet.assign(128,0);
+						string str;
+						getline(cin, str);
+						int res = 0;
+						for (int i = 0; i < str.size(); ++i)
+						{
+							if (str[i] >= 0 && str[i] <= 127 && numSet[str[i]] == 0)
+							{
+								res += 1;
+								numSet[str[i]] += 1;
+							}
+						}
+						cout << res;*/
+#pragma endregion
 
+#pragma region MyRegion
+						/*string str;
+							getline(cin,str);
+							for (int i = str.size()-1; i >=0; --i)
+							{
+								cout << str[i];
+							}*/
+#pragma endregion
+
+#pragma region MyRegion
+							/*string str;
+								while (getline(cin, str))
+								{
+									vector<string> list1;
+									string tmp;
+									for (int i = 0; i < str.size(); ++i)
+									{
+										if (str[i] == ' ')
+										{
+											list1.push_back(tmp);
+											tmp.clear();
+										}
+										else
+										{
+											tmp.push_back(str[i]);
+										}
+									}
+									if (!tmp.empty())
+										list1.push_back(tmp);
+									for (int i = list1.size() - 1; i >= 0; i--)
+									{
+										if (i == 0)
+										{
+											cout << list1[i];
+										}
+										else
+										{
+											cout << list1[i] << " ";
+										}
+									}
+								}*/
+#pragma endregion
+
+#pragma region MyRegion
+								/*int count = 0;
+									cin >> count;
+									vector<string> list;
+									for (int i = 0; i < count; ++i)
+									{
+										string tmp;
+										cin >> tmp;
+										list.push_back(tmp);
+									}
+									sort(list.begin(),list.end());
+									for (string s : list)
+										cout << s<<endl;*/
+#pragma endregion
+
+#pragma region MyRegion
+										/*int num;
+											cin >> num;
+											int res = 0;
+											while (num != 0)
+											{
+												if ((num & 1) == 1)
+												{
+													res++;
+												}
+												num >>= 1;
+											}
+											cout << res;*/
+#pragma endregion
+
+	int count;
+	cin >> count;
+	vector<int[]> list;
+	int dp[count][];
+	for (int i = 0; i < count; ++i)
+	{
+		int a, b, c;
+		cin >> a >> b >> c;
+		list.push_back({a,b,c});
+	}
 
 
 
