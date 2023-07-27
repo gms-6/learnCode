@@ -7,6 +7,10 @@
 #include <algorithm>
 #include<string>
 #include<thread>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include<math.h>
 #include "MySqlModel.cpp"
 
 using namespace std;
@@ -68,10 +72,199 @@ int main()
 	std::cout << res<<"="<<sum; */
 #pragma endregion
 
-	MySqlModel sqlModel;
-	sqlModel.connect();
+#pragma region MyRegion
+	/*MySqlModel sqlModel;
+	sqlModel.connect();*/
+#pragma endregion
+
+#pragma region vector
+	//front back
+	//begin end
+	//cbegin cend
+	//crbegin crend
+	//rbegin rend
+	//push_back pop_back
+	//vector<int> ve;
+	//ve.assign(6,6);
+	///*for (auto num : ve)
+	//{
+	//	cout << num << endl;
+	//}*/
+	//vector<int>::iterator beg;
+	//vector<int>::const_reverse_iterator crbeg;
+	//for (crbeg = ve.crbegin(); crbeg != ve.crend(); crbeg++)
+	//{
+	//	cout << *crbeg << endl;
+	//}
+#pragma endregion
+
+#pragma region 1
+/*string s1;
+getline(cin, s1);
+int res = 0;
+for (int i = s1.size() - 1; i >= 0; i--)
+{
+	if (s1[i] == ' ')
+	{
+		break;
+	}
+	else
+	{
+		res++;
+	}
 
 }
+cout << res;*/
+#pragma endregion
+
+#pragma region 2
+/*string str;
+getline(cin, str);
+char tar, low, up;
+cin >> tar;
+int res = 0;
+low = tolower(tar);
+up = toupper(tar);
+for (int i = 0; i < str.size(); ++i)
+{
+	if (str[i] == low || str[i] == up)
+		res++;
+}
+cout << res;*/
+#pragma endregion
+
+#pragma region 3
+//int nums[501];
+	//int count;
+	//cin >> count;
+	//int num;
+	//vector<int> vec;
+	//vec.assign(501,0);
+
+	////map<int, int> map1;
+	//map<int, int, std::greater<int>> map1;
+	//set<int, less<int>> map2;
+	//for (int i = 0; i < count; ++i)
+	//{
+	//	cin >> num;
+	//	map2.insert(num);
+	//	/*auto ite = map2.find(num);
+	//	if (ite == map1.end() && map1[num] == 0)
+	//	{
+	//		map1[num] = 1;
+	//	}*/
+	//}
+	//for (auto tmp : map2)
+	//{
+	//	cout << tmp << endl;
+	//}
+	///*for (int i = 0; i < 501; ++i)
+	//{
+	//	if (vec[i] != 0)
+	//	{
+	//		cout << i << endl;
+	//	}
+	//}*/
+#pragma endregion
+
+#pragma region 4
+/*string src;
+	getline(cin,src);
+	int rep = 0;
+	string str;
+	for (int i = 0; i < src.size(); ++i)
+	{
+
+		str.push_back(src[i]);
+		rep++;
+		if (rep == 8)
+		{
+			rep = 0;
+			cout << str << endl;
+			str.clear();
+		}
+	}
+	if (str.size() != 0)
+	{
+		for (int i = 0; i < 8 - rep; ++i)
+		{
+			str.push_back('0');
+		}
+		cout << str;
+	}*/
+#pragma endregion
+
+#pragma region 5
+	/*string str;
+		getline(cin,str);
+		unordered_map<char, int> unmap;
+		unmap['0'] = 0;
+		unmap['1'] = 1;
+		unmap['2'] = 2;
+		unmap['3'] = 3;
+		unmap['4'] = 4;
+		unmap['5'] = 5;
+		unmap['6'] = 6;
+		unmap['7'] = 7;
+		unmap['8'] = 8;
+		unmap['9'] = 9;
+		unmap['A'] = 10;
+		unmap['B'] = 11;
+		unmap['C'] = 12;
+		unmap['D'] = 13;
+		unmap['E'] = 14;
+		unmap['F'] = 15;
+		int res = 0;
+		int pow1 = 0;
+		for (int i = str.size() - 1; i > 1; --i)
+		{
+			res = unmap[str[i]] * pow(16, pow1++) + res;
+		}
+		cout << res;*/
+#pragma endregion
+
+#pragma region 6
+		/*int num = 0;
+			cin >> num;
+			int target = num;
+			string res;
+			for (int i = 2; i <= sqrt(num); ++i)
+			{
+				while (target % i == 0)
+				{
+					res =res+ to_string( i)+" ";
+					target /= i;
+				}
+			}
+			if (target != 1)
+				res+= to_string(target);
+			cout << res;*/
+#pragma endregion
+
+
+
+
+
+
+
+
+	return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单

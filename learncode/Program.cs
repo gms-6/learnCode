@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using learncode.Ioc;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Configuration;
+using System.Runtime.Remoting.Contexts;
 
 namespace learncode
 {
@@ -675,10 +677,19 @@ namespace learncode
             ////learncode.ReviewCode.test
             //Console.ReadKey();
             #endregion
+            #region
+            ////List<int> list = Enumerable.Repeat(1000,10).ToList();
+            ////foreach (var num in list)
+            ////    Console.WriteLine(num);
 
-            List<int> list = Enumerable.Repeat(1000,10).ToList();
-            foreach (var num in list)
-                Console.WriteLine(num);
+            //var a=ConfigurationManager.ConnectionStrings["MySql"];
+            //var b = a.ConnectionString;
+            //Console.WriteLine(b);
+            #endregion
+
+            Http http=new Http();
+            string url = "http://172.17.51.94:8080/wmsboot/si/wcs/v2/";
+            http.HttpServer(url);
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)

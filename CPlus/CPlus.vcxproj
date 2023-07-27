@@ -135,6 +135,7 @@
     <ClCompile Include="CPlus.cpp" />
     <ClCompile Include="MyBag.cpp" />
     <ClCompile Include="MySqlModel.cpp" />
+    <ClCompile Include="Review230727.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

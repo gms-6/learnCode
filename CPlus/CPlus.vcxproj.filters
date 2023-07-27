@@ -27,5 +27,8 @@
     <ClCompile Include="MySqlModel.cpp">
       <Filter>classModel</Filter>
     </ClCompile>
+    <ClCompile Include="Review230727.cpp">
+      <Filter>classModel</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
