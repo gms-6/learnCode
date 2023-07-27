@@ -365,17 +365,78 @@ cout << res;*/
 											cout << res;*/
 #pragma endregion
 
-	int count;
-	cin >> count;
-	vector<int[]> list;
-	int dp[count][];
-	for (int i = 0; i < count; ++i)
-	{
-		int a, b, c;
-		cin >> a >> b >> c;
-		list.push_back({a,b,c});
-	}
+#pragma region 16 未完成
+											/*int totalMon,count;
+												cin >> totalMon >> count;
+												vector<int[]> list;
+												vector<int> dp;
+												vector<int> select;
+												dp.assign(totalMon+1,0);
+												select.assign(count,0);
+												for (int i = 0; i < count; ++i)
+												{
+													int v, p, q;
+													cin >> v >> p >> q;
+													list.push_back({v,p,q});
+												}
 
+												for (int i = 1; i <= count; ++i)
+												{
+													if (list[i - 1][2] == 0)
+													{
+														for (int j = totalMon; j >= list[i - 1][0]; j--)
+														{
+															if (dp[j] < dp[j - list[i - 1][0]])
+															{
+																select[i - 1] = 1;
+															}
+														}
+													}
+												}*/
+#pragma endregion
+
+	string str;
+	int x = 0, y = 0;
+	string tmp;
+	while (getline(cin, str, ';'))
+	{
+		if (str.size() >= 2 && str.size() <= 3&&(str[0]=='A'||str[0]=='D'||str[0]=='W'||str[0]=='S'))
+		{
+			bool res = false;
+			int step = 0;
+			if (str.size() == 2 && str[1] >= '1' && str[1] <= '9')
+			{
+				res = true;
+				step = str[1] - '0';
+			}
+			else if (str.size() == 3 && str[1] >= '1' && str[1] <= '9' && str[2] >= '0' && str[2] <= '9')
+			{
+				res = true;
+				step = (str[1] - '0') * 10 + str[2] - '0';
+			}
+			if (res)
+			{
+				if (str[0] == 'A')
+				{
+					x -= step;
+				}
+				else if (str[0] == 'D')
+				{
+					x += step;
+				}
+				else if (str[0] == 'W')
+				{
+					y += step;
+				}
+				else if (str[0] == 'S')
+				{
+					y -= step;
+				}
+			}
+
+		}
+	}
+	cout << x << "," << y;
 
 
 	return 0;
