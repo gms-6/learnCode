@@ -11,6 +11,7 @@
 #include <set>
 #include <unordered_map>
 #include<math.h>
+#include<limits>
 #include "MySqlModel.cpp"
 
 using namespace std;
@@ -395,50 +396,265 @@ cout << res;*/
 												}*/
 #pragma endregion
 
-	string str;
-	int x = 0, y = 0;
-	string tmp;
-	while (getline(cin, str, ';'))
-	{
-		if (str.size() >= 2 && str.size() <= 3&&(str[0]=='A'||str[0]=='D'||str[0]=='W'||str[0]=='S'))
-		{
-			bool res = false;
-			int step = 0;
-			if (str.size() == 2 && str[1] >= '1' && str[1] <= '9')
-			{
-				res = true;
-				step = str[1] - '0';
-			}
-			else if (str.size() == 3 && str[1] >= '1' && str[1] <= '9' && str[2] >= '0' && str[2] <= '9')
-			{
-				res = true;
-				step = (str[1] - '0') * 10 + str[2] - '0';
-			}
-			if (res)
-			{
-				if (str[0] == 'A')
-				{
-					x -= step;
-				}
-				else if (str[0] == 'D')
-				{
-					x += step;
-				}
-				else if (str[0] == 'W')
-				{
-					y += step;
-				}
-				else if (str[0] == 'S')
-				{
-					y -= step;
-				}
-			}
+#pragma region MyRegion
+												/*string str;
+													int x = 0, y = 0;
+													string tmp;
+													while (getline(cin, str, ';'))
+													{
+														if (str.size() >= 2 && str.size() <= 3&&(str[0]=='A'||str[0]=='D'||str[0]=='W'||str[0]=='S'))
+														{
+															bool res = false;
+															int step = 0;
+															if (str.size() == 2 && str[1] >= '1' && str[1] <= '9')
+															{
+																res = true;
+																step = str[1] - '0';
+															}
+															else if (str.size() == 3 && str[1] >= '1' && str[1] <= '9' && str[2] >= '0' && str[2] <= '9')
+															{
+																res = true;
+																step = (str[1] - '0') * 10 + str[2] - '0';
+															}
+															if (res)
+															{
+																if (str[0] == 'A')
+																{
+																	x -= step;
+																}
+																else if (str[0] == 'D')
+																{
+																	x += step;
+																}
+																else if (str[0] == 'W')
+																{
+																	y += step;
+																}
+																else if (str[0] == 'S')
+																{
+																	y -= step;
+																}
+															}
 
+														}
+													}
+													cout << x << "," << y;*/
+#pragma endregion
+
+#pragma region MyRegion
+													/*string pwd;
+														while (getline(cin, pwd))
+														{
+															if (pwd.size() <= 8)
+															{
+																cout << "NG" << endl;
+																continue;
+															}
+															vector<bool> conditions;
+															conditions.assign(4, false);
+															int res = 0;
+															for (int i = 0; i < pwd.size(); ++i)
+															{
+																if (pwd[i] >= 'A' && pwd[i] <= 'Z')
+																{
+																	if (!conditions[0])
+																		res += 1;
+																	conditions[0] = true;
+																}
+																else if (pwd[i] >= 'a' && pwd[i] <= 'z')
+																{
+																	if (!conditions[1])
+																		res += 1;
+																	conditions[1] = true;
+																}
+																else if (pwd[i] >= '0' && pwd[i] <= '9')
+																{
+																	if (!conditions[2])
+																		res += 1;
+																	conditions[2] = true;
+																}
+																else if (pwd[i] != ' ' && pwd[i] != '\n')
+																{
+																	if (!conditions[3])
+																		res += 1;
+																	conditions[3] = true;
+																}
+																if (res >= 3)
+																	break;
+															}
+															if (res < 3)
+															{
+																cout << "NG" << endl;
+																continue;
+															}
+															bool res1 = true;
+															for (int i = 0; i < pwd.size() - 3; i++)
+															{
+																for (int j = i + 1; j < pwd.size() - 2; j++)
+																{
+																	if (pwd[j] == pwd[i] && pwd[j + 1] == pwd[i + 1] && pwd[i + 2] == pwd[j + 2])
+																	{
+																		res1 = false;
+																		break;
+																	}
+																}
+															}
+															if (!res1)
+															{
+																cout << "NG" << endl;
+
+																continue;
+															}
+															cout << "OK" << endl;
+														}*/
+#pragma endregion
+
+#pragma region MyRegion
+
+
+
+
+	/*unordered_map<char, int> unMap;
+	unMap['1']=1;
+	unMap['a']=2;
+	unMap['b']=2;
+	unMap['c']=2;
+	unMap['d']=3;
+	unMap['e']=3;
+	unMap['f']=3;
+	unMap['g']=4;
+	unMap['h']=4;
+	unMap['i']=4;
+	unMap['j']=5;
+	unMap['k']=5;
+	unMap['l']=5;
+	unMap['m']=6;
+	unMap['n']=6;
+	unMap['o']=6;
+	unMap['p']=7;
+	unMap['q']=7;
+	unMap['r']=7;
+	unMap['s']=7;
+	unMap['t']=8;
+	unMap['u']=8;
+	unMap['v']=8;
+	unMap['w']=9;
+	unMap['x']=9;
+	unMap['y']=9;
+	unMap['z']=9;
+	unMap['0']=0;
+	string str;
+	string res;
+	getline(cin,str);
+	for (int i = 0; i < str.size(); ++i)
+	{
+		auto ite = unMap.find(str[i]);
+		if (ite != unMap.end())
+		{
+			res += to_string(ite->second);
+		}
+		else
+		{
+			if (str[i] >= 'A' && str[i] <= 'Z')
+			{
+				if (str[i] == 'Z')
+					res += 'a';
+				else
+				{
+					res += str[i] + 33;
+				}
+			}
+			else
+			{
+				res += str[i];
+			}
 		}
 	}
-	cout << x << "," << y;
+	cout << res;*/
+#pragma endregion
+
+#pragma region MyRegion
+//while (1)
+//{
+//	int count = 0;
+//	cin >> count;
+//	if (count == 0)
+//	{
+//		break;
+//	}
+//	cout << count / 2 << endl;
+//}
+#pragma endregion
+
+#pragma region MyRegion
 
 
+
+	/*unordered_map<char, int> unMap;
+	string str;
+	getline(cin,str);
+	for (int i = 0; i < str.size(); ++i)
+	{
+		unMap[str[i]] += 1;
+	}
+	int min = 21;
+	char minchar;
+	for (auto tmp : unMap)
+	{
+		if (tmp.second < min)
+		{
+			min = tmp.second;
+		}
+	}
+	string res;
+	for (int i = 0; i < str.size(); ++i)
+	{
+		if (unMap[str[i]] == min)
+			continue;
+		res += str[i];
+	}
+	cout << res;*/
+#pragma endregion
+
+	int count = 0;
+	cin >> count;
+	int tmp = 0;
+	vector<int> list,frontList,backList;
+	while (cin >> tmp)
+	{
+		list.push_back(tmp);
+	}
+	frontList.assign(count,0);
+	backList.assign(count,0);
+	for (int i = 1; i < count; ++i)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			if (list[i] > list[j])
+			{
+				frontList[i] = max(frontList[i],frontList[j]+1);
+			}
+		}
+	}
+	for (int i = count - 2; i >= 0; i--)
+	{
+		for (int j = count - 1; j > i; j--)
+		{
+			if (list[i] > list[j])
+			{
+				backList[i] = max(backList[i], backList[j] + 1);
+			}
+		}
+	}
+	int max = -1;
+	for (int i = 0; i < count; ++i)
+	{
+		if (frontList[i] + backList[i]+1 > max)
+		{
+			max = frontList[i] + backList[i] + 1;
+		}
+	}
+	cout << count - max;
 	return 0;
 
 }
