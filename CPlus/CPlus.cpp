@@ -616,7 +616,8 @@ cout << res;*/
 	cout << res;*/
 #pragma endregion
 
-	int count = 0;
+#pragma region MyRegion
+	/*int count = 0;
 	cin >> count;
 	int tmp = 0;
 	vector<int> list,frontList,backList;
@@ -654,22 +655,45 @@ cout << res;*/
 			max = frontList[i] + backList[i] + 1;
 		}
 	}
-	cout << count - max;
+	cout << count - max;*/
+#pragma endregion
+
+#pragma region MyRegion
+
+
+	/*string str;
+	getline(cin,str);
+	for (int i = 0; i < str.size()-1; ++i)
+	{
+		int step = 1;
+		for (int j = 0; j < str.size() - 1 - i; ++j)
+		{
+			if (!(str[j] >= 'a' && str[j] <= 'z' || str[j] >= 'A' && str[j] <= 'Z'))
+				continue;
+			int k = j + 1;
+			for (k = j + 1; k < str.size(); k++)
+			{
+				if (str[k] >= 'a' && str[k] <= 'z' || str[k] >= 'A' && str[k] <= 'Z')
+					break;
+			}
+			if (k >= str.size())
+				continue;
+			if (tolower(str[j]) > tolower(str[k]))
+			{
+				auto temp = str[j];
+				str[j] = str[k];
+				str[k] = temp;
+			}
+		}
+	}
+	cout << str;*/
+#pragma endregion
+
+	
+
 	return 0;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
