@@ -12,91 +12,318 @@
 #include <unordered_map>
 #include<math.h>
 #include<limits>
+#include <unordered_set>
 #include "MySqlModel.cpp"
+#include "ListNode.cpp"
 
 using namespace std;
+bool FindLast(vector<vector<int>>& maze, vector < vector<bool>>& path, vector<vector<int>>& list, int x, int y, int dir[4][2], int target[2]);
 
 int main()
 {
 #pragma region MyRegion
-	/*ifstream reader("D:/test.txt");
-	vector<int> list;
-	string str;
-	while (getline(reader, str))
+
+	/*int len = 0, wid = 0;
+	cin >> len >> wid;
+	vector<vector<int>> maze;
+	vector < vector<bool>> path;
+	int dir[4][2] = { {1,0},{-1,0},{0,1},{0,-1} };
+	for (int i = 0; i < len; ++i)
 	{
-		string num;
-		for (int i = 0; i < str.length(); ++i)
+		vector<int> tmpvec;
+		for (int j = 0; j < wid; ++j)
 		{
-			if (str[i] == '-')
+			int tmp = 0;
+			cin >> tmp;
+			tmpvec.push_back(tmp);
+		}
+		maze.push_back(tmpvec);
+		vector<bool> tmppath;
+		tmppath.assign(wid, false);
+		path.push_back(tmppath);
+	}
+	vector<vector<int>> list;
+	list.push_back({0,0});
+	int target[] = {len-1,wid-1};
+	
+	if (FindLast(maze,path,list, 0, 0, dir, target))
+	{
+		for (auto num : list)
+		{
+			cout << "(" << num[0] << "," << num[1] << ")"<<endl;
+		}
+	}*/
+
+#pragma endregion
+#pragma region MyRegion
+
+	/*int n = 0;
+	cin >> n;
+	cin.ignore();
+	vector<string> list;
+	for (int i = 0; i < n; i++)
+	{
+		string str;
+		getline(cin, str);
+		list.push_back(str);
+	}
+	for(auto str:list)
+	{
+
+		vector<int> chara(26, 0);
+		for (int i = 0; i < str.size(); ++i)
+		{
+			if (isalpha(str[i]))
 			{
-				if (num.length() == 1 && num[0] == '-')
-					continue;
-				if (num.length() > 0)
-				{
-					list.push_back(stoi(num));
-					num.clear();
-				}
-				num += '-';
+				chara[tolower(str[i]) - 'a'] += 1;
 			}
-			else if (isdigit(str[i]))
+		}
+		sort(chara.begin(), chara.end(), greater<int>());
+		int max = 26;
+		int res = 0;
+		for (int num : chara)
+		{
+			if (num == 0)
+				break;
+			res += num * max;
+			max--;
+		}
+		cout << res<<endl;
+	}*/
+
+#pragma endregion
+#pragma region MyRegion
+
+	/*string str;
+	vector<int> list;
+	while (getline(cin, str, ' '))
+	{
+		list.push_back(stoi(str));
+	}
+	unordered_map<int, int> map;
+	auto ptr = map.find(-1);
+	for (int i = 2; i < list.size() - 1; ++i)
+	{
+		int cur = list[i+1];
+		int next = list[i];
+		i = i + 1;
+		if (map.find(cur) != map.end())
+		{
+			int num = map[cur];
+			map[cur] = next;
+			map[next] = num;
+		}
+		else
+		{
+			map[cur] = next;
+		}
+	}
+	int n = list.size()-1;
+	map[-1] = list[1];
+	ptr = map.find(-1);
+	while (ptr != map.end())
+	{
+		if (ptr->second == list[n])
+		{
+			if (map.find(list[n]) != map.end())
 			{
-				num += str[i];
-				if(i==str.length()-1)
-					list.push_back(stoi(num));
+				map[ptr->first] = map[list[n]];
 			}
 			else
 			{
-				if (num.length() == 1 && num[0] == '-' || num.length() == 0)
-				{
-					num.clear();
-				}
-				else
-				{
-					list.push_back(stoi(num));
-					num.clear();
-				}
+				map.erase(ptr->first);
+			}
+			break;
+		}
+		else
+		{
+			ptr = map.find(ptr->second);
+		}
+	}
+	ptr = map.find(-1);
+	while (ptr != map.end())
+	{
+			cout << ptr->second << " ";
+			ptr = map.find(ptr->second);
+	}*/
+
+#pragma endregion
+
+	int count = 0;
+	cin >> count;
+	ListNode *head=nullptr;
+	ListNode *tmpHead = nullptr;
+	for (int i = 0; i < count; ++i)
+	{
+		int tmpNum = 0;
+		cin >> tmpNum;
+		if (head == nullptr)
+		{
+			head = new ListNode();
+			head->m_nKey = tmpNum;
+			tmpHead = head;
+		}
+		else
+		{
+			tmpHead->m_pNext = new ListNode();
+			tmpHead->m_pNext->m_nKey = tmpNum;
+			tmpHead = tmpHead->m_pNext;
+		}
+	}
+	
+	int n = 0;
+	tmpHead = head;
+	while (tmpHead != nullptr)
+	{
+		n++;
+		tmpHead = tmpHead->m_pNext;
+	}
+	int k = 0;
+	cin >> k;
+	int index = n - k + 1;
+	n = 0;
+	tmpHead = head;
+	while (true)
+	{
+		n++;
+		if (n == index)
+		{
+			cout << tmpHead->m_nKey << endl;
+			break;
+		}
+		tmpHead = tmpHead->m_pNext;
+	}
+	
+	
+	
+	
+	
+	/*
+	tmpHead = head;
+	while (tmpHead != nullptr)
+	{
+		cout << tmpHead->m_nKey << endl;
+		tmpHead = tmpHead->m_pNext;
+	}
+	while (head != nullptr)
+	{
+		tmpHead = head;
+		head = head->m_pNext;
+		delete tmpHead;
+	}*/
+
+	return 0;
+}
+
+bool FindLast(vector<vector<int>> &maze, vector < vector<bool>> &path,vector<vector<int>> &list, int x, int y,int dir[4][2], int target[2])
+{
+	if (x == target[0] && y == target[1])
+		return true;
+	for (int i = 0; i < 4; ++i)
+	{
+		int tmpX = x + dir[i][0];
+		int tmpY = y + dir[i][1];
+		if (tmpX<0 || tmpX>target[0] || tmpY<0 || tmpY>target[1])
+			continue;
+		if (maze[tmpX][tmpY] == 1||path[tmpX][tmpY])
+			continue;
+		path[tmpX][tmpY] = true;
+		list.push_back({ tmpX,tmpY });
+		if (FindLast(maze, path, list, tmpX, tmpY, dir, target))
+			return true;
+		list.pop_back();
+		path[tmpX][tmpY] = false;
+
+	}
+	return false;
+}
+
+
+
+
+
+
+#pragma region MyRegion
+
+#pragma region MyRegion
+/*ifstream reader("D:/test.txt");
+vector<int> list;
+string str;
+while (getline(reader, str))
+{
+	string num;
+	for (int i = 0; i < str.length(); ++i)
+	{
+		if (str[i] == '-')
+		{
+			if (num.length() == 1 && num[0] == '-')
+				continue;
+			if (num.length() > 0)
+			{
+				list.push_back(stoi(num));
+				num.clear();
+			}
+			num += '-';
+		}
+		else if (isdigit(str[i]))
+		{
+			num += str[i];
+			if(i==str.length()-1)
+				list.push_back(stoi(num));
+		}
+		else
+		{
+			if (num.length() == 1 && num[0] == '-' || num.length() == 0)
+			{
+				num.clear();
+			}
+			else
+			{
+				list.push_back(stoi(num));
+				num.clear();
 			}
 		}
 	}
-	sort(list.begin(), list.end());
-	int sum = 0;
-	string res;
-	for (int n : list)
+}
+sort(list.begin(), list.end());
+int sum = 0;
+string res;
+for (int n : list)
+{
+	sum += n;
+	if (n >= 0)
 	{
-		sum += n;
-		if (n >= 0)
-		{
-			res += "+";
-		}
-		res += to_string(n);
+		res += "+";
 	}
-	std::cout << res<<"="<<sum; */
+	res += to_string(n);
+}
+std::cout << res<<"="<<sum; */
 #pragma endregion
 
 #pragma region MyRegion
-	/*MySqlModel sqlModel;
-	sqlModel.connect();*/
+/*MySqlModel sqlModel;
+sqlModel.connect();*/
 #pragma endregion
 
 #pragma region vector
-	//front back
-	//begin end
-	//cbegin cend
-	//crbegin crend
-	//rbegin rend
-	//push_back pop_back
-	//vector<int> ve;
-	//ve.assign(6,6);
-	///*for (auto num : ve)
-	//{
-	//	cout << num << endl;
-	//}*/
-	//vector<int>::iterator beg;
-	//vector<int>::const_reverse_iterator crbeg;
-	//for (crbeg = ve.crbegin(); crbeg != ve.crend(); crbeg++)
-	//{
-	//	cout << *crbeg << endl;
-	//}
+//front back
+//begin end
+//cbegin cend
+//crbegin crend
+//rbegin rend
+//push_back pop_back
+//vector<int> ve;
+//ve.assign(6,6);
+///*for (auto num : ve)
+//{
+//	cout << num << endl;
+//}*/
+//vector<int>::iterator beg;
+//vector<int>::const_reverse_iterator crbeg;
+//for (crbeg = ve.crbegin(); crbeg != ve.crend(); crbeg++)
+//{
+//	cout << *crbeg << endl;
+//}
 #pragma endregion
 
 #pragma region 1
@@ -994,8 +1221,9 @@ cout << res;*/
 	}
 	cout << chara << endl << space << endl << num << endl << other;*/
 #pragma endregion
+#pragma region MyRegion
 
-	int n;
+	/*int n;
 	cin >> n;
 	vector<int> weight;
 	vector<int> count;
@@ -1009,16 +1237,24 @@ cout << res;*/
 	{
 		int tmp;
 		cin >> tmp;
-		count.push_back(tmp);
+		for(int j=0;j< tmp;++j)
+			count.push_back(weight[i]);
 	}
+	unordered_set<int> set;
+	set.insert(0);
+	for (int i = 0; i < count.size(); ++i)
+	{
+		unordered_set<int> tmp(set);
+		for (int num : tmp)
+		{
+			set.insert(num+count[i]);
+		}
+	}
+	cout << set.size();*/
 
+#pragma endregion
 
-
-	return 0;
-
-}
-
-
+#pragma endregion
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单

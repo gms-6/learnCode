@@ -687,9 +687,38 @@ namespace learncode
             //Console.WriteLine(b);
             #endregion
 
-            Http http=new Http();
-            string url = "http://172.17.51.94:8080/wcs/";
-            http.HttpServer(url);
+            //Http http=new Http();
+            //string url = "http://172.17.51.94:8080/wcs/";
+            //http.HttpServer(url);
+
+
+            int n = Convert.ToInt32(Console.ReadLine());
+            IList<int> list = new List<int>();
+            HashSet<int> set = new HashSet<int>();
+            string[] firStr = Console.ReadLine().Split(' ');
+            string[] secStr = Console.ReadLine().Split(' ');
+            for (int i = 0; i < n; ++i)
+            {
+                int m = Convert.ToInt32(firStr[i]);
+                int x = Convert.ToInt32(secStr[i]);
+                for (int j = 0; j < x; ++j)
+                {
+                    list.Add(m);
+                }
+            }
+            set.Add(0);
+            for (int i = 0; i < list.Count; ++i)
+            {
+                HashSet<int> tmp = new HashSet<int>(set);
+                foreach (int num in tmp)
+                {
+                    set.Add(num + list[i]);
+                }
+            }
+            Console.WriteLine(set.Count);
+
+
+
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)

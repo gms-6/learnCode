@@ -16,6 +16,9 @@
     <Filter Include="classModel">
       <UniqueIdentifier>{82306918-d7aa-4248-b8a1-c8e74606eacc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{5d969166-1624-4413-a25f-9485a76455da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPlus.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="Review230727.cpp">
       <Filter>classModel</Filter>
+    </ClCompile>
+    <ClCompile Include="ListNode.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

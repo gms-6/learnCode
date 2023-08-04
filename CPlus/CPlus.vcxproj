@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPlus.cpp" />
+    <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="MyBag.cpp" />
     <ClCompile Include="MySqlModel.cpp" />
     <ClCompile Include="Review230727.cpp" />
