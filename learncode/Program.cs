@@ -688,7 +688,7 @@ namespace learncode
             #endregion
 
             Http http=new Http();
-            string url = "http://172.17.51.94:8080/wmsboot/si/wcs/v2/";
+            string url = "http://172.17.51.94:8080/wcs/";
             http.HttpServer(url);
             Console.ReadKey();
         }

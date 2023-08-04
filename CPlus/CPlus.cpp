@@ -514,76 +514,76 @@ cout << res;*/
 
 
 
-	/*unordered_map<char, int> unMap;
-	unMap['1']=1;
-	unMap['a']=2;
-	unMap['b']=2;
-	unMap['c']=2;
-	unMap['d']=3;
-	unMap['e']=3;
-	unMap['f']=3;
-	unMap['g']=4;
-	unMap['h']=4;
-	unMap['i']=4;
-	unMap['j']=5;
-	unMap['k']=5;
-	unMap['l']=5;
-	unMap['m']=6;
-	unMap['n']=6;
-	unMap['o']=6;
-	unMap['p']=7;
-	unMap['q']=7;
-	unMap['r']=7;
-	unMap['s']=7;
-	unMap['t']=8;
-	unMap['u']=8;
-	unMap['v']=8;
-	unMap['w']=9;
-	unMap['x']=9;
-	unMap['y']=9;
-	unMap['z']=9;
-	unMap['0']=0;
-	string str;
-	string res;
-	getline(cin,str);
-	for (int i = 0; i < str.size(); ++i)
-	{
-		auto ite = unMap.find(str[i]);
-		if (ite != unMap.end())
-		{
-			res += to_string(ite->second);
-		}
-		else
-		{
-			if (str[i] >= 'A' && str[i] <= 'Z')
-			{
-				if (str[i] == 'Z')
-					res += 'a';
-				else
-				{
-					res += str[i] + 33;
-				}
-			}
-			else
-			{
-				res += str[i];
-			}
-		}
-	}
-	cout << res;*/
+														/*unordered_map<char, int> unMap;
+														unMap['1']=1;
+														unMap['a']=2;
+														unMap['b']=2;
+														unMap['c']=2;
+														unMap['d']=3;
+														unMap['e']=3;
+														unMap['f']=3;
+														unMap['g']=4;
+														unMap['h']=4;
+														unMap['i']=4;
+														unMap['j']=5;
+														unMap['k']=5;
+														unMap['l']=5;
+														unMap['m']=6;
+														unMap['n']=6;
+														unMap['o']=6;
+														unMap['p']=7;
+														unMap['q']=7;
+														unMap['r']=7;
+														unMap['s']=7;
+														unMap['t']=8;
+														unMap['u']=8;
+														unMap['v']=8;
+														unMap['w']=9;
+														unMap['x']=9;
+														unMap['y']=9;
+														unMap['z']=9;
+														unMap['0']=0;
+														string str;
+														string res;
+														getline(cin,str);
+														for (int i = 0; i < str.size(); ++i)
+														{
+															auto ite = unMap.find(str[i]);
+															if (ite != unMap.end())
+															{
+																res += to_string(ite->second);
+															}
+															else
+															{
+																if (str[i] >= 'A' && str[i] <= 'Z')
+																{
+																	if (str[i] == 'Z')
+																		res += 'a';
+																	else
+																	{
+																		res += str[i] + 33;
+																	}
+																}
+																else
+																{
+																	res += str[i];
+																}
+															}
+														}
+														cout << res;*/
 #pragma endregion
 
 #pragma region MyRegion
-//while (1)
-//{
-//	int count = 0;
-//	cin >> count;
-//	if (count == 0)
-//	{
-//		break;
-//	}
-//	cout << count / 2 << endl;
-//}
+														//while (1)
+														//{
+														//	int count = 0;
+														//	cin >> count;
+														//	if (count == 0)
+														//	{
+														//		break;
+														//	}
+														//	cout << count / 2 << endl;
+														//}
 #pragma endregion
 
 #pragma region MyRegion
@@ -689,7 +689,330 @@ cout << res;*/
 	cout << str;*/
 #pragma endregion
 
-	
+#pragma region MyRegion
+
+
+	/*int count = 0;
+	cin >> count;
+	vector<string> vec;
+	vector<string> bro;
+
+	string target;
+	int next = 0;
+	for (int i = 0; i < count; ++i)
+	{
+		string tmp;
+		cin >> tmp;
+		vec.push_back(tmp);
+	}
+	cin >> target;
+	cin >> next;
+	for (int i = 0; i < count; ++i)
+	{
+		if (vec[i].size() == target.size() && vec[i] != target)
+		{
+			string str1 = vec[i];
+			string str2 = target;
+			sort(str1.begin(),str1.end());
+			sort(str2.begin(),str2.end());
+			if (str1 == str2)
+			{
+				bro.push_back(vec[i]);
+			}
+		}
+
+	}
+	sort(bro.begin(),bro.end());
+	cout << bro.size() << endl;
+	if (next <= bro.size())
+	{
+		cout << bro[next - 1];
+	}*/
+#pragma endregion
+#pragma region MyRegion
+
+	/*string str;
+	cin >> str;
+	string tar;
+
+	string EncyStr;
+	cin >> EncyStr;
+	string Encytar;
+	for (int i = 0; i < str.size(); ++i)
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+		{
+			if (str[i] == '9')
+				tar += '0';
+			else
+				tar += str[i] + 1;
+		}
+		else if (str[i] >= 'a' && str[i] <= 'z')
+		{
+			if (str[i] == 'z')
+				tar += 'A';
+			else
+				tar += str[i] - 31;
+		}
+		else if (str[i] >= 'A' && str[i] <= 'Z')
+		{
+			if (str[i] == 'Z')
+				tar += 'a';
+			else
+				tar += str[i] + 33;
+		}
+		else
+			tar += str[i];
+	}
+
+	for (int i = 0; i < EncyStr.size(); ++i)
+	{
+		if (EncyStr[i] >= '0' && EncyStr[i] <= '9')
+		{
+			if (EncyStr[i] == '0')
+				Encytar += '9';
+			else
+				Encytar += EncyStr[i] - 1;
+		}
+		else if (EncyStr[i] >= 'a' && EncyStr[i] <= 'z')
+		{
+			if (EncyStr[i] == 'a')
+				Encytar += 'Z';
+			else
+				Encytar += EncyStr[i] - 33;
+		}
+		else if (EncyStr[i] >= 'A' && EncyStr[i] <= 'Z')
+		{
+			if (EncyStr[i] == 'A')
+				Encytar += 'z';
+			else
+				Encytar += EncyStr[i] + 31;
+		}
+		else
+			Encytar += EncyStr[i];
+	}
+
+
+	cout << tar<<endl;
+	cout << Encytar;*/
+#pragma endregion
+
+#pragma region MyRegion
+
+	/*string str;
+	getline(cin,str);
+	string temp;
+	vector<string> list;
+	for (int i = 0; i < str.size(); ++i)
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+		{
+			temp += str[i];
+		}
+		else
+		{
+			if (temp.size() != 0)
+			{
+				list.push_back(temp);
+				temp.clear();
+			}
+		}
+	}
+	if (temp.size() != 0)
+	{
+		list.push_back(temp);
+		temp.clear();
+	}
+	for (int i = list.size() - 1; i >= 0; --i)
+	{
+		cout << list[i] << " ";
+	}*/
+
+#pragma endregion
+#pragma region MyRegion
+	/*string str;
+	cin >> str;
+	vector<vector<bool>> dp;
+	for (int i = 0; i < str.size(); ++i)
+	{
+		vector < bool> tmp;
+		tmp.assign(str.size(), false);
+		dp.push_back(tmp);
+	}
+	int max = -1;
+	for (int j = 0; j < str.size(); ++j)
+	{
+		for (int i = 0; i < str.size(); ++i)
+		{
+			if (str[i] == str[j])
+			{
+				if (j - i < 2)
+				{
+					dp[i][j] = true;
+				}
+				else
+				{
+					dp[i][j] = dp[i + 1][j - 1];
+				}
+				if (dp[i][j] && j - i + 1 > max)
+					max = j - i + 1;
+			}
+			else
+			{
+				dp[i][j] = false;
+			}
+		}
+	}
+	cout << max;*/
+#pragma endregion
+#pragma region MyRegion
+
+	/*string str;
+	cin >> str;
+	auto array=str.c_str();
+	for (int i = 0; i < str.size() - 1; ++i)
+	{
+		for (int j = 0; j < str.size() - 1 - i; ++j)
+		{
+			if (str[j] > str[j+1])
+			{
+				char tmp = str[j];
+				str[j] = str[j+1];
+				str[j+1] = tmp;
+			}
+		}
+	}
+	cout << str;*/
+#pragma endregion
+#pragma region MyRegion
+
+	/*int count = 0;
+	cin >> count;
+	int begin = 1;
+	vector<int> list;
+	for (int i = 0; i < count; ++i)
+	{
+		if (i == 0)
+		{
+			int tmp = 1;
+			int add = 2;
+			for (int j = 0; j < count; j++)
+			{
+				list.push_back(tmp);
+				cout << tmp << " ";
+				tmp = tmp + add;
+				add += 1;
+			}
+			cout << endl;
+		}
+		else
+		{
+			int num = list[i - 1]+1;
+			int numAdd = i + 2;
+			for (int j = 0; j < count - i; j++)
+			{
+				cout << num << " ";
+				num += numAdd;
+				numAdd += 1;
+			}
+			cout << endl;
+		}
+	}*/
+
+#pragma endregion
+#pragma region MyRegion
+
+	/*string str,msg;
+	cin >> str;
+	cin >> msg;
+	char character[26];
+	bool exit[26];
+	string uniqueStr;
+	for (int i = 0; i < 26; ++i)
+	{
+		exit[i] = false;
+	}
+	for (int i = 0; i < str.size(); ++i)
+	{
+		if (exit[str[i] - 'a'])
+			continue;
+		uniqueStr += str[i];
+		exit[str[i] - 'a'] = true;
+	}
+	int index = 0;
+	for (int i = 0; i < uniqueStr.size(); ++i)
+	{
+		character[i] = uniqueStr[i];
+	}
+	index = uniqueStr.size();
+	for (int i = 0; i < 26; ++i)
+	{
+		if (!exit[i])
+		{
+			character[index++] = 'a'+i;
+		}
+	}
+	string res;
+	for (int i = 0; i < msg.size(); ++i)
+	{
+		res += character[msg[i]-'a'];
+	}
+	cout << res;*/
+
+#pragma endregion
+#pragma region MyRegion
+
+	/*double height = 0;
+	cin >> height;
+
+	double total = height, lastHeight = 0,curHeight= height;
+	for (int i = 0; i < 4; ++i)
+	{
+		curHeight /= 2;
+		total += curHeight * 2;
+	}
+	cout << total << endl << curHeight / 2;*/
+
+#pragma endregion
+#pragma region MyRegion
+
+	/*string str;
+	getline(cin,str);
+	int chara = 0, space = 0, num = 0, other = 0;
+	for (int i = 0; i < str.size(); ++i)
+	{
+		if (str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'A' && str[i] <= 'Z')
+			chara += 1;
+		else if (str[i] == ' ')
+		{
+			space += 1;
+		}
+		else if (str[i] >= '0' && str[i] <= '9')
+			num += 1;
+		else
+			other += 1;
+	}
+	cout << chara << endl << space << endl << num << endl << other;*/
+#pragma endregion
+
+	int n;
+	cin >> n;
+	vector<int> weight;
+	vector<int> count;
+	for (int i = 0; i < n; ++i)
+	{
+		int tmp;
+		cin >> tmp;
+		weight.push_back(tmp);
+	}
+	for (int i = 0; i < n; ++i)
+	{
+		int tmp;
+		cin >> tmp;
+		count.push_back(tmp);
+	}
+
+
 
 	return 0;
 
