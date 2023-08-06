@@ -15,6 +15,7 @@
 #include <unordered_set>
 #include "MySqlModel.cpp"
 #include "ListNode.cpp"
+#include "Review230806.cpp"
 
 using namespace std;
 bool FindLast(vector<vector<int>>& maze, vector < vector<bool>>& path, vector<vector<int>>& list, int x, int y, int dir[4][2], int target[2]);
@@ -45,7 +46,7 @@ int main()
 	vector<vector<int>> list;
 	list.push_back({0,0});
 	int target[] = {len-1,wid-1};
-	
+
 	if (FindLast(maze,path,list, 0, 0, dir, target))
 	{
 		for (auto num : list)
@@ -148,8 +149,9 @@ int main()
 	}*/
 
 #pragma endregion
+#pragma region MyRegion
 
-	int count = 0;
+	/*int count = 0;
 	cin >> count;
 	ListNode *head=nullptr;
 	ListNode *tmpHead = nullptr;
@@ -170,7 +172,7 @@ int main()
 			tmpHead = tmpHead->m_pNext;
 		}
 	}
-	
+
 	int n = 0;
 	tmpHead = head;
 	while (tmpHead != nullptr)
@@ -192,12 +194,12 @@ int main()
 			break;
 		}
 		tmpHead = tmpHead->m_pNext;
-	}
-	
-	
-	
-	
-	
+	}*/
+
+
+
+
+
 	/*
 	tmpHead = head;
 	while (tmpHead != nullptr)
@@ -212,10 +214,17 @@ int main()
 		delete tmpHead;
 	}*/
 
+#pragma endregion
+
+	Review230806 review;
+	vector<int> nums = {1,2,3};
+	
+	review.premute(nums);
+
 	return 0;
 }
 
-bool FindLast(vector<vector<int>> &maze, vector < vector<bool>> &path,vector<vector<int>> &list, int x, int y,int dir[4][2], int target[2])
+bool FindLast(vector<vector<int>>& maze, vector < vector<bool>>& path, vector<vector<int>>& list, int x, int y, int dir[4][2], int target[2])
 {
 	if (x == target[0] && y == target[1])
 		return true;
@@ -225,7 +234,7 @@ bool FindLast(vector<vector<int>> &maze, vector < vector<bool>> &path,vector<vec
 		int tmpY = y + dir[i][1];
 		if (tmpX<0 || tmpX>target[0] || tmpY<0 || tmpY>target[1])
 			continue;
-		if (maze[tmpX][tmpY] == 1||path[tmpX][tmpY])
+		if (maze[tmpX][tmpY] == 1 || path[tmpX][tmpY])
 			continue;
 		path[tmpX][tmpY] = true;
 		list.push_back({ tmpX,tmpY });
@@ -1256,13 +1265,13 @@ cout << res;*/
 
 #pragma endregion
 
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
+	// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
+	// 调试程序: F5 或调试 >“开始调试”菜单
 
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
+	// 入门使用技巧: 
+	//   1. 使用解决方案资源管理器窗口添加/管理文件
+	//   2. 使用团队资源管理器窗口连接到源代码管理
+	//   3. 使用输出窗口查看生成输出和其他消息
+	//   4. 使用错误列表窗口查看错误
+	//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
+	//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
