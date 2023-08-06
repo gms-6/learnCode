@@ -13,12 +13,12 @@
 #include<math.h>
 #include<limits>
 #include <unordered_set>
-#include "MySqlModel.cpp"
 #include "ListNode.cpp"
 #include "Review230806.cpp"
 
 using namespace std;
 bool FindLast(vector<vector<int>>& maze, vector < vector<bool>>& path, vector<vector<int>>& list, int x, int y, int dir[4][2], int target[2]);
+bool Is7(int num);
 
 int main()
 {
@@ -216,12 +216,28 @@ int main()
 
 #pragma endregion
 
-	Review230806 review;
-	vector<int> nums = {1,2,3};
-	
-	review.premute(nums);
+	int num = 0;
+	cin >> num;
+	int res = 0;
+	for (int i = 1; i <= num; ++i)
+	{
+		if (Is7(num))
+		{
+			res++;
+		}
+	}
+	cout << res;
 
 	return 0;
+}
+bool Is7(int num)
+{
+	if (num % 7 == 0)
+		return true;
+	string str = to_string(num);
+	if (str.find("7"))
+		return true;
+	return false;
 }
 
 bool FindLast(vector<vector<int>>& maze, vector < vector<bool>>& path, vector<vector<int>>& list, int x, int y, int dir[4][2], int target[2])

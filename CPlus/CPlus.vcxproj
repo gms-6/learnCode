@@ -112,7 +112,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,7 +135,6 @@
     <ClCompile Include="CPlus.cpp" />
     <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="MyBag.cpp" />
-    <ClCompile Include="MySqlModel.cpp" />
     <ClCompile Include="Review230727.cpp" />
     <ClCompile Include="Review230806.cpp" />
   </ItemGroup>
