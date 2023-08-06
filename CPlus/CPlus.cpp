@@ -215,18 +215,47 @@ int main()
 	}*/
 
 #pragma endregion
+#pragma region MyRegion
 
-	int num = 0;
+	/*int num = 0;
 	cin >> num;
 	int res = 0;
 	for (int i = 1; i <= num; ++i)
 	{
-		if (Is7(num))
+		if (Is7(i))
 		{
 			res++;
 		}
 	}
-	cout << res;
+	cout << res;*/
+
+#pragma endregion
+
+	int n;
+	cin >> n;
+	int count = 0;
+	for (int i = 1; i <= n; ++i)
+	{
+		unordered_set<int> set;
+		for (int j = 1; j*j <= i; j++)
+		{
+			if (i % j == 0)
+			{
+				set.insert(j);
+				set.insert(i/j);
+			}
+		}
+		int value=0;
+		for (int num : set)
+		{
+			if (num != i)
+				value += num;
+		}
+		if (value == i)
+			count++;
+	}
+	cout << count;
+
 
 	return 0;
 }
@@ -235,7 +264,7 @@ bool Is7(int num)
 	if (num % 7 == 0)
 		return true;
 	string str = to_string(num);
-	if (str.find("7"))
+	if (str.find("7") != string::npos)
 		return true;
 	return false;
 }
