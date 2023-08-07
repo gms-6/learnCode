@@ -19,9 +19,74 @@
 using namespace std;
 bool FindLast(vector<vector<int>>& maze, vector < vector<bool>>& path, vector<vector<int>>& list, int x, int y, int dir[4][2], int target[2]);
 bool Is7(int num);
+bool IsPrime(int num);
+void Show(vector<vector<int>> nums);
+bool judgePoint24DFS(vector<double> list);
+vector<double> judgePoint24DFSCalc(double a, double b);
+
 
 int main()
 {
+	double num;
+	vector<double> list;
+	while (cin >> num)
+	{
+		list.push_back(num);
+	}
+	if (judgePoint24DFS(list))
+		cout << "true";
+	else
+		cout << "false";
+
+	return 0;
+}
+
+bool judgePoint24DFS(vector<double> list)
+{
+	if (list.size() == 1)
+	{
+		if (abs(list[0] - 24) < 0.001)
+			return true;
+	}
+	for (int i = 0; i < list.size(); ++i)
+	{
+		for (int j = i + 1; j < list.size(); ++j)
+		{
+			for (auto num : judgePoint24DFSCalc(list[i], list[j]))
+			{
+				vector<double> tmp;
+				tmp.push_back(num);
+				for (int k = 0; k < list.size(); ++k)
+				{
+					if (k == i || k == j)
+						continue;
+					tmp.push_back(list[k]);
+				}
+				if (judgePoint24DFS(tmp))
+					return true;
+			}
+
+		}
+	}
+}
+vector<double> judgePoint24DFSCalc(double a, double b)
+{
+	vector<double> list;
+	list.push_back(a+b);
+	list.push_back(a-b);
+	list.push_back(b-a);
+	list.push_back(a*b);
+	list.push_back(a/b);
+	list.push_back(b/a);
+	return list;
+}
+
+
+#pragma region main
+
+
+//int main()
+//{
 #pragma region MyRegion
 
 	/*int len = 0, wid = 0;
@@ -231,7 +296,9 @@ int main()
 
 #pragma endregion
 
-	int n;
+#pragma region MyRegion
+
+	/*int n;
 	cin >> n;
 	int count = 0;
 	for (int i = 1; i <= n; ++i)
@@ -254,10 +321,225 @@ int main()
 		if (value == i)
 			count++;
 	}
-	cout << count;
+	cout << count;*/
 
+#pragma endregion
+#pragma region MyRegion
 
-	return 0;
+	/*string str;
+	getline(cin,str);
+	vector<int> num;
+	num.assign(128,0);
+	for (auto s : str)
+		num[s] += 1;
+	char c;
+	bool flag = false;
+	for (auto s : str)
+	{
+		if (num[s] == 1)
+		{
+			c = s;
+			flag = true;
+			break;
+		}
+	}
+	if (flag)
+		cout << c;
+	else
+		cout << -1;*/
+
+#pragma endregion
+#pragma region MyRegion
+
+		/*int num;
+		cin >> num;
+		int value=2000;
+		int first = 0, sec = 0;
+		for (int i = 2; i <= num/2; ++i)
+		{
+			if (IsPrime(i) && IsPrime(num - i))
+			{
+				if (num - i - i < value)
+				{
+					value = num - i - i;
+					first = i;
+					sec = num - i;
+				}
+			}
+		}
+		cout << first<<endl<<sec;*/
+
+#pragma endregion
+#pragma region MyRegion
+
+		/*int dp[11][11];
+		int a, b;
+		cin >> a >> b;
+		for (int i = 0; i <= a; ++i)
+		{
+			for (int j = 1; j <= b; ++j)
+			{
+				if (i == 0)
+					dp[i][j] = 1;
+				else if (j == 1)
+					dp[i][j] = 1;
+				else if (i < j)
+					dp[i][j] = dp[i][i];
+				else if (i >= j)
+					dp[i][j] = dp[i - j][j] + dp[i][j - 1];
+			}
+		}
+		cout << dp[a][b];*/
+#pragma endregion
+#pragma region MyRegion
+
+		/*int num = 0;
+		while (cin >> num)
+		{
+			int count = 0;
+			while (num)
+			{
+				count++;
+				num = num & (num - 1);
+			}
+			cout << count << endl;
+		}*/
+
+#pragma endregion
+#pragma region MyRegion
+		/*string str;
+		cin >> str;
+		int len;
+		cin >> len;
+		double rate=0;
+		int front = 0, back = len-1;
+		int l = 0, r = len - 1;
+		int count=0;
+		for (int i = front; i <= back; ++i)
+		{
+			if (str[i] == 'G' || str[i] == 'C')
+				count++;
+		}
+		int tmpCount = count;
+		while (r < str.size()-1)
+		{
+			l++;
+			r++;
+			if (str[l-1] == 'G' || str[l-1] == 'C')
+				tmpCount--;
+			if (str[r] == 'G' || str[r] == 'C')
+				tmpCount++;
+			if (tmpCount > count)
+			{
+				front = l;
+				back = r;
+				count = tmpCount;
+			}
+			if (count == len)
+				break;
+		}
+
+		for (int i = front; i <= back; ++i)
+		{
+			cout << str[i];
+		}*/
+
+#pragma endregion
+#pragma region MyRegion
+
+	/*string s1, s2;
+	cin >> s1 >> s2;
+	if (s1.size() > s2.size())
+		swap(s1,s2);
+	int index = 0;
+	int max = 0;
+	int n1 = s1.size(), n2 = s2.size();
+	vector<vector<int>> dp(n1+1,vector<int>(n2+1,0));
+	for (int i = 1; i <= n1; ++i)
+	{
+		for (int j = 1; j <= n2; ++j)
+		{
+			if (s1[i-1] == s2[j-1])
+			{
+					dp[i][j] = dp[i - 1][j - 1] + 1;
+			}
+			if (dp[i][j] > max)
+			{
+				max = dp[i][j];
+				index = i - max;
+			}
+		}
+	}
+	cout << s1.substr(index,max);*/
+#pragma endregion
+
+	
+
+//	return 0;
+//}
+#pragma region MyRegion
+
+//string getComSubstr(string& str1, string& str2)
+//{
+//	if (str1.size() > str2.size())
+//		swap(str1, str2);      //保证str1是最短的字符串
+//	int len1 = str1.size();
+//	int len2 = str2.size();
+//	vector<vector<int>> MSC(len1 + 1, vector<int>(len2 + 1, 0));
+//	int start = 0, max_size = 0;
+//	for (int i = 1; i <= len1; i++)
+//	{
+//		for (int j = 1; j <= len2; j++)
+//		{
+//			if (str2[j - 1] == str1[i - 1])
+//			{
+//				MSC[i][j] = MSC[i - 1][j - 1] + 1;
+//			}
+//			if (MSC[i][j] > max_size)
+//			{
+//				max_size = MSC[i][j];
+//				start = i - max_size;
+//			}
+//		}
+//	}
+//	return str1.substr(start, max_size);
+//}
+//int main() {
+//	string str1, str2;
+//	string str;
+//	while (cin >> str1 >> str2) { // 注意 while 处理多个 case
+//		str = getComSubstr(str1, str2);
+//		cout << str << endl;
+//	}
+//}
+#pragma endregion
+
+#pragma endregion
+
+void Show(vector<vector<int>> nums)
+{
+	for (auto item1 : nums)
+	{
+		for (auto item2 : item1)
+		{
+			cout << item2 << "  ";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+}
+bool IsPrime(int num)
+{
+	bool res = true;
+	for (int i = 2; i * i <= num; ++i)
+	{
+		if (num % i == 0)
+		{
+			res = false;
+			break;
+		}
+	}
+	return res;
 }
 bool Is7(int num)
 {
