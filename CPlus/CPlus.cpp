@@ -23,11 +23,14 @@ bool IsPrime(int num);
 void Show(vector<vector<int>> nums);
 bool judgePoint24DFS(vector<double> list);
 vector<double> judgePoint24DFSCalc(double a, double b);
+bool CanPartition(vector<int>& nums, int t, int k, vector<int>& bucket);
 
 
 int main()
 {
-	double num;
+#pragma region MyRegion
+
+	/*double num;
 	vector<double> list;
 	while (cin >> num)
 	{
@@ -36,9 +39,67 @@ int main()
 	if (judgePoint24DFS(list))
 		cout << "true";
 	else
-		cout << "false";
+		cout << "false";*/
 
+#pragma endregion
+
+	int n;
+	cin >> n;
+	vector<int> list;
+	vector<int> bucket(2,0);
+	int sum = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		int tmp;
+		cin >> tmp;
+		sum += tmp;
+		if (tmp % 5 == 0)
+		{
+			bucket[0] -= tmp;
+		}
+		else if (tmp % 3 == 0)
+			bucket[1] -= tmp;
+		else
+			list.push_back(tmp);
+	}
+	if (sum % 2 != 0)
+	{
+		cout << "false";
+		return 0;
+	}
+	int target = sum / 2;
+	for (int i = 0; i < 2; ++i)
+		bucket[i] += target;
+	sort(list.begin(),list.end(),greater<int>());
+	bool res=CanPartition(list,0,2,bucket);
+	if (res)
+		cout << "true";
+	else
+		cout << "false";
 	return 0;
+}
+
+bool CanPartition(vector<int>& nums, int t, int k, vector<int>& bucket)
+{
+	if (t == nums.size())
+		return true;
+	else
+	{
+		for (int i = 0; i < k; ++i)
+		{
+			if (i > 0 && bucket[i - 1] == bucket[i])
+				continue;
+			if (bucket[i] >= nums[t])
+			{
+				bucket[i] -= nums[t];
+				if (CanPartition(nums, t + 1, k, bucket))
+					return true;
+				bucket[i] += nums[t];
+			}
+		}
+		return false;
+	}
+
 }
 
 bool judgePoint24DFS(vector<double> list)

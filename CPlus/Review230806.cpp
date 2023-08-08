@@ -97,7 +97,7 @@ public:
 	/*输入： nums = [4, 3, 2, 3, 5, 2, 1], k = 4
 		输出： True
 		说明： 有可能将其分成 4 个子集（5），（1, 4），（2, 3），（2, 3）等于总和。*/
-	bool CanPartitionKSubsets1(vector<int> nums,int k)
+	bool CanPartitionKSubsets1(vector<int> &nums,int k)
 	{
 		int sum = 0;
 		for (int num : nums)
@@ -107,7 +107,8 @@ public:
 		if (sum % k != 0)
 			return false;
 		int target = sum / k;
-		vector<int> bucket(k,target);
+		vector<int> bucket(k, target);
+		sort(nums.begin(),nums.end(),greater<int>());
 		return CanPartitionKSubsets1DFS(nums,0,k,bucket);
 	}
 	bool CanPartitionKSubsets1DFS(vector<int> &nums, int t, int k, vector<int> &bucket)
@@ -116,23 +117,23 @@ public:
 		{
 			return true;
 		}
-		for (int i = 0; i < k; ++i)
+		else
 		{
-			if (i > 0 && bucket[i - 1] == bucket[i])
-				continue;
-			bool ret = false;
-			if (bucket[i] >= nums[t])
+			for (int i = 0; i < k; ++i)
 			{
-				bucket[i] -= nums[t];
-				bool tmp = CanPartitionKSubsets1DFS(nums,t+1,k,bucket);
-				if (tmp)
-					return true;
-				ret = ret || tmp;
-				bucket[i] += nums[t];
+				if (i > 0 && bucket[i - 1] == bucket[i])
+					continue;
+				if (bucket[i] >= nums[t])
+				{
+					bucket[i] -= nums[t];
+					bool tmp = CanPartitionKSubsets1DFS(nums, t + 1, k, bucket);
+					if (tmp)
+						return true;
+					bucket[i] += nums[t];
+				}
 			}
-			return ret;
+			return false;
 		}
-		return false;
 	}
 
 };
