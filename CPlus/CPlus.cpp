@@ -68,6 +68,7 @@ bool judgePoint24DFS(vector<double> list)
 
 		}
 	}
+	return false;
 }
 vector<double> judgePoint24DFSCalc(double a, double b)
 {
