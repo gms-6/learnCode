@@ -121,6 +121,8 @@
     <Compile Include="Model\WordDictionary.cs" />
     <Compile Include="MyLinkedList.cs" />
     <Compile Include="Model\Node.cs" />
+    <Compile Include="ReviewCode\PreviousCode\Program1.cs" />
+    <Compile Include="ReviewCode\PreviousCode\ReviewCode22.cs" />
     <Compile Include="ReviewCode\Review.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
