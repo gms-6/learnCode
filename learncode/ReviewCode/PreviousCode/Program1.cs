@@ -12,8 +12,8 @@ namespace learncode.ReviewCode.PreviousCode
         static int M = 0;
         static int min = int.MaxValue;
 
-        static void Main(string[] args)
-        {
+        //static void Main(string[] args)
+        //{
             #region 人数最多的站点
             //int count = Convert.ToInt32(Console.ReadLine());
             //int[,] platform = new int[count, 2];
@@ -81,8 +81,8 @@ namespace learncode.ReviewCode.PreviousCode
             //Array.Sort(nums);
             //Show(nums);
 
-            Console.ReadKey();
-        }
+           // Console.ReadKey();
+        //}
 
         //public static void Show(int[] nums)
         //{

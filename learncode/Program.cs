@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Configuration;
 using System.Runtime.Remoting.Contexts;
+using System.Text.RegularExpressions;
 
 namespace learncode
 {
@@ -804,8 +805,19 @@ namespace learncode
             //    }
             //    Console.WriteLine(str2.Substring(index - max + 1, max));
             //}
-#endregion
+            #endregion
 
+            string s1 = "123dasd\r\n123123";
+            Console.WriteLine(s1);
+            StringBuilder sb1 = new StringBuilder();
+            for (int i = 0; i < s1.Length; ++i)
+            {
+                if (s1[i] != '\r' && s1[i] != '\n')
+                    sb1.Append(s1[i]);
+            }
+            //s1 = Regex.Replace(s1,@"\r\n|\r|\n","");
+            s1=sb1.ToString();
+            Console.WriteLine(s1);
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)
