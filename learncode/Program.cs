@@ -687,8 +687,8 @@ namespace learncode
             //Console.WriteLine(b);
             #endregion
 
-            //Http http=new Http();
-            //string url = "http://172.17.51.94:8080/wcs/";
+            //Http http = new Http();
+            //string url = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/";
             //http.HttpServer(url);
 
             #region
@@ -718,90 +718,93 @@ namespace learncode
             //Console.WriteLine(set.Count);
             #endregion
             //这是一个经典的组合问题，可以使用分组和排列的方法来解决。 假设有m个苹果和n个盘子，我们可以将问题分为两种情况： 1. 盘子中至少有一个盘子为空：这种情况下，我们可以将m个苹果放在n-1个盘子中，即将问题转化为将m个苹果放在n-1个盘子中的分法。所以，这种情况下的分法数为f(m, n-1)。 2. 盘子中所有盘子都有苹果：这种情况下，我们可以将每个盘子中放入一个苹果，然后将剩余的m-n个苹果放在n个盘子中，即将问题转化为将m-n个苹果放在n个盘子中的分法。所以，这种情况下的分法数为f(m-n, n)。 综上所述，将m个苹果放在n个盘子中的分法数为f(m, n) = f(m, n-1) + f(m-n, n)。 边界条件： - 当m=0时，表示没有苹果需要放入盘子中，所以只有一种分法，即所有盘子都为空。 - 当n=0时，表示没有盘子可以放苹果，所以没有分法。 根据上述递推关系和边界条件，可以使用递归或动态规划的方法来求解。
-            string str1 = Console.ReadLine();
-            string str2 = Console.ReadLine();
-            int len1 = str1.Length;
-            int len2 = str2.Length;
-            int max = 0;
-            int index = 0;
-            if (len1 < len2)
-            {
-                int[,] dp = new int[len1 + 1, len2];
-                for (int i = 0; i < len1; i++)
-                {
-                    for (int j = 0; j < len2; j++)
-                    {
-                        if (i == 0 || j == 0)
-                        {
-                            if (str1[i] == str2[j])
-                            {
-                                dp[i, j] = 1;
-                                if (max < dp[i, j])
-                                {
-                                    max = dp[i, j];
-                                    index = i;
-                                }
-                            }
-                            else
-                                dp[i, j] = 0;
-                        }
-                        else
-                        {
-                            if (str1[i] == str2[j])
-                            {
-                                dp[i, j] = dp[i - 1, j - 1] + 1;
-                                if (max < dp[i, j])
-                                {
-                                    max = dp[i, j];
-                                    index = i;
-                                }
-                            }
-                            else
-                                dp[i, j] = 0;
-                        }
-                    }
-                }
-                Console.WriteLine(str1.Substring(index - max + 1, max));
-            }
-            else
-            {
-                int[,] dp = new int[len2, len1];
-                for (int i = 0; i < len2; i++)
-                {
-                    for (int j = 0; j < len1; j++)
-                    {
-                        if (i == 0 || j == 0)
-                        {
-                            if (str2[i] == str1[j])
-                            {
-                                dp[i, j] = 1;
-                                if (max < dp[i, j])
-                                {
-                                    max = dp[i, j];
-                                    index = i;
-                                }
-                            }
-                            else
-                                dp[i, j] = 0;
-                        }
-                        else
-                        {
-                            if (str2[i] == str1[j])
-                            {
-                                dp[i, j] = dp[i - 1, j - 1] + 1;
-                                if (max < dp[i, j])
-                                {
-                                    max = dp[i, j];
-                                    index = i;
-                                }
-                            }
-                            else
-                                dp[i, j] = 0;
-                        }
-                    }
-                }
-                Console.WriteLine(str2.Substring(index - max + 1, max));
-            }
+            #region
+
+            //string str1 = Console.ReadLine();
+            //string str2 = Console.ReadLine();
+            //int len1 = str1.Length;
+            //int len2 = str2.Length;
+            //int max = 0;
+            //int index = 0;
+            //if (len1 < len2)
+            //{
+            //    int[,] dp = new int[len1 + 1, len2];
+            //    for (int i = 0; i < len1; i++)
+            //    {
+            //        for (int j = 0; j < len2; j++)
+            //        {
+            //            if (i == 0 || j == 0)
+            //            {
+            //                if (str1[i] == str2[j])
+            //                {
+            //                    dp[i, j] = 1;
+            //                    if (max < dp[i, j])
+            //                    {
+            //                        max = dp[i, j];
+            //                        index = i;
+            //                    }
+            //                }
+            //                else
+            //                    dp[i, j] = 0;
+            //            }
+            //            else
+            //            {
+            //                if (str1[i] == str2[j])
+            //                {
+            //                    dp[i, j] = dp[i - 1, j - 1] + 1;
+            //                    if (max < dp[i, j])
+            //                    {
+            //                        max = dp[i, j];
+            //                        index = i;
+            //                    }
+            //                }
+            //                else
+            //                    dp[i, j] = 0;
+            //            }
+            //        }
+            //    }
+            //    Console.WriteLine(str1.Substring(index - max + 1, max));
+            //}
+            //else
+            //{
+            //    int[,] dp = new int[len2, len1];
+            //    for (int i = 0; i < len2; i++)
+            //    {
+            //        for (int j = 0; j < len1; j++)
+            //        {
+            //            if (i == 0 || j == 0)
+            //            {
+            //                if (str2[i] == str1[j])
+            //                {
+            //                    dp[i, j] = 1;
+            //                    if (max < dp[i, j])
+            //                    {
+            //                        max = dp[i, j];
+            //                        index = i;
+            //                    }
+            //                }
+            //                else
+            //                    dp[i, j] = 0;
+            //            }
+            //            else
+            //            {
+            //                if (str2[i] == str1[j])
+            //                {
+            //                    dp[i, j] = dp[i - 1, j - 1] + 1;
+            //                    if (max < dp[i, j])
+            //                    {
+            //                        max = dp[i, j];
+            //                        index = i;
+            //                    }
+            //                }
+            //                else
+            //                    dp[i, j] = 0;
+            //            }
+            //        }
+            //    }
+            //    Console.WriteLine(str2.Substring(index - max + 1, max));
+            //}
+#endregion
 
             Console.ReadKey();
         }
