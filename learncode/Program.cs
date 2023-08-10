@@ -688,9 +688,9 @@ namespace learncode
             //Console.WriteLine(b);
             #endregion
 
-            //Http http = new Http();
-            //string url = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/";
-            //http.HttpServer(url);
+            Http http = new Http();
+            string url = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/";
+            http.HttpServer(url);
 
             #region
             //int n = Convert.ToInt32(Console.ReadLine());
@@ -807,17 +807,17 @@ namespace learncode
             //}
             #endregion
 
-            string s1 = "123dasd\r\n123123";
-            Console.WriteLine(s1);
-            StringBuilder sb1 = new StringBuilder();
-            for (int i = 0; i < s1.Length; ++i)
-            {
-                if (s1[i] != '\r' && s1[i] != '\n')
-                    sb1.Append(s1[i]);
-            }
-            //s1 = Regex.Replace(s1,@"\r\n|\r|\n","");
-            s1=sb1.ToString();
-            Console.WriteLine(s1);
+            //string s1 = "123dasd\r\n123123";
+            //Console.WriteLine(s1);
+            //StringBuilder sb1 = new StringBuilder();
+            //for (int i = 0; i < s1.Length; ++i)
+            //{
+            //    if (s1[i] != '\r' && s1[i] != '\n')
+            //        sb1.Append(s1[i]);
+            //}
+            ////s1 = Regex.Replace(s1,@"\r\n|\r|\n","");
+            //s1=sb1.ToString();
+            //Console.WriteLine(s1);
             Console.ReadKey();
         }
         public static bool CanPlant(int mid, int[] loc, int n)
