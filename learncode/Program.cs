@@ -689,7 +689,7 @@ namespace learncode
             #endregion
 
             Http http = new Http();
-            string url = "http://172.17.51.94:8080/wms/restful/api/v3/wcs/";
+            string url = "http://172.17.51.94:19192/wmsboot/si/wcs/v2/";
             http.HttpServer(url);
 
             #region

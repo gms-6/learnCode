@@ -131,6 +131,7 @@
     <Compile Include="ReviewCode\Review230505.cs" />
     <Compile Include="ReviewCode\Review230601.cs" />
     <Compile Include="ReviewCode\test.cs" />
+    <Content Include="SqlCode\sqlCodeTest.sql" />
     <Compile Include="ThreadTest\AutoResetEventTest.cs" />
     <Compile Include="ThreadTest\AwaitTest.cs" />
     <Compile Include="ThreadTest\ManualResetEventTest.cs" />
